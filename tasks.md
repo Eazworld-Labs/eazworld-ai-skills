@@ -133,11 +133,11 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 
 ### 3.1 Architecture & Core Systems
 
-- [ ] `software-architecture`
-- [ ] `frontend-design`
-- [ ] `backend-engineering`
-- [ ] `database-architecture`
-- [ ] `api-development`
+- [x] `software-architecture`
+- [x] `frontend-design`
+- [x] `backend-engineering`
+- [x] `database-architecture`
+- [x] `api-development`
 
 ### 3.2 Security, Review & Quality Assurance
 
