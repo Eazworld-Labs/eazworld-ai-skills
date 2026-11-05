@@ -12,8 +12,7 @@ examples/
 │   ├── software-engineering/sample-skill/   # Fully compliant skill + internal link
 │   ├── digital-marketing/                   # Empty core department (.gitkeep)
 │   ├── ai-automation/                      # Empty core department (.gitkeep)
-│   ├── business-solutions/                 # Empty core department (.gitkeep)
-│   └── device-services/repair-qa/          # Optional Department 5 (ARCHITECTURE.md)
+│   └── business-solutions/                 # Empty core department (.gitkeep)
 └── invalid-skills/   # Must fail validation with exit code 1
     ├── software-engineering/Bad_Skill_Name/       # Kebab-case violation
     ├── software-engineering/missing-entry/        # No SKILL.md

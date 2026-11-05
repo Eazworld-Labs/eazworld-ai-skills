@@ -44,9 +44,6 @@ const CORE_DEPARTMENTS = [
   'business-solutions',
 ];
 
-// Department 5 from docs/ARCHITECTURE.md — allowed when present, not required for v1.0.0.
-const OPTIONAL_DEPARTMENTS = ['device-services'];
-
 // docs/SKILL_AUTHORING_GUIDE.md §5 — lowercase kebab-case only.
 const KEBAB_CASE_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
@@ -574,7 +571,7 @@ function runScan(skillsDir, reporter) {
 
   const entries = fs.readdirSync(absSkillsDir, { withFileTypes: true });
   const dirNames = entries.filter((e) => e.isDirectory()).map((e) => e.name);
-  const knownDepartments = new Set([...CORE_DEPARTMENTS, ...OPTIONAL_DEPARTMENTS]);
+  const knownDepartments = new Set(CORE_DEPARTMENTS);
 
   // Core department folders must exist (ARCHITECTURE.md §6 / ROADMAP 4 departments).
   for (const dept of CORE_DEPARTMENTS) {
@@ -594,7 +591,7 @@ function runScan(skillsDir, reporter) {
         'department-unknown',
         `${relRoot}/${name}`,
         `unknown department — expected one of: ${[...knownDepartments].join(', ')} ` +
-          '(update DEPARTMENTS in scripts/validate-skills.js if intentional)'
+          `(update CORE_DEPARTMENTS in scripts/validate-skills.js if intentional)`
       );
     }
   }

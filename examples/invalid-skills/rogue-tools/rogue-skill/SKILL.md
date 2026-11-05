@@ -1,7 +1,7 @@
 ---
 name: rogue-skill
 description: Fixture placed inside an unknown department folder to prove the validator
-  rejects department directories outside the four core departments and device-services.
+  rejects department directories outside the four core departments.
 license: MIT
 metadata:
   author: Eazworld
@@ -24,7 +24,7 @@ Lives under `rogue-tools/`, which is not a recognized department.
 
 ## 4. Technical Standards & Rules
 
-- Only the four core departments plus device-services are recognized.
+- Only the four core departments are recognized.
 
 ## 5. Execution Workflow (Step-by-Step)
 
