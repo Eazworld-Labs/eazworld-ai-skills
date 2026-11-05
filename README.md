@@ -163,6 +163,28 @@ package install. Both installers copy the library's `.claude/skills/` tree into 
 project's root; Claude Code and OpenCode then discover the skills automatically at
 startup.
 
+### Install with the skills CLI (recommended)
+
+The [skills.sh](https://skills.sh) CLI installs the whole library into your
+project's agent folders in one command:
+
+```bash
+npx skills add eazworld/eazworld-ai-skills
+```
+
+- Add `--skill <name>` to install one skill instead of all 32 — for example
+  `npx skills add eazworld/eazworld-ai-skills --skill nigeria-payments`.
+- Add `--agent claude-code` (or `--agent opencode`) to target one agent, `-g` to
+  install globally for all projects, and run `npx skills update` any time to pull
+  the latest versions.
+- Discovery is verified working against this library's nested
+  `.claude/skills/<department>/<skill>/` layout: the CLI parses every `SKILL.md`,
+  and each skill — including its `references/` — lands in
+  `.claude/skills/<skill-name>/` in your project.
+
+(The clone source is `eazworld/eazworld-ai-skills`; while the live repository still
+sits at `fekt2016/eazworld-ai-skills`, substitute that owner in the command.)
+
 ### One-line quick installation
 
 **Linux / macOS (Bash)** — installs into the current directory, or pass a project
