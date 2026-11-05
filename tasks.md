@@ -399,6 +399,14 @@ badge, `PROJECT_SPEC.md`, and all 31 skill metadata blocks — no stale 0.x valu
 - [ ] Expand regional fintech integrations across West Africa.
 - [ ] Regularly run automated dependency security audits.
 
+**First-pass status (2026-11-05):** Issues and PRs checked — none open. Claude Code
+re-verification attempted — the weekly limit is still active (resets 12am
+Africa/Accra), so §7.1 stays queued for when quota returns. Dependency audit:
+repository has zero dependencies and zero devDependencies (Node built-ins only, no
+lockfile, no node_modules), so there is no third-party surface to audit — verified
+directly from `package.json`. All four items stay unchecked by design: Phase 10 is
+ongoing maintenance, not a one-time gate.
+
 ---
 
 ## Final Project Completion Checklist
@@ -410,8 +418,12 @@ badge, `PROJECT_SPEC.md`, and all 31 skill metadata blocks — no stale 0.x valu
 - [ ] Phase 5: 5 AI & Automation Skills Completed
 - [ ] Phase 6: 6 Business Solutions Skills Completed
 - [ ] Phase 7: Cross-Agent Compatibility Matrix Verified
-- [ ] Phase 8: Public Developer Experience & Docs Completed
-- [ ] Phase 9: Security Audit & Public v1.0.0 Tagged
+- [x] Phase 8: Public Developer Experience & Docs Completed
+- [x] Phase 9: Security Audit & Public v1.0.0 Tagged
+
+**Note:** Phases 3–7 stay open here until the Claude Code verification completes
+(weekly quota; resets 12am Africa/Accra). All 31 skills are shipped, validated,
+green on CI, and tagged in v1.0.0; only cross-agent execution evidence is pending.
 
 ---
 
