@@ -296,15 +296,24 @@ weekly-limit message (resets 12am Africa/Accra).
 
 ### 7.2 OpenCode Verification
 
-- [ ] Test shared skill discovery from `.claude/skills/`.
-- [ ] Verify activation on domain triggers.
-- [ ] Verify relative link resolution for `references/`.
-- [ ] Confirm no duplicate skills exist under `.opencode/`.
+- [x] Test shared skill discovery from `.claude/skills/`.
+- [x] Verify activation on domain triggers.
+- [x] Verify relative link resolution for `references/`.
+- [x] Confirm no duplicate skills exist under `.opencode/`.
 
 ### 7.3 Compatibility Matrix Logging
 
-- [ ] Document test outcomes and agent runner versions in `docs/COMPATIBILITY.md`.
+- [x] Document test outcomes and agent runner versions in `docs/COMPATIBILITY.md`.
 - [ ] Resolve any execution discrepancies across environments.
+
+**Evidence (§7.2):** Discovery — all 31 skills registered live in OpenCode v2.0.15
+as created. Activation — `api-development` loaded end to end via the skill tool with
+full content. References — 3/3 static resolution plus runtime resolution of
+`./references/openapi-checklist.md` during the live load. Duplicates — no `.opencode/`
+directory exists. Matrix written to `docs/COMPATIBILITY.md` with runner versions
+(OpenCode v2.0.15, Claude Code 2.1.312, Node v24.21.0). §7.1 remains blocked by the
+Claude Code weekly quota (resets 12am Africa/Accra); §7.3 discrepancy resolution stays
+open until Claude Code can be tested for environment-specific discrepancies.
 
 **Completion Criteria:** Compatibility Matrix fully populated with passing status across both agents.
 
