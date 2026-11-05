@@ -219,19 +219,28 @@ creation. Claude Code check remains open: CLI returns the weekly-limit message
 
 ### 5.1 AI & Automation Skills Portfolio
 
-- [ ] `ai-agent-development`
-- [ ] `n8n-automation`
-- [ ] `whatsapp-automation`
-- [ ] `chatbot-development`
-- [ ] `crm-automation`
+- [x] `ai-agent-development`
+- [x] `n8n-automation`
+- [x] `whatsapp-automation`
+- [x] `chatbot-development`
+- [x] `crm-automation`
 
 ### 5.2 Quality Requirements
 
-- [ ] Document supported API, webhook, and LLM agent architectures.
-- [ ] Enforce strict environment variable isolation for API keys.
-- [ ] Include retry logic, exponential backoff, and error-handling workflows.
-- [ ] Validate every skill via automated linter.
+- [x] Document supported API, webhook, and LLM agent architectures.
+- [x] Enforce strict environment variable isolation for API keys.
+- [x] Include retry logic, exponential backoff, and error-handling workflows.
+- [x] Validate every skill via automated linter.
 - [ ] Verify cross-agent execution in Claude Code and OpenCode.
+
+**Evidence:** Sweep across all 5 skills confirmed 5/5 for "Supported architectures"
+statements, an Environment Isolation rule in every §6, and exponential backoff plus an
+error path (error branch, fail-fast, dead-letter, or fallback) in every skill. Each
+skill ships one fenced example (backoff helper, n8n retry config, HMAC verification,
+intent spec, idempotent dedup — JSON examples machine-parsed). Validator PASS for all
+25 skills; format checks clean. OpenCode discovery verified live in-session — all 5
+registered on creation. Claude Code check remains open: CLI returns the weekly-limit
+message (resets 12am Africa/Accra).
 
 **Completion Criteria:** All 5 AI & Automation skills provide reliable, secure, and reusable workflows.
 
