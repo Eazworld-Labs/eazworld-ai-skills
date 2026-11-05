@@ -5,7 +5,7 @@
 [![Version][version-badge]][version]
 [![Supported Agents][agents-badge]][agents]
 
-> A production-grade, open-source collection of **31 AI agent skills** that standardizes
+> A production-grade, open-source collection of **32 AI agent skills** that standardizes
 > how AI coding agents design, engineer, secure, and deliver software — from core web
 > platforms to digital marketing, business automation, and West African fintech.
 
@@ -28,15 +28,15 @@ Every skill is authored **once** and stored in a single authoritative location �
 Progressive disclosure keeps context efficient: metadata loads at startup, instructions
 load on trigger, and deep reference assets load only on demand.
 
-### Skills Portfolio — 31 Skills Across 4 Departments
+### Skills Portfolio — 32 Skills Across 4 Departments
 
 | Department | Skills | Focus Areas |
 | :--- | :---: | :--- |
 | **1. Software Engineering** | 13 | Core tech stack, system architecture, mobile, APIs, databases, testing, DevOps |
 | **2. Digital Marketing** | 7 | Technical SEO, Google/Meta advertising, brand identity, conversion optimization |
 | **3. AI & Automation** | 5 | Custom AI agent frameworks, n8n workflows, WhatsApp API, LLM chatbots, CRM pipelines |
-| **4. Business Solutions** | 6 | School/Church ERPs, POS & inventory, booking engines, regional fintech (Paystack/MoMo) |
-| **Total** | **31** | **Comprehensive enterprise & open-source coverage** |
+| **4. Business Solutions** | 7 | School/Church ERPs, POS & inventory, booking engines, regional fintech (Paystack/MoMo) |
+| **Total** | **32** | **Comprehensive enterprise & open-source coverage** |
 
 - **Software Engineering (13):** `software-architecture`, `frontend-design`,
   `backend-engineering`, `api-development`, `database-architecture`,
@@ -47,8 +47,8 @@ load on trigger, and deep reference assets load only on demand.
   `conversion-optimization`
 - **AI & Automation (5):** `ai-agent-development`, `n8n-automation`,
   `whatsapp-automation`, `chatbot-development`, `crm-automation`
-- **Business Solutions (6):** `school-management`, `church-management`, `pos-inventory`,
-  `restaurant-management`, `booking-systems`, `ghana-payments`
+- **Business Solutions (7):** `school-management`, `church-management`, `pos-inventory`,
+  `restaurant-management`, `booking-systems`, `ghana-payments`, `nigeria-payments`
 
 See the full release plan in [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -144,7 +144,7 @@ directly.
 
 1. Open the same workspace (`opencode` from the repository root).
 2. `.claude/skills/` is picked up natively with no extra configuration.
-3. Verify by checking the session's skill list — all 31 skills register on startup.
+3. Verify by checking the session's skill list — all 32 skills register on startup.
 
 **Requirements:** Node.js 18+ for the validator and test suite (library CI runs on
 Node 24). Cross-agent test results live in

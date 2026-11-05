@@ -407,6 +407,11 @@ lockfile, no node_modules), so there is no third-party surface to audit — veri
 directly from `package.json`. All four items stay unchecked by design: Phase 10 is
 ongoing maintenance, not a one-time gate.
 
+**Fintech expansion progress:** Nigeria-first step shipped — `nigeria-payments`
+(Paystack, Flutterwave, OPay, bank transfers, USSD/pending reconciliation) added
+under business-solutions; library now 32 skills. Ghana–Nigeria coverage in place;
+further WAEMU/cross-border rails remain future scope.
+
 ---
 
 ## Final Project Completion Checklist

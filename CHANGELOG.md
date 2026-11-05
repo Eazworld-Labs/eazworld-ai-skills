@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- **`nigeria-payments` skill:** Nigerian rails — Paystack, Flutterwave, OPay, and
+  bank transfers — with kobo-denominated charges, per-provider timing-safe webhook
+  verification, USSD and transfer pending states with reconciliation, and
+  role-gated refunds (Phase 10, Nigeria-first regional fintech expansion).
+
+---
+
 ## [1.0.0] - 2026-11-05
 
 ### Added
