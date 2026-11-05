@@ -131,10 +131,25 @@ node scripts/validate-skills.js
 
 ### 3. Use with your agent
 
-- **Claude Code:** open this repository as your workspace — skills under `.claude/skills/`
-  are indexed automatically at startup.
-- **OpenCode:** open the same workspace — `.claude/skills/` is picked up natively with no
-  extra configuration.
+No plugin and no package install — both agents read this repository's directory
+directly.
+
+**Claude Code**
+
+1. Open this repository as your workspace (`claude` from the repository root).
+2. Skills under `.claude/skills/` are indexed automatically at startup.
+3. Verify by asking Claude Code to list its available skills.
+
+**OpenCode**
+
+1. Open the same workspace (`opencode` from the repository root).
+2. `.claude/skills/` is picked up natively with no extra configuration.
+3. Verify by checking the session's skill list — all 31 skills register on startup.
+
+**Requirements:** Node.js 18+ for the validator and test suite (library CI runs on
+Node 24). Cross-agent test results live in
+[docs/COMPATIBILITY.md](docs/COMPATIBILITY.md); problems and common questions are
+covered in [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md).
 
 Skills activate by describing your task; the agent matches your prompt against each
 skill's frontmatter description and loads the relevant instructions.
@@ -179,6 +194,7 @@ All submissions require human maintainer sign-off.
 | [docs/ENGINEERING_STANDARDS.md](docs/ENGINEERING_STANDARDS.md) | Mandatory coding & behavioral rules |
 | [docs/SKILL_AUTHORING_GUIDE.md](docs/SKILL_AUTHORING_GUIDE.md) | How to author compliant skills |
 | [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) | Cross-agent discovery & testing matrix |
+| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Troubleshooting & FAQ |
 | [docs/SECURITY_POLICY.md](docs/SECURITY_POLICY.md) | Zero-trust security requirements |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Release plan & milestones |
 | [CHANGELOG.md](CHANGELOG.md) | Version history |

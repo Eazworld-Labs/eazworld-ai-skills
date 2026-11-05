@@ -324,11 +324,22 @@ open until Claude Code can be tested for environment-specific discrepancies.
 **Priority:** High  
 **Objective:** Make the library accessible, well-documented, and easy for open-source contributors to use.
 
-- [ ] Complete root `README.md` with usage badges and installation steps.
-- [ ] Document installation for Claude Code and OpenCode users.
-- [ ] Add step-by-step skill creation guide in `CONTRIBUTING.md`.
-- [ ] Add troubleshooting and FAQ section in documentation.
-- [ ] Review all Markdown files for formatting, typos, and broken relative links.
+- [x] Complete root `README.md` with usage badges and installation steps.
+- [x] Document installation for Claude Code and OpenCode users.
+- [x] Add step-by-step skill creation guide in `CONTRIBUTING.md`.
+- [x] Add troubleshooting and FAQ section in documentation.
+- [x] Review all Markdown files for formatting, typos, and broken relative links.
+
+**Evidence:** README carries CI/license/version/agents badges and a per-agent
+installation section (numbered steps for Claude Code and OpenCode, verification
+step, Node requirement). CONTRIBUTING Step 3 now walks template copy → frontmatter →
+7 sections → fenced example → quality-matrix self-check. `docs/TROUBLESHOOTING.md`
+ships troubleshooting (validator, discovery, links, CI) and FAQ, linked from the
+README documentation table. Repo-wide review: all active relative links resolve (4
+flagged are intentional — a backticked format example, the test-asserted
+`broken-links` fixture, and two template placeholders); trailing whitespace is
+entirely legitimate 2-space hard breaks; heading hierarchy clean; common-misspelling
+sweep clean; tests 8/8 and validator PASS (31 skills).
 
 **Completion Criteria:** External developers can clone, install, use, and contribute to the library seamlessly.
 

@@ -58,7 +58,8 @@ git checkout -b feat/add-graphql-skill
 
 Follow the rules outlined in `docs/SKILL_AUTHORING_GUIDE.md`.
 
-Ensure your skill directory name uses lowercase kebab-case under the correct department:
+**Step 3a — Create the directory.** Ensure your skill directory name uses lowercase
+kebab-case under the correct department:
 
 ```text
 .claude/skills/[department]/[skill-name]/
@@ -67,7 +68,15 @@ Ensure your skill directory name uses lowercase kebab-case under the correct dep
 └── assets/
 ```
 
-Every SKILL.md must include the 7 mandatory sections:
+**Step 3b — Start from the template.** Copy `templates/SKILL_TEMPLATE.md` into the
+new directory as `SKILL.md`. Replace the template's placeholder section-8 links with
+real files, or state plainly that the skill is self-contained.
+
+**Step 3c — Write the frontmatter.** A `name` matching the directory in kebab-case,
+a folded third-person `description` carrying real trigger phrases, `license: MIT`,
+and a `metadata` block with `author` and `version`.
+
+**Step 3d — Write the 7 mandatory sections:**
 
 1. Overview & Purpose
 2. Activation Conditions & Triggers
@@ -76,6 +85,20 @@ Every SKILL.md must include the 7 mandatory sections:
 5. Execution Workflow
 6. Security & Edge Case Guidelines
 7. Definition of Done & Quality Gates
+
+**Step 3e — Add at least one fenced code example** in section 4 or 5 —
+syntactically valid TypeScript, JavaScript, SQL, JSON, or YAML. JSON examples are
+machine-parsed during review.
+
+**Step 3f — Self-check against the quality matrix** in the authoring guide: precise
+triggers with an anti-trigger, an audit checklist, security guardrails with no
+secrets, measurable Definition of Done items, and KPIs with baseline and target
+where the domain has them.
+
+Add a `references/` file only when the skill genuinely needs deep supporting
+material — most skills stay self-contained.
+
+Continue to Step 4 to validate before committing.
 
 ### Step 4: Run Local Validation
 
