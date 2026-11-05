@@ -398,6 +398,8 @@ badge, `PROJECT_SPEC.md`, and all 31 skill metadata blocks — no stale 0.x valu
 - [ ] Maintain compatibility as Claude Code and OpenCode specs evolve.
 - [ ] Expand regional fintech integrations across West Africa.
 - [ ] Regularly run automated dependency security audits.
+- [x] Ship the distribution & user installation suite (`scripts/install.sh`,
+      `scripts/install.ps1`, README "User Installation & Setup").
 
 **First-pass status (2026-11-05):** Issues and PRs checked — none open. Claude Code
 re-verification attempted — the weekly limit is still active (resets 12am
@@ -411,6 +413,16 @@ ongoing maintenance, not a one-time gate.
 (Paystack, Flutterwave, OPay, bank transfers, USSD/pending reconciliation) added
 under business-solutions; library now 32 skills. Ghana–Nigeria coverage in place;
 further WAEMU/cross-border rails remain future scope.
+
+**Distribution suite status:** `scripts/install.sh` (executable) and
+`scripts/install.ps1` shipped; README gained a "User Installation & Setup" section
+(one-line curl/iwr installs, submodule integration, discovery explanation). Bash
+installer verified end to end — fresh clone-to-32-skills install plus idempotent
+update run, content matched against the working tree. PowerShell counterpart
+review-verified (no pwsh on this machine). Note: the scripts' default clone source
+is `https://github.com/eazworld/eazworld-ai-skills.git` per project-owner spec;
+the live repo currently sits at `fekt2016/eazworld-ai-skills` — override with
+`EAZWORLD_SKILLS_REPO` (Bash) or `-Repo` (PowerShell) until the repo moves.
 
 ---
 

@@ -156,6 +156,75 @@ skill's frontmatter description and loads the relevant instructions.
 
 ---
 
+## User Installation & Setup
+
+Bring the library's skills into your own project with one command — no plugin, no
+package install. Both installers copy the library's `.claude/skills/` tree into your
+project's root; Claude Code and OpenCode then discover the skills automatically at
+startup.
+
+### One-line quick installation
+
+**Linux / macOS (Bash)** — installs into the current directory, or pass a project
+path to install elsewhere:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/eazworld/eazworld-ai-skills/main/scripts/install.sh | bash -s -- /path/to/your-project
+```
+
+**Windows (PowerShell)** — run from your project folder:
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/eazworld/eazworld-ai-skills/main/scripts/install.ps1 | iex
+```
+
+Prefer to read a script first? Download it (`curl -O <url>` or save the file) and
+run it directly — `bash scripts/install.sh <project>` or `.\install.ps1` — with
+identical behavior.
+
+### What the installers do
+
+1. Confirm `git` is installed.
+2. Clone the library into a local cache (`~/.eazworld-ai-skills`) — reused on every
+   later run, so installs and updates share one download.
+3. Create `.claude/skills/` in your project and copy the skill tree into it.
+4. Print a confirmation with the number of skills installed.
+
+Re-running an installer refreshes the cache from GitHub and replaces your copy, so
+updates use the same one command. The clone source defaults to
+`https://github.com/eazworld/eazworld-ai-skills.git` and can be overridden with the
+`EAZWORLD_SKILLS_REPO` environment variable (Bash) or the `-Repo` parameter
+(PowerShell) — useful for forks or mirrors.
+
+### Git Submodule integration (version-controlled projects)
+
+Teams that want the skills pinned to a version can vendor the library as a submodule
+and copy its skills into place:
+
+```bash
+cd your-project
+git submodule add https://github.com/eazworld/eazworld-ai-skills.git vendor/eazworld-ai-skills
+mkdir -p .claude
+cp -R vendor/eazworld-ai-skills/.claude/skills .claude/skills
+```
+
+Update later with `git -C vendor/eazworld-ai-skills pull --ff-only`, then re-run
+the copy command. Commit the copied tree normally so every clone of your project
+ships with the skills.
+
+### How discovery works
+
+- Both agents read
+  `<your-project>/.claude/skills/<department>/<skill-name>/SKILL.md` straight from
+  the workspace root at startup — that is the entire contract.
+- Open a fresh session after installing (skills are indexed at startup, not
+  mid-session), then ask the agent to list its skills to verify they registered.
+- The skills are plain Markdown: copy them, rename them, or edit them freely. If
+  your project's stack differs, the standards apply as-is; the TypeScript-flavored
+  examples may need translating.
+
+---
+
 ## Security Policy
 
 Security is embedded into every skill, script, and generated artifact:
