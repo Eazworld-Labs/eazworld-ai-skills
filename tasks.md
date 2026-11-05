@@ -141,9 +141,9 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 
 ### 3.2 Security, Review & Quality Assurance
 
-- [ ] `security-audit`
-- [ ] `software-testing`
-- [ ] `code-review`
+- [x] `security-audit`
+- [x] `software-testing`
+- [x] `code-review`
 
 ### 3.3 Specialized Engineering Domains
 
