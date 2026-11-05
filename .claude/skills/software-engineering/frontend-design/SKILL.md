@@ -20,6 +20,29 @@ performance on the client. Delivers components that are keyboard-reachable, read
 screen readers, and fast on mid-range mobile devices — not just correct in a desktop
 browser.
 
+## 1A. Design Purpose (Define Before Any Pixel)
+
+Every screen exists to change what a user thinks, feels, or does. State the purpose
+in one line before writing code — if it cannot be stated, the design is not ready:
+
+1. **Audience + context:** who is this for and what are they doing when they see it.
+2. **The one job:** what must this screen make true — "help a customer finish
+   checkout in under a minute," not "show a nice form."
+3. **The one impression:** the feeling the design must leave ("trust," "calm
+   confidence," "urgency without panic").
+4. **The primary action:** the single next step the eye and hand should find first.
+
+Purpose then governs every later decision: hierarchy serves the primary action,
+tokens express the impression, states protect the job when data is missing or slow.
+Judgment rule: a pattern that contradicts the purpose is wrong even when it
+matches a library default — purpose outranks consistency with third-party
+components, never the project's own tokens.
+
+Example: a fintech checkout page whose purpose is "let a returning customer pay in
+under a minute without doubt" keeps one total, one method selector, and a plain
+security note — a coupon carousel or animated banner fails the purpose test and
+ships out of the file, however good it looks in isolation.
+
 ## 2. Activation Conditions & Triggers
 
 - **Trigger 1:** When a user asks to build, restyle, or refactor a UI component, page, or
@@ -72,7 +95,9 @@ export function Badge({ label, tone }: BadgeProps) {
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the screen or component, its states (default, loading,
-   empty, error), and its responsive requirements.
+   empty, error), and its responsive requirements. Then write the one-line design
+   purpose (Section 1A) — audience, one job, one impression, primary action — before
+   opening any file.
 2. **Step 2: Inspect Context** — Execute the audit checklist; identify which existing
    components and tokens can be reused.
 3. **Step 3: Formulate Plan** — Sketch the component tree and state ownership before
@@ -100,6 +125,7 @@ export function Badge({ label, tone }: BadgeProps) {
 
 ## 7. Definition of Done & Quality Gates
 
+- [ ] Design purpose written before implementation and stated in the report.
 - [ ] Type-check, lint, and test suite pass (`tsc`, `npm run lint`, `npm test`).
 - [ ] Layout verified at 360px, 768px, and 1440px viewports.
 - [ ] Keyboard path works end to end with visible focus states.
