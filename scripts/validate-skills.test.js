@@ -65,6 +65,7 @@ test('invalid fixtures fail with exit code 1 and descriptive messages', () => {
   // Frontmatter (task 2.1)
   assertError(res, 'description-missing', 'no-description');
   assertError(res, 'name-mismatch', 'wrong-name-field');
+  assertError(res, 'frontmatter-invalid', 'colon-scalar');
 
   // Mandatory sections (task 2.1)
   assertError(res, 'section-missing', 'few-sections');

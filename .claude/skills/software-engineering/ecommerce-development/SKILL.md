@@ -1,9 +1,9 @@
 ---
 name: ecommerce-development
-description: Build e-commerce features end to end: product catalogs, carts, checkout
-  flows, payment gateways, and order management. Use when integrating Paystack, Hubtel,
-  or Ghana Mobile Money, building storefront pages, handling payment webhooks, or
-  designing inventory and order lifecycle logic.
+description: Build e-commerce features end to end, starting with product catalogs,
+  carts, checkout flows, payment gateways, and order management. Use when integrating
+  Paystack, Hubtel, or Ghana Mobile Money, building storefront pages, handling
+  payment webhooks, or designing inventory and order lifecycle logic.
 license: MIT
 metadata:
   author: Eazworld

@@ -1,9 +1,9 @@
 ---
 name: school-management
-description: Manage school operations: students, classes, attendance, gradebooks, and
-  fee collection. Use when building enrollment and rosters, recording grades or
-  attendance, invoicing school fees with Paystack or Mobile Money, designing parent
-  portals, or defining staff and parent data access.
+description: Manage school operations including students, classes, attendance,
+  gradebooks, and fee collection. Use when building enrollment and rosters, recording
+  grades or attendance, invoicing school fees with Paystack or Mobile Money,
+  designing parent portals, or defining staff and parent data access.
 license: MIT
 metadata:
   author: Eazworld

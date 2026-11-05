@@ -241,6 +241,16 @@ function parseFrontmatter(text) {
 
   let openBlockKey = null; // set while a nested mapping (metadata:) is open
   let lastKey = null; // last top-level key — scalar values may fold across lines
+  let lastKeyQuoted = false; // whether the last folded scalar started quoted
+  // Strict-YAML mirror check: a plain (unquoted) scalar containing ": " is a
+  // nested mapping to a strict YAML parser, which rejects the whole file as
+  // unparseable (observed live: the skills.sh CLI silently skipped 5 skills).
+  // This lenient parser would otherwise accept them silently.
+  const hasNestedMapping = (value) => {
+    const v = value.trim();
+    if (v.startsWith('"') || v.startsWith("'")) return false; // quoted: legal
+    return /:\s/.test(v);
+  };
   for (let i = 1; i < end; i++) {
     const raw = lines[i];
     if (!raw.trim() || raw.trim().startsWith('#')) continue;
@@ -252,6 +262,15 @@ function parseFrontmatter(text) {
       // Top-level key
       const key = mappingMatch[2];
       const value = mappingMatch[3].trim();
+      if (value !== '' && hasNestedMapping(value)) {
+        return {
+          ok: false,
+          error:
+            `unquoted nested mapping at line ${i + 1}: plain scalar for "${key}" ` +
+            `contains ": " — strict YAML parsers reject this; quote the value, ` +
+            `reword it, or drop the colon`,
+        };
+      }
       if (value === '') {
         data[key] = {};
         openBlockKey = key;
@@ -260,9 +279,20 @@ function parseFrontmatter(text) {
         openBlockKey = null;
       }
       lastKey = key;
+      lastKeyQuoted = value.startsWith('"') || value.startsWith("'");
     } else if (mappingMatch && indent > 0 && openBlockKey) {
       // Nested mapping key (e.g. metadata.author)
-      data[openBlockKey][mappingMatch[2]] = stripQuotes(mappingMatch[3].trim());
+      const nestedValue = mappingMatch[3].trim();
+      if (nestedValue !== '' && hasNestedMapping(nestedValue)) {
+        return {
+          ok: false,
+          error:
+            `unquoted nested mapping at line ${i + 1}: plain scalar for ` +
+            `"${openBlockKey}.${mappingMatch[2]}" contains ": " — strict YAML ` +
+            `parsers reject this; quote the value or drop the colon`,
+        };
+      }
+      data[openBlockKey][mappingMatch[2]] = stripQuotes(nestedValue);
     } else if (mappingMatch && indent > 0 && !openBlockKey) {
       return {
         ok: false,
@@ -270,6 +300,16 @@ function parseFrontmatter(text) {
       };
     } else if (lastKey && typeof data[lastKey] === 'string' && /^\s+\S/.test(raw)) {
       // Folded plain multi-line scalar: append with a single space (YAML folding).
+      // Strict YAML also forbids ": " on continuation lines of an unquoted scalar.
+      if (!lastKeyQuoted && /:\s/.test(raw)) {
+        return {
+          ok: false,
+          error:
+            `unquoted nested mapping at line ${i + 1}: folded plain scalar for ` +
+            `"${lastKey}" contains ": " — strict YAML parsers reject this; ` +
+            `quote the value, reword it, or drop the colon`,
+        };
+      }
       data[lastKey] = `${data[lastKey]} ${raw.trim()}`;
     } else {
       return { ok: false, error: `invalid YAML at line ${i + 1}: "${raw.trim()}"` };

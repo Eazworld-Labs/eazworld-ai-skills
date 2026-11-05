@@ -1,9 +1,9 @@
 ---
 name: ghana-payments
-description: Integrate Ghana payment rails: Paystack, Hubtel, and Mobile Money. Use
-  when initiating charges, verifying payment callbacks and signatures, handling
-  pending states and reconciliation, processing refunds, or diagnosing failed and
-  duplicated transactions.
+description: Integrate Ghana payment rails including Paystack, Hubtel, and Mobile
+  Money. Use when initiating charges, verifying payment callbacks and signatures,
+  handling pending states and reconciliation, processing refunds, or diagnosing
+  failed and duplicated transactions.
 license: MIT
 metadata:
   author: Eazworld

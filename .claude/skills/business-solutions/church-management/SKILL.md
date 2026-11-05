@@ -1,9 +1,9 @@
 ---
 name: church-management
-description: Run church operations: members, groups, attendance, events, and giving.
-  Use when managing member directories, tracking tithes and offerings through Paystack
-  or Mobile Money, organizing small groups and events, or securing pastoral notes and
-  giving records.
+description: Run church operations across members, groups, attendance, events, and
+  giving. Use when managing member directories, tracking tithes and offerings
+  through Paystack or Mobile Money, organizing small groups and events, or securing
+  pastoral notes and giving records.
 license: MIT
 metadata:
   author: Eazworld

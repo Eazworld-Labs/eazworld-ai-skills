@@ -1,9 +1,9 @@
 ---
 name: nigeria-payments
-description: Integrate Nigerian payment rails: Paystack, Flutterwave, OPay, and bank
-  transfers. Use when initiating kobo-denominated charges, verifying webhook
-  signatures, handling USSD and transfer confirmations, processing refunds, or
-  reconciling pending transactions.
+description: Integrate Nigerian payment rails including Paystack, Flutterwave, OPay,
+  and bank transfers. Use when initiating kobo-denominated charges, verifying
+  webhook signatures, handling USSD and transfer confirmations, processing
+  refunds, or reconciling pending transactions.
 license: MIT
 metadata:
   author: Eazworld
