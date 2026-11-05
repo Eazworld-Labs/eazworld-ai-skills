@@ -17,7 +17,8 @@
 [CmdletBinding()]
 param(
     [string]$Target = (Get-Location).Path,
-    [string]$Repo = $env:EAZWORLD_SKILLS_REPO
+    [string]$Repo = $env:EAZWORLD_SKILLS_REPO,
+    [string[]]$Skill = @('*')
 )
 
 if ([string]::IsNullOrWhiteSpace($Repo)) {
@@ -73,13 +74,31 @@ if (Test-Path $GitDir) {
 }
 
 # --- 4. Install skills into the target -----------------------------------------
-$SourceSkills = Join-Path $CacheDir ".claude\skills"
-if (-not (Test-Path $SourceSkills)) {
+$SourceRoot = Join-Path $CacheDir ".claude\skills"
+if (-not (Test-Path $SourceRoot)) {
     Write-Err "the .claude\skills tree was not found in the cloned library."
     exit 1
 }
 
-Copy-Item -Recurse -Force (Join-Path $SourceSkills "*") $SkillsDir
+# A named selection copies exactly the requested skills and never deletes
+# anything else in the target; '*' refreshes the whole tree.
+if ($Skill -contains '*') {
+    Copy-Item -Recurse -Force (Join-Path $SourceRoot "*") $SkillsDir
+} else {
+    foreach ($name in $Skill) {
+        $src = Get-ChildItem -Directory -Recurse -Depth 2 -Filter $name $SourceRoot |
+            Select-Object -First 1
+        if (-not $src) {
+            Write-Err "skill not found in the library: $name"
+            $available = (Get-ChildItem -Recurse -Filter "SKILL.md" $SourceRoot |
+                ForEach-Object { Split-Path $_.DirectoryName -Leaf } | Sort-Object) -join ', '
+            Write-Info "available skills: $available"
+            exit 1
+        }
+        Copy-Item -Recurse -Force $src.FullName $SkillsDir
+        Write-Ok "installed skill: $name"
+    }
+}
 $Count = (Get-ChildItem -Recurse -Filter "SKILL.md" $SkillsDir).Count
 if ($Count -eq 0) {
     Write-Err "no SKILL.md files were installed — aborting."

@@ -225,7 +225,15 @@ identical behavior.
 4. Print a confirmation with the number of skills installed.
 
 Re-running an installer refreshes the cache from GitHub and replaces your copy, so
-updates use the same one command. The clone source defaults to
+updates use the same one command. To install only part of the library, name the
+skills you want — everything else is skipped:
+
+```bash
+bash scripts/install.sh --skill nigeria-payments --skill pos-inventory
+# PowerShell: .\install.ps1 -Skill nigeria-payments,pos-inventory
+```
+
+The clone source defaults to
 `https://github.com/Eazworld-Labs/eazworld-ai-skills.git` and can be overridden with the
 `EAZWORLD_SKILLS_REPO` environment variable (Bash) or the `-Repo` parameter
 (PowerShell) — useful for forks or mirrors.

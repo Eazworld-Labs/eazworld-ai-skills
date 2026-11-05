@@ -424,7 +424,9 @@ update run, content matched against the working tree. PowerShell counterpart
 review-verified (no pwsh on this machine). Note: the repository later moved from
 `fekt2016/` to the `Eazworld-Labs` organization — every install link and script
 default now points at `Eazworld-Labs/eazworld-ai-skills` (overridable via
-`EAZWORLD_SKILLS_REPO` or `-Repo`).
+`EAZWORLD_SKILLS_REPO` or `-Repo`). Selective installs are supported everywhere:
+`npx skills add --skill`, `install.sh --skill`, and `install.ps1 -Skill` install
+only the named skills (bash installer end-to-end tested for the selection path).
 
 ---
 

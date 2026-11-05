@@ -2,9 +2,12 @@
 # Install or update the Eazworld AI Skills Library into a project.
 #
 # Usage:
-#   bash install.sh [target-project-dir]
+#   bash install.sh [target-project-dir] [--skill <name>]...
 #
-# When no target is given, the current directory is used.
+# When no target is given, the current directory is used. Repeat --skill to
+# install a selection of skills instead of all of them:
+#   bash install.sh --skill nigeria-payments --skill pos-inventory
+# Use --skill '*' (the default) to install everything.
 #
 # Environment:
 #   EAZWORLD_SKILLS_REPO     Clone source URL
@@ -19,7 +22,6 @@
 set -euo pipefail
 
 REPO="${EAZWORLD_SKILLS_REPO:-https://github.com/Eazworld-Labs/eazworld-ai-skills.git}"
-TARGET="${1:-$PWD}"
 CACHE_DIR="${EAZWORLD_SKILLS_CACHE:-$HOME/.eazworld-ai-skills}"
 
 if [ -t 1 ]; then
@@ -35,6 +37,32 @@ fi
 print_ok()   { printf "%b✓%b %s\n" "$GREEN" "$NC" "$*"; }
 print_info() { printf "%b→%b %s\n" "$CYAN" "$NC" "$*"; }
 print_err()  { printf "%b✗%b %s\n" "$RED" "$NC" "$*" >&2; }
+
+# --- 0. Parse arguments ----------------------------------------------------------
+# No arrays: tooling here targets old macOS bash (3.2), which cannot expand
+# empty arrays under set -u. Selection is kept as a space-separated string.
+TARGET="$PWD"
+SKILL_LIST=""
+usage() {
+  printf "Usage: bash install.sh [target-project-dir] [--skill <name>]...\n"
+  printf "  --skill <name>   install one skill instead of all (repeatable; '*' = all)\n"
+  printf "  --help, -h       show this help\n"
+}
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --skill)
+      [ $# -ge 2 ] || { print_err "--skill needs a name (or '*' for all)"; exit 1; }
+      [ -z "$SKILL_LIST" ] && SKILL_LIST="$2" || SKILL_LIST="$SKILL_LIST $2"
+      shift 2 ;;
+    --skill=*) 
+      [ -z "$SKILL_LIST" ] && SKILL_LIST="${1#--skill=}" || SKILL_LIST="$SKILL_LIST ${1#--skill=}"
+      shift ;;
+    --help|-h) usage; exit 0 ;;
+    --*) print_err "unknown option: $1"; usage; exit 1 ;;
+    *) TARGET="$1"; shift ;;
+  esac
+done
+[ -n "$SKILL_LIST" ] || SKILL_LIST='*'
 
 # --- 1. Require git ------------------------------------------------------------
 if ! git --version >/dev/null 2>&1; then
@@ -74,10 +102,26 @@ if [ ! -d "$CACHE_DIR/.claude/skills" ]; then
   exit 1
 fi
 
-if command -v rsync >/dev/null 2>&1; then
-  rsync -a --delete "$CACHE_DIR/.claude/skills/" "$TARGET/.claude/skills/"
+# A name-style request ('*') refreshes the whole tree; a named selection copies
+# exactly the requested skills and never deletes anything else in the target.
+if [ "$SKILL_LIST" = '*' ]; then
+  if command -v rsync >/dev/null 2>&1; then
+    rsync -a --delete "$CACHE_DIR/.claude/skills/" "$TARGET/.claude/skills/"
+  else
+    cp -R "$CACHE_DIR/.claude/skills/." "$TARGET/.claude/skills/"
+  fi
 else
-  cp -R "$CACHE_DIR/.claude/skills/." "$TARGET/.claude/skills/"
+  for skill_name in $SKILL_LIST; do
+    skill_src="$(find "$CACHE_DIR/.claude/skills" -mindepth 2 -maxdepth 2 -type d -name "$skill_name" | head -1)"
+    if [ -z "$skill_src" ]; then
+      print_err "skill not found in the library: $skill_name"
+      available="$(find "$CACHE_DIR/.claude/skills" -name 'SKILL.md' | while read -r f; do basename "$(dirname "$f")"; done | sort | tr '\n' ' ')"
+      print_info "available skills: $available"
+      exit 1
+    fi
+    cp -R "$skill_src" "$TARGET/.claude/skills/"
+    print_ok "installed skill: $skill_name"
+  done
 fi
 
 COUNT="$(find "$TARGET/.claude/skills" -name 'SKILL.md' | wc -l | tr -d ' ')"
