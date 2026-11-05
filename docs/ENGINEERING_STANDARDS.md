@@ -8,9 +8,12 @@ Status: Foundational Standard (Enforced for AI Agents & Human Contributors)
 
 ## 1. Purpose
 
-This document defines the mandatory engineering standards, architectural patterns, and behavioral rules that all AI agents (Claude Code, OpenCode) and human contributors must follow when developing, maintaining, or deploying Eazworld projects.
+This document defines the mandatory engineering standards, architectural patterns, and
+behavioral rules that all AI agents (Claude Code, OpenCode) and human contributors must
+follow when developing, maintaining, or deploying Eazworld projects.
 
-The objective is to consistently deliver secure, highly reliable, observable, and production-ready solutions that real businesses and customers depend on.
+The objective is to consistently deliver secure, highly reliable, observable, and
+production-ready solutions that real businesses and customers depend on.
 
 ---
 
@@ -26,8 +29,10 @@ Every implementation must strictly prioritize:
 6. **Comprehensive documentation:** Keep architecture records and documentation synchronized with code changes.
 7. **Automated testing:** Validate all functional logic with appropriate automated test coverage.
 8. **Consistent architecture:** Adhere strictly to the established design patterns of the target repository.
-9. **Responsible dependency management:** Minimize external packages to reduce bundle size and vulnerability surface area.
-10. **Verifiable implementation:** Never claim a task or feature is complete unless verified through actual test runs or builds.
+9. **Responsible dependency management:** Minimize external packages to reduce bundle size
+   and vulnerability surface area.
+10. **Verifiable implementation:** Never claim a task or feature is complete unless
+    verified through actual test runs or builds.
 
 ---
 
@@ -45,7 +50,8 @@ Before altering any existing project, the AI agent must perform a rigorous code 
 8. Identify environment variable requirements (`.env.example`) and build configurations.
 9. Identify existing linters, formatters, and type-checking rules.
 
-*Never assume an existing project uses a particular framework or directory layout without checking it first. Never rewrite or rebuild a feature that already exists.*
+*Never assume an existing project uses a particular framework or directory layout without
+checking it first. Never rewrite or rebuild a feature that already exists.*
 
 ---
 
@@ -59,7 +65,8 @@ Before writing code:
 - Evaluate potential breaking changes to existing APIs, databases, or UI components.
 - For complex multi-file or multi-service features, formulate a step-by-step implementation plan before coding.
 
-*Ask for immediate clarification if essential requirements are ambiguous. Do not invent business requirements or create unauthorized product features.*
+*Ask for immediate clarification if essential requirements are ambiguous. Do not invent
+business requirements or create unauthorized product features.*
 
 ---
 
@@ -67,10 +74,12 @@ Before writing code:
 
 All software architecture must prioritize:
 
-- **Separation of Concerns (SoC):** Isolate business logic from UI rendering, data access layers, and transport protocols.
+- **Separation of Concerns (SoC):** Isolate business logic from UI rendering, data access
+  layers, and transport protocols.
 - **Modular Design:** Build small, loosely coupled, and highly cohesive components/modules.
 - **Clear Data Boundaries:** Enforce strict type boundaries and validation between service layers.
-- **Resilient Error Handling:** Implement graceful degradation, retry logic for transient errors, and structured error boundaries.
+- **Resilient Error Handling:** Implement graceful degradation, retry logic for transient
+  errors, and structured error boundaries.
 
 **Strictly Avoid:**
 - Circular dependencies between modules or packages.
@@ -99,7 +108,8 @@ Frontend implementations (React, Next.js, TypeScript, React Native/Expo) must:
 
 Backend implementations (Node.js, Express, TypeScript, Serverless) must:
 
-- Validate and sanitize all incoming payloads at the transport boundary using robust validation schemas (e.g., Zod, Joi).
+- Validate and sanitize all incoming payloads at the transport boundary using robust
+  validation schemas (e.g., Zod, Joi).
 - Enforce authentication (JWT, Session tokens) on all protected endpoints.
 - Enforce role-based or attribute-based authorization independently of frontend routing.
 - Return consistent, standard HTTP status codes (`200`, `201`, `400`, `401`, `403`, `404`, `422`, `500`).
@@ -158,7 +168,8 @@ Security must be embedded into every phase of development, aligning with **OWASP
 - Avoid logging sensitive fields (passwords, tokens, PII, financial data).
 - Apply the **Principle of Least Privilege** for database users, IAM roles, and file permissions.
 
-*Never execute destructive terminal commands (e.g., recursive deletes, force-drops, unauthenticated remote calls) without explicit human confirmation.*
+*Never execute destructive terminal commands (e.g., recursive deletes, force-drops,
+unauthenticated remote calls) without explicit human confirmation.*
 
 ---
 
@@ -170,12 +181,14 @@ Every feature must include appropriate automated tests before it is marked ready
 - **Unit Testing:** Isolate and test individual functions, hooks, and utility logic.
 - **Integration Testing:** Test API endpoints, database interactions, and service layers.
 - **Component / UI Testing:** Verify interactive frontend component behavior.
-- **End-to-End (E2E) Testing:** Validate critical user journeys (e.g., checkout, authentication flow, payment processing).
+- **End-to-End (E2E) Testing:** Validate critical user journeys (e.g., checkout,
+  authentication flow, payment processing).
 
 **Testing Rules:**
 1. Test normal execution paths, invalid user input, failure states, and boundary conditions.
 2. Never claim tests passed unless they were physically executed and output logs were inspected.
-3. Never delete or bypass failing tests simply to manufacture a green build report. Fix the underlying bug or specification discrepancy.
+3. Never delete or bypass failing tests simply to manufacture a green build report. Fix the
+   underlying bug or specification discrepancy.
 
 ---
 
@@ -187,7 +200,8 @@ All code must prioritize:
 - Strict type safety (TypeScript strict mode enabled where applicable).
 - Elimination of dead code, commented-out blocks, and unused package imports.
 
-*All code changes must adhere strictly to the project's existing ESLint, Prettier, or language-specific linter configurations.*
+*All code changes must adhere strictly to the project's existing ESLint, Prettier, or
+language-specific linter configurations.*
 
 ---
 
@@ -265,10 +279,12 @@ Before any production deployment:
 
 All autonomous or assisted AI agents must adhere to these behavioral rules:
 1. **Inspect before modifying:** Always read existing files before editing.
-2. **Plan complex changes:** Outline your approach before writing sprawling multi-file modifications.
+2. **Plan complex changes:** Outline your approach before writing sprawling multi-file
+   modifications.
 3. **Preserve existing functionality:** Do not break unrelated features or regressions.
 4. **Explain key trade-offs:** Clearly communicate technical decisions and architectural choices to human supervisors.
-5. **Report failures honestly:** If an error occurs, a test fails, or a build breaks, disclose it immediately without fabrication.
+5. **Report failures honestly:** If an error occurs, a test fails, or a build breaks,
+   disclose it immediately without fabrication.
 
 *Never fabricate test outputs, fake build successes, or pretend an operation succeeded when it was unverified.*
 
@@ -291,6 +307,8 @@ A task or feature is officially complete only when:
 
 ## 20. Standard of Excellence
 
-Eazworld software is built for real businesses, communities, and production users who depend on its reliability every single day. 
+Eazworld software is built for real businesses, communities, and production users who
+depend on its reliability every single day.
 
-Production quality is non-negotiable. Reliability, security, maintainability, and precision must drive every single engineering decision we make.
+Production quality is non-negotiable. Reliability, security, maintainability, and precision
+must drive every single engineering decision we make.

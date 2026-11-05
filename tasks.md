@@ -1,4 +1,5 @@
-# Eazworld AI Skills Library — Development Tasks (`TASKS.md`)
+# Eazworld AI Skills Library — Development Tasks (`tasks.md`)
+
 **Version:** 1.0.0  
 **Owner:** Eazworld  
 **Status:** Active Development  
@@ -13,6 +14,7 @@
 This document tracks the actual implementation progress of the Eazworld AI Skills Library.
 
 ### Status Legend
+
 - `[ ]` Not started
 - `[x]` Completed
 - `[~]` In progress
@@ -20,6 +22,7 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 - `[?]` Requires review
 
 ### Mandatory Operational Rules
+
 1. Complete tasks in their defined order unless a dependency requires otherwise.
 2. Do not mark a task complete (`[x]`) until all its acceptance criteria are satisfied.
 3. Test every skill in both Claude Code and OpenCode before considering it production-ready.
@@ -33,10 +36,12 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 ---
 
 ## PHASE 1 — Complete Repository Foundation
+
 **Priority:** Critical  
 **Objective:** Finish and verify the repository's foundational structure and documentation suite.
 
 ### 1.1 Repository Directory Structure
+
 - [x] Verify root repository directory structure.
 - [x] Verify `.claude/skills/` directory exists.
 - [x] Verify `docs/` directory exists.
@@ -47,21 +52,23 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 - [x] Remove unnecessary or duplicate files.
 
 ### 1.2 Foundational Documentation Suite
+
 - [x] `README.md` (v1.0.0)
 - [x] `LICENSE` (MIT)
 - [x] `CONTRIBUTING.md` (v1.0.0)
 - [x] `SECURITY.md` (v1.0.0)
 - [x] `CHANGELOG.md` (v1.0.0)
-- [x] `SPEC.md` (v1.0.0)
+- [x] `PROJECT_SPEC.md` (v1.0.0)
 - [x] `docs/ENGINEERING_STANDARDS.md` (v2.0.0)
 - [x] `docs/ARCHITECTURE.md` (v1.0.0)
 - [x] `docs/SKILL_AUTHORING_GUIDE.md` (v1.0.0)
 - [x] `docs/COMPATIBILITY.md` (v1.0.0)
 - [x] `docs/SECURITY_POLICY.md` (v1.0.0)
 - [x] `docs/ROADMAP.md` (v1.0.0)
-- [x] `TASKS.md` (v1.0.0)
+- [x] `tasks.md` (v1.0.0)
 
 ### 1.3 Repository Governance & Workflows
+
 - [x] Create `.github/PULL_REQUEST_TEMPLATE.md`.
 - [x] Create GitHub issue templates for bug reports and feature requests.
 - [x] Define branch protection guidelines.
@@ -75,10 +82,12 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 ---
 
 ## PHASE 2 — Build Validation & Quality Automation
+
 **Priority:** Critical  
 **Objective:** Build automated tools to validate skills before they are accepted into the library.
 
 ### 2.1 Validation Scripts
+
 - [ ] Create `scripts/validate-skills.js`.
 - [ ] Validate `SKILL.md` YAML frontmatter formatting and schema.
 - [ ] Validate skill `name` against its parent folder name (`kebab-case`).
@@ -90,6 +99,7 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 - [ ] Report invalid skill directories cleanly in CLI output.
 
 ### 2.2 Security Validation
+
 - [ ] Add secret and token detection patterns.
 - [ ] Detect accidental API key exposure (`sk_live_`, `AIzaSy`, etc.).
 - [ ] Detect hardcoded passwords, private keys, and DB URIs.
@@ -97,6 +107,7 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 - [ ] Verify helper scripts do not execute destructive operations without authorization.
 
 ### 2.3 Automated Test Suite for Validation
+
 - [ ] Create automated tests for `scripts/validate-skills.js`.
 - [ ] Create valid and invalid sample skill mockups in `examples/`.
 - [ ] Test missing metadata scenarios.
@@ -105,6 +116,7 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 - [ ] Confirm expected non-zero exit codes and descriptive failure messages.
 
 ### 2.4 GitHub Actions CI/CD Pipeline
+
 - [ ] Create `.github/workflows/lint-skills.yml`.
 - [ ] Trigger validation automatically on Pull Requests to `main`.
 - [ ] Fail build workflows when skill checks or security scans fail.
@@ -115,10 +127,12 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 ---
 
 ## PHASE 3 — Software Engineering Department (13 Skills)
+
 **Priority:** Critical  
 **Objective:** Author, validate, and test the 13 core software engineering skills.
 
 ### 3.1 Architecture & Core Systems
+
 - [ ] `software-architecture`
 - [ ] `frontend-design`
 - [ ] `backend-engineering`
@@ -126,11 +140,13 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 - [ ] `api-development`
 
 ### 3.2 Security, Review & Quality Assurance
+
 - [ ] `security-audit`
 - [ ] `software-testing`
 - [ ] `code-review`
 
 ### 3.3 Specialized Engineering Domains
+
 - [ ] `ecommerce-development`
 - [ ] `mobile-app-development`
 - [ ] `performance-optimization`
@@ -138,6 +154,7 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 - [ ] `cloud-devops`
 
 ### 3.4 Mandatory Quality Checklist per Skill
+
 - [ ] Create skill directory (`skills/software-engineering/<skill-name>/`).
 - [ ] Write `SKILL.md` with valid YAML frontmatter.
 - [ ] Define precise triggers and activation conditions.
@@ -155,10 +172,12 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 ---
 
 ## PHASE 4 — Digital Marketing Department (7 Skills)
+
 **Priority:** High  
 **Objective:** Build seven reusable digital marketing and growth skills.
 
 ### 4.1 Marketing Skills Portfolio
+
 - [ ] `seo-strategy`
 - [ ] `google-ads`
 - [ ] `meta-ads`
@@ -168,6 +187,7 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 - [ ] `conversion-optimization`
 
 ### 4.2 Quality Requirements
+
 - [ ] Define target users, platform policies, and activation triggers.
 - [ ] Include structured research and audience analysis procedures.
 - [ ] Establish measurable campaign KPI evaluation logic.
@@ -179,10 +199,12 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 ---
 
 ## PHASE 5 — AI & Automation Department (5 Skills)
+
 **Priority:** High  
 **Objective:** Develop five skills for custom AI systems, n8n integrations, and business automation.
 
 ### 5.1 AI & Automation Skills Portfolio
+
 - [ ] `ai-agent-development`
 - [ ] `n8n-automation`
 - [ ] `whatsapp-automation`
@@ -190,6 +212,7 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 - [ ] `crm-automation`
 
 ### 5.2 Quality Requirements
+
 - [ ] Document supported API, webhook, and LLM agent architectures.
 - [ ] Enforce strict environment variable isolation for API keys.
 - [ ] Include retry logic, exponential backoff, and error-handling workflows.
@@ -201,10 +224,12 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 ---
 
 ## PHASE 6 — Business Solutions Department (6 Skills)
+
 **Priority:** High  
 **Objective:** Build six skills for enterprise verticals, ERPs, and regional fintech integrations.
 
 ### 6.1 Business Solutions Portfolio
+
 - [ ] `school-management`
 - [ ] `church-management`
 - [ ] `pos-inventory`
@@ -213,6 +238,7 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 - [ ] `ghana-payments` (Paystack, Hubtel, Mobile Money APIs)
 
 ### 6.2 Quality Requirements
+
 - [ ] Define RBAC roles, data privacy standards, and audit logging.
 - [ ] Address regional payment callback verification and idempotency rules.
 - [ ] Include offline-first and POS sync considerations where relevant.
@@ -224,22 +250,26 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 ---
 
 ## PHASE 7 — Agent Compatibility & Integration Verification
+
 **Priority:** Critical  
 **Objective:** Formally test and document cross-agent compatibility across the complete library.
 
 ### 7.1 Claude Code Verification
+
 - [ ] Test native skill discovery from `.claude/skills/`.
 - [ ] Verify activation on domain triggers.
 - [ ] Verify relative link resolution for `references/`.
 - [ ] Test representative skills across all 4 departments.
 
 ### 7.2 OpenCode Verification
+
 - [ ] Test shared skill discovery from `.claude/skills/`.
 - [ ] Verify activation on domain triggers.
 - [ ] Verify relative link resolution for `references/`.
 - [ ] Confirm no duplicate skills exist under `.opencode/`.
 
 ### 7.3 Compatibility Matrix Logging
+
 - [ ] Document test outcomes and agent runner versions in `docs/COMPATIBILITY.md`.
 - [ ] Resolve any execution discrepancies across environments.
 
@@ -248,6 +278,7 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 ---
 
 ## PHASE 8 — Developer Experience & Public Documentation
+
 **Priority:** High  
 **Objective:** Make the library accessible, well-documented, and easy for open-source contributors to use.
 
@@ -262,16 +293,19 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 ---
 
 ## PHASE 9 — Final Security Audit & Public v1.0.0 Release
+
 **Priority:** Critical  
 **Objective:** Execute final quality audits and publish version 1.0.0 to GitHub.
 
 ### 9.1 Pre-Release Audit
+
 - [ ] Run `npm run validate` across all 31 skills.
 - [ ] Perform automated secret scanning across entire Git history.
 - [ ] Audit code snippets for OWASP Top 10 compliance.
 - [ ] Confirm MIT license information in all files.
 
 ### 9.2 Release Artifacts
+
 - [ ] Update `CHANGELOG.md` for Release v1.0.0.
 - [ ] Update version tags in root files.
 - [ ] Create Git release tag `v1.0.0`.
@@ -282,6 +316,7 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 ---
 
 ## PHASE 10 — Post-Release Maintenance & Ecosystem Growth
+
 **Priority:** Ongoing  
 **Objective:** Maintain quality, address community feedback, and expand skills post-release.
 
