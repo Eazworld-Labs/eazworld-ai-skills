@@ -81,6 +81,30 @@ Before writing any UI code, inspect the target repository:
 - Server Components by default — add `"use client"` only when the component genuinely
   needs state, effects, or browser APIs.
 - No new dependencies without explicit human approval.
+- **Visual System & Aesthetic Standards:** the design-token contract every UI
+  implements, layered so brand values change in exactly one place — components quote
+  token names, never raw values.
+- **Color tokens — three layers:** a primitive base (raw palette values, no meaning),
+  a semantic intent layer (what a color means — `--color-bg-app`,
+  `--color-surface-base`, `--color-surface-elevated`, `--color-border-subtle`,
+  `--color-text-primary`, `--color-text-muted`, `--color-action-primary`,
+  `--color-action-accent`), and a component scope that aliases semantic names for one
+  fixed purpose. Components consume only semantic and component names.
+- **Dark-mode surfaces:** deep neutral app backgrounds (`#090d16` / `#0b0e14`);
+  elevation by sequential surface fills or low-opacity white overlays — never pure
+  black panels stacked on pure black backgrounds.
+- **Glassmorphism (strict):** `backdrop-filter: blur(12px)` plus a translucent fill
+  plus a 1px border — only on neutral surfaces (navbars, dialogs, panels), never
+  behind primary action buttons or body copy.
+- **Typography — 1.250 modular scale (Major Third):** `xs` 0.75rem → `2xl` 1.953rem
+  in 1.250 steps; weights 400 (body) through 700 (display and emphasis only).
+  Display type serves headings and hero moments (line height 1.1); body type serves
+  reading (line height 1.5) — nothing in between is invented.
+- **Spatial grid:** 8px base grid with 4px half-steps — every margin, padding, and
+  gap resolves to the grid; no arbitrary offsets.
+- **Surface finishes:** border-radius tiers `sm` 4px → `xl` 16px plus `full`; shadow
+  elevation tiers `sm` / `md` / `lg`. Elevation expresses hierarchy, so shadows are
+  assigned by layer, never by taste.
 
 Example of a typed, single-purpose component:
 
@@ -132,6 +156,12 @@ export function Badge({ label, tone }: BadgeProps) {
 - [ ] Text contrast meets WCAG AA (4.5:1).
 - [ ] No secrets or private data present in the client bundle.
 - [ ] Loading, empty, and error states implemented for data-driven views.
+- [ ] **Design Token Enforcement:** All colors, gaps, margins, padding, radii,
+      and shadows are referenced strictly via CSS variables or framework theme
+      tokens (zero raw/hardcoded hex or arbitrary pixel values in component files).
+- [ ] **Type Scale Compliance:** All heading and body text sizing adheres to the
+      1.250 modular type scale (`xs` through `2xl`) with no arbitrary font size
+      overrides.
 
 ## 8. Supporting References & Assets
 

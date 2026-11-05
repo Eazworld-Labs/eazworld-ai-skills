@@ -59,14 +59,43 @@ dies in a slide deck.
 - Tokens are expressed in code form so design and implementation share one source:
   developers consume the same values designers approve.
 
-Example token block (values come from the brand audit):
+Example token architecture (values come from the brand audit; the primitive
+palette is illustrative placeholder input, final values come from your audit):
 
 ```css
+/* Primitive palette — EXAMPLE-ONLY values, input to the audit only. */
 :root {
-  --brand-primary: #0f172a;
-  --brand-accent: #f59e0b;
+  --ink-950: #0b0e14;
+  --ink-900: #111827;
+  --paper-50: #f8fafc;
+  --accent-500: #f59e0b;
+}
+
+/* Semantic mappings, light theme — components consume only these names. */
+:root {
+  --color-bg-app: #f8fafc;
+  --color-surface-base: #f8fafc;
+  --color-surface-elevated: #ffffff;
+  --color-border-subtle: #e2e8f0;
+  --color-text-primary: #0f172a;
+  --color-text-muted: #475569;
+  --color-action-primary: #0f172a;
+  --color-action-accent: #f59e0b;
+  --radius-md: 8px;
   --font-display: "Sora", sans-serif;
   --font-body: "Inter", sans-serif;
+}
+
+/* Dark theme — deep neutral surfaces with low-opacity white elevation. */
+[data-theme="dark"] {
+  --color-bg-app: #090d16;
+  --color-surface-base: #0b0e14;
+  --color-surface-elevated: rgba(255, 255, 255, 0.04);
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-text-primary: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-action-primary: #f8fafc;
+  --color-action-accent: #fbbf24;
 }
 ```
 
@@ -113,6 +142,12 @@ Example token block (values come from the brand audit):
 - [ ] KPIs defined with baseline and target — consistency audit findings across
       surfaces, asset reuse rate, and brand-search volume over time.
 - [ ] Guide tested by applying it to three real surfaces successfully.
+- [ ] **Design Token Enforcement:** All colors, gaps, margins, padding, radii,
+      and shadows are referenced strictly via CSS variables or framework theme
+      tokens (zero raw/hardcoded hex or arbitrary pixel values in component files).
+- [ ] **Type Scale Compliance:** All heading and body text sizing adheres to the
+      1.250 modular type scale (`xs` through `2xl`) with no arbitrary font size
+      overrides.
 
 ## 8. Supporting References & Assets
 
