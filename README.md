@@ -11,6 +11,18 @@
 
 **Version:** 1.0.0 · **License:** MIT · **Agents:** Claude Code & OpenCode
 
+### Install in one command
+
+```bash
+npx skills add eazworld/eazworld-ai-skills
+```
+
+This copies all 32 skills into your project's `.claude/skills/`, ready for both
+Claude Code and OpenCode to discover automatically at startup — or use
+`--skill <name>` for a single skill. Full setup options (shell installers,
+submodules, updates) live in [User Installation & Setup](#user-installation--setup).
+(During the move to the `eazworld` org, `fekt2016/eazworld-ai-skills` also works.)
+
 ---
 
 ## Overview
