@@ -184,21 +184,29 @@ kept per this task list. Claude Code discovery remains open pending a Claude Cod
 
 ### 4.1 Marketing Skills Portfolio
 
-- [ ] `seo-strategy`
-- [ ] `google-ads`
-- [ ] `meta-ads`
-- [ ] `social-media-management`
-- [ ] `brand-identity`
-- [ ] `email-marketing`
-- [ ] `conversion-optimization`
+- [x] `seo-strategy`
+- [x] `google-ads`
+- [x] `meta-ads`
+- [x] `social-media-management`
+- [x] `brand-identity`
+- [x] `email-marketing`
+- [x] `conversion-optimization`
 
 ### 4.2 Quality Requirements
 
-- [ ] Define target users, platform policies, and activation triggers.
-- [ ] Include structured research and audience analysis procedures.
-- [ ] Establish measurable campaign KPI evaluation logic.
-- [ ] Validate every skill using `scripts/validate-skills.js`.
+- [x] Define target users, platform policies, and activation triggers.
+- [x] Include structured research and audience analysis procedures.
+- [x] Establish measurable campaign KPI evaluation logic.
+- [x] Validate every skill using `scripts/validate-skills.js`.
 - [ ] Verify cross-agent execution in Claude Code and OpenCode.
+
+**Evidence:** All 7 skills contain a target-users statement, named platform policies,
+an activation-triggers section, a Research & Audience Audit Checklist, and KPI
+evaluation logic with baseline and target — verified 7/7 by sweep. Validator PASS for
+all 20 skills; every skill ships at least one fenced example (JSON examples
+machine-parsed). OpenCode discovery verified live in-session — all 7 registered on
+creation. Claude Code check remains open: CLI returns the weekly-limit message
+(resets 12am Africa/Accra).
 
 **Completion Criteria:** All 7 Digital Marketing skills pass library quality standards and agent tests.
 
