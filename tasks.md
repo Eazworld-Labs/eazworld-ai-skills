@@ -253,20 +253,30 @@ message (resets 12am Africa/Accra).
 
 ### 6.1 Business Solutions Portfolio
 
-- [ ] `school-management`
-- [ ] `church-management`
-- [ ] `pos-inventory`
-- [ ] `restaurant-management`
-- [ ] `booking-systems`
-- [ ] `ghana-payments` (Paystack, Hubtel, Mobile Money APIs)
+- [x] `school-management`
+- [x] `church-management`
+- [x] `pos-inventory`
+- [x] `restaurant-management`
+- [x] `booking-systems`
+- [x] `ghana-payments` (Paystack, Hubtel, Mobile Money APIs)
 
 ### 6.2 Quality Requirements
 
-- [ ] Define RBAC roles, data privacy standards, and audit logging.
-- [ ] Address regional payment callback verification and idempotency rules.
-- [ ] Include offline-first and POS sync considerations where relevant.
-- [ ] Validate every skill via automated linter.
+- [x] Define RBAC roles, data privacy standards, and audit logging.
+- [x] Address regional payment callback verification and idempotency rules.
+- [x] Include offline-first and POS sync considerations where relevant.
+- [x] Validate every skill via automated linter.
 - [ ] Verify cross-agent execution in Claude Code and OpenCode.
+
+**Evidence:** Flattened-text sweep confirmed 6/6 across all six skills for RBAC role
+definitions, data privacy/retention rules, audit logging, payment callback
+verification, idempotency rules, and offline considerations. Each skill ships one
+fenced example (role matrix, access rules, offline queue, order ticket, idempotent
+booking, timing-safe callback verification — five JSON examples machine-parsed).
+Validator PASS for all 31 skills; format checks clean. OpenCode discovery verified
+live in-session — all 6 registered on creation (two experienced transient registry
+churn and re-registered). Claude Code check remains open: CLI returns the
+weekly-limit message (resets 12am Africa/Accra).
 
 **Completion Criteria:** All 6 Business Solutions skills deliver practical, secure, and production-ready guidance.
 
