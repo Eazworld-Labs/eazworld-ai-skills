@@ -14,7 +14,7 @@
 ### Install in one command
 
 ```bash
-npx skills add eazworld/eazworld-ai-skills
+npx skills add Eazworld-Labs/eazworld-ai-skills
 ```
 
 This copies all 32 skills into your project's `.claude/skills/`, ready for both
@@ -128,7 +128,7 @@ Full protocols: [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/fekt2016/eazworld-ai-skills.git
+git clone https://github.com/Eazworld-Labs/eazworld-ai-skills.git
 cd eazworld-ai-skills
 ```
 
@@ -181,11 +181,11 @@ The [skills.sh](https://skills.sh) CLI installs the whole library into your
 project's agent folders in one command:
 
 ```bash
-npx skills add eazworld/eazworld-ai-skills
+npx skills add Eazworld-Labs/eazworld-ai-skills
 ```
 
 - Add `--skill <name>` to install one skill instead of all 32 — for example
-  `npx skills add eazworld/eazworld-ai-skills --skill nigeria-payments`.
+  `npx skills add Eazworld-Labs/eazworld-ai-skills --skill nigeria-payments`.
 - Add `--agent claude-code` (or `--agent opencode`) to target one agent, `-g` to
   install globally for all projects, and run `npx skills update` any time to pull
   the latest versions.
@@ -203,13 +203,13 @@ sits at `fekt2016/eazworld-ai-skills`, substitute that owner in the command.)
 path to install elsewhere:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/eazworld/eazworld-ai-skills/main/scripts/install.sh | bash -s -- /path/to/your-project
+curl -fsSL https://raw.githubusercontent.com/Eazworld-Labs/eazworld-ai-skills/main/scripts/install.sh | bash -s -- /path/to/your-project
 ```
 
 **Windows (PowerShell)** — run from your project folder:
 
 ```powershell
-iwr -useb https://raw.githubusercontent.com/eazworld/eazworld-ai-skills/main/scripts/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/Eazworld-Labs/eazworld-ai-skills/main/scripts/install.ps1 | iex
 ```
 
 Prefer to read a script first? Download it (`curl -O <url>` or save the file) and
@@ -226,7 +226,7 @@ identical behavior.
 
 Re-running an installer refreshes the cache from GitHub and replaces your copy, so
 updates use the same one command. The clone source defaults to
-`https://github.com/eazworld/eazworld-ai-skills.git` and can be overridden with the
+`https://github.com/Eazworld-Labs/eazworld-ai-skills.git` and can be overridden with the
 `EAZWORLD_SKILLS_REPO` environment variable (Bash) or the `-Repo` parameter
 (PowerShell) — useful for forks or mirrors.
 
@@ -237,7 +237,7 @@ and copy its skills into place:
 
 ```bash
 cd your-project
-git submodule add https://github.com/eazworld/eazworld-ai-skills.git vendor/eazworld-ai-skills
+git submodule add https://github.com/Eazworld-Labs/eazworld-ai-skills.git vendor/eazworld-ai-skills
 mkdir -p .claude
 cp -R vendor/eazworld-ai-skills/.claude/skills .claude/skills
 ```
@@ -311,8 +311,8 @@ Released under the [MIT License](LICENSE).
 
 Maintained by **Eazworld**.
 
-[ci-badge]: https://github.com/fekt2016/eazworld-ai-skills/actions/workflows/lint-skills.yml/badge.svg
-[ci]: https://github.com/fekt2016/eazworld-ai-skills/actions
+[ci-badge]: https://github.com/Eazworld-Labs/eazworld-ai-skills/actions/workflows/lint-skills.yml/badge.svg
+[ci]: https://github.com/Eazworld-Labs/eazworld-ai-skills/actions
 [license-badge]: https://img.shields.io/badge/License-MIT-yellow.svg
 [license]: LICENSE
 [version-badge]: https://img.shields.io/badge/version-1.0.0-blue.svg

@@ -8,7 +8,7 @@
 # Repository URL resolution order:
 #   1. the -Repo parameter
 #   2. the EAZWORLD_SKILLS_REPO environment variable
-#   3. the default: https://github.com/eazworld/eazworld-ai-skills.git
+#   3. the default: https://github.com/Eazworld-Labs/eazworld-ai-skills.git
 #
 # The installer clones the library into a local cache and copies its
 # .claude\skills tree into <target>\.claude\skills. Re-running it updates
@@ -21,7 +21,7 @@ param(
 )
 
 if ([string]::IsNullOrWhiteSpace($Repo)) {
-    $Repo = "https://github.com/eazworld/eazworld-ai-skills.git"
+    $Repo = "https://github.com/Eazworld-Labs/eazworld-ai-skills.git"
 }
 
 $CacheDir = if ($env:EAZWORLD_SKILLS_CACHE) {

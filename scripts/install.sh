@@ -8,7 +8,7 @@
 #
 # Environment:
 #   EAZWORLD_SKILLS_REPO     Clone source URL
-#                            (default: https://github.com/eazworld/eazworld-ai-skills.git)
+#                            (default: https://github.com/Eazworld-Labs/eazworld-ai-skills.git)
 #   EAZWORLD_SKILLS_CACHE    Local cache directory
 #                            (default: ~/.eazworld-ai-skills)
 #
@@ -18,7 +18,7 @@
 
 set -euo pipefail
 
-REPO="${EAZWORLD_SKILLS_REPO:-https://github.com/eazworld/eazworld-ai-skills.git}"
+REPO="${EAZWORLD_SKILLS_REPO:-https://github.com/Eazworld-Labs/eazworld-ai-skills.git}"
 TARGET="${1:-$PWD}"
 CACHE_DIR="${EAZWORLD_SKILLS_CACHE:-$HOME/.eazworld-ai-skills}"
 

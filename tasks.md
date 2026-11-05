@@ -366,7 +366,9 @@ sweep clean; tests 8/8 and validator PASS (31 skills).
 
 **Evidence (§9.2 items 3–4):** Annotated tag `v1.0.0` created on `aa335a8` and
 pushed to origin; GitHub Release published at
-https://github.com/fekt2016/eazworld-ai-skills/releases/tag/v1.0.0. Repository
+https://github.com/Eazworld-Labs/eazworld-ai-skills/releases/tag/v1.0.0. (The repo
+later moved from `fekt2016/` to the `Eazworld-Labs` organization; install links
+point at `Eazworld-Labs` throughout.) Repository
 visibility confirmed PUBLIC via `gh repo view`.
 
 **Evidence (§9.1):** Validator PASS — 31/31 skills, 0 errors, 0 warnings. History
@@ -419,10 +421,10 @@ further WAEMU/cross-border rails remain future scope.
 (one-line curl/iwr installs, submodule integration, discovery explanation). Bash
 installer verified end to end — fresh clone-to-32-skills install plus idempotent
 update run, content matched against the working tree. PowerShell counterpart
-review-verified (no pwsh on this machine). Note: the scripts' default clone source
-is `https://github.com/eazworld/eazworld-ai-skills.git` per project-owner spec;
-the live repo currently sits at `fekt2016/eazworld-ai-skills` — override with
-`EAZWORLD_SKILLS_REPO` (Bash) or `-Repo` (PowerShell) until the repo moves.
+review-verified (no pwsh on this machine). Note: the repository later moved from
+`fekt2016/` to the `Eazworld-Labs` organization — every install link and script
+default now points at `Eazworld-Labs/eazworld-ai-skills` (overridable via
+`EAZWORLD_SKILLS_REPO` or `-Repo`).
 
 ---
 
