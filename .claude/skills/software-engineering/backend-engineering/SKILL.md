@@ -61,6 +61,22 @@ Before writing server code, inspect the target repository:
 - Express-specific rules: register middleware in order (security → parsing → routes →
   404 → error), and never call `next()` after a response has been sent.
 
+Example of boundary validation before any business logic runs:
+
+```ts
+const PlaceOrderSchema = z.object({
+  sku: z.string().min(1),
+  qty: z.number().int().positive(),
+});
+
+const parsed = PlaceOrderSchema.safeParse(req.body);
+if (!parsed.success) {
+  return res.status(422).json({
+    error: { code: 'invalid_input', message: 'Validation failed' },
+  });
+}
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the operation, its inputs, outputs, and failure modes.

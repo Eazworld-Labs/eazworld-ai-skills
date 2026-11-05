@@ -62,6 +62,20 @@ repository, pinned dependencies, and a tested way back when a release goes wrong
 - Infrastructure that matters is defined as code so environments are reproducible, and
   cost is treated as a design constraint.
 
+Example of a least-privilege pull-request workflow:
+
+```yaml
+on: [pull_request]
+permissions:
+  contents: read # write only where a step genuinely requires it
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2 # pin exact versions, never @v4
+      - run: npm ci && npm test
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the target platform, environments, and what "working

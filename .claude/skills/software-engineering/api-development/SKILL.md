@@ -61,6 +61,18 @@ Before drafting a contract, inspect the target repository:
 - The OpenAPI specification lives with the code and is validated against the routes —
   spec drift is a defect.
 
+Example of the single error envelope every failure uses:
+
+```json
+{
+  "error": {
+    "code": "order_not_found",
+    "message": "Order 42 does not exist",
+    "details": {}
+  }
+}
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the consumers, operations, and payloads the contract

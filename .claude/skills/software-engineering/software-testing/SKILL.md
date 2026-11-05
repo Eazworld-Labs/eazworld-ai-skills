@@ -56,6 +56,17 @@ when it is green, the change is safe; when it is red, something real is wrong.
 - Flaky tests are defects: quarantine with a ticket, then fix or delete — never rerun
   until green.
 
+Example of a deterministic behavior test (Arrange, Act, Assert):
+
+```ts
+it('returns 404 when the order does not exist', async () => {
+  const res = await request(app).get('/orders/does-not-exist');
+
+  expect(res.status).toBe(404);
+  expect(res.body.error.code).toBe('order_not_found');
+});
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the behavior to cover and the failure modes that must

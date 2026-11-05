@@ -58,6 +58,15 @@ of what must move.
   recommending a rewrite.
 - Praise what is done well; reviews that only criticize teach people to fear them.
 
+Example of an actionable comment:
+
+```text
+blocker · src/payment/charge.ts:88
+The amount comes from the client payload. Recompute it server-side from
+the cart before charging (see api-development skill, section 4).
+Suggestion: const amountMinor = await priceCart(cart);
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate what the change is supposed to do and how success is

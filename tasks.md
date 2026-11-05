@@ -155,17 +155,23 @@ This document tracks the actual implementation progress of the Eazworld AI Skill
 
 ### 3.4 Mandatory Quality Checklist per Skill
 
-- [ ] Create skill directory (`skills/software-engineering/<skill-name>/`).
-- [ ] Write `SKILL.md` with valid YAML frontmatter.
-- [ ] Define precise triggers and activation conditions.
-- [ ] Outline required inputs and context audit directives.
-- [ ] Define step-by-step execution workflows.
-- [ ] Incorporate non-negotiable security guardrails.
-- [ ] Include concrete code templates and examples.
-- [ ] Add supporting spec files under `references/` if required.
-- [ ] Pass automated validation script (`npm run validate`).
+- [x] Create skill directory (`skills/software-engineering/<skill-name>/`).
+- [x] Write `SKILL.md` with valid YAML frontmatter.
+- [x] Define precise triggers and activation conditions.
+- [x] Outline required inputs and context audit directives.
+- [x] Define step-by-step execution workflows.
+- [x] Incorporate non-negotiable security guardrails.
+- [x] Include concrete code templates and examples.
+- [x] Add supporting spec files under `references/` if required.
+- [x] Pass automated validation script (`npm run validate`).
 - [ ] Verify discovery and loading in Claude Code.
-- [ ] Verify discovery and loading in OpenCode.
+- [x] Verify discovery and loading in OpenCode.
+
+**Evidence & known issue:** Validator PASS for all 13 skills; every skill ships at least
+one fenced code example. OpenCode discovery verified live in-session — 12 of 13 skills
+registered on creation. Known issue: `frontend-design` is shadowed in OpenCode by a
+built-in skill with the same ID; the file exists and passes validation, and the name is
+kept per this task list. Claude Code discovery remains open pending a Claude Code run.
 
 **Completion Criteria:** All 13 Software Engineering skills pass quality gates and are fully executable in both agents.
 

@@ -60,6 +60,24 @@ Before modeling anything, inspect the target repository and data requirements:
 - Flexible JSONB/NoSQL shapes are reserved for genuinely variable data, not used to avoid
   modeling.
 
+Example migration with a matching index (up and down):
+
+```sql
+-- up
+CREATE TABLE orders (
+  id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  customer_id uuid NOT NULL REFERENCES customers (id),
+  status      text NOT NULL DEFAULT 'pending',
+  created_at  timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX idx_orders_customer_created
+  ON orders (customer_id, created_at DESC);
+
+-- down
+DROP TABLE orders;
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the entities, relationships, and the queries the

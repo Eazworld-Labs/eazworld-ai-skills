@@ -81,6 +81,18 @@ interruptions included — not just on the simulator where they were written.
   `EXPO_PUBLIC_*` variables; server secrets never enter the client.
 - **Secure Storage:** Tokens and credentials go in Keychain/Keystore via
   `expo-secure-store` or the auth session flow — never in plain AsyncStorage.
+
+Example of token storage on the secure keystore:
+
+```ts
+import * as SecureStore from 'expo-secure-store';
+
+export async function saveSession(token: string) {
+  await SecureStore.setItemAsync('session_token', token, {
+    keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+  });
+}
+```
 - **Deep Links:** Validate incoming deep link URLs before acting on them; an untrusted
   link must not trigger authenticated actions.
 - **Permissions:** Request camera, location, or media access only when the feature needs

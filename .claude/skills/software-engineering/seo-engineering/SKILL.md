@@ -62,6 +62,23 @@ can actually be found and correctly displayed in results.
 - Images carry descriptive alt text, next-gen formats, and lazy loading below the fold —
   image weight is also a ranking factor through Core Web Vitals.
 
+Example of per-page metadata and Product structured data:
+
+```ts
+export const metadata: Metadata = {
+  title: 'Ankara Print Shoes | EazWorld',
+  description: 'Hand-finished Ankara print shoes, sizes 38–46, delivery across Accra.',
+  alternates: { canonical: '/products/ankara-print-shoes' },
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Ankara Print Shoes',
+  offers: { '@type': 'Offer', price: '250.00', priceCurrency: 'GHS' },
+};
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the pages in scope, their search intent, and the

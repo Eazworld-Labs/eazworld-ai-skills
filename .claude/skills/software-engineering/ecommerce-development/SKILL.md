@@ -58,6 +58,21 @@ gateways, and Mobile Money flows where the network is not always reliable.
 - Provider integration starts in sandbox mode and switches to live only after an
   end-to-end sandbox pass.
 
+Example of an idempotent webhook handler:
+
+```ts
+app.post('/webhooks/paystack', async (req, res) => {
+  verifySignature(req); // shared secret read from the environment
+  const event = parseEvent(req.body);
+
+  const firstTime = await markEventProcessed(event.id); // unique insert
+  if (!firstTime) return res.sendStatus(200); // replay — already handled
+
+  await applyEvent(event);
+  res.sendStatus(200);
+});
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the flow to build or fix, the provider involved, and

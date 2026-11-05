@@ -59,6 +59,16 @@ Before writing any UI code, inspect the target repository:
   needs state, effects, or browser APIs.
 - No new dependencies without explicit human approval.
 
+Example of a typed, single-purpose component:
+
+```tsx
+type BadgeProps = { label: string; tone: 'info' | 'warn' | 'danger' };
+
+export function Badge({ label, tone }: BadgeProps) {
+  return <span className={`badge badge-${tone}`}>{label}</span>;
+}
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the screen or component, its states (default, loading,

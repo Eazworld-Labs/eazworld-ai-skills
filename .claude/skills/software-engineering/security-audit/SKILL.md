@@ -57,6 +57,14 @@ dismiss what is not without guessing.
   over patches that block one instance.
 - Findings are written for action: location, impact, and the smallest safe remediation.
 
+Example finding format:
+
+```text
+[HIGH] src/routes/export.ts:42 — CSV export missing an authorization check
+Impact: any authenticated user can export all customers' data.
+Fix: require role=admin on /admin/export and add a deny-path test.
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the scope, data sensitivity, and rules of engagement;

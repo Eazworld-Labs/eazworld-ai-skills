@@ -58,6 +58,16 @@ Before proposing any structure, inspect the target repository:
   decision, consequences.
 - Prefer reversible decisions, and document the reversal path for irreversible ones.
 
+Example of a module boundary expressed as a typed contract:
+
+```ts
+// orders module — the only surface other modules may import
+export interface OrderService {
+  getById(id: OrderId): Promise<Order | null>;
+  place(command: PlaceOrderCommand): Promise<OrderId>;
+}
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate the problem, scale assumptions, and hard constraints in

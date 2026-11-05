@@ -57,6 +57,18 @@ performance change without a measurement is an opinion, not an optimization.
 - Security features are never traded for speed — validation, signatures, and rate limits
   stay on.
 
+Example of cache-aside with an explicit TTL and per-user key:
+
+```ts
+const key = `product:${userId}:${productId}`; // never share across users
+const hit = await redis.get(key);
+if (hit) return JSON.parse(hit) as Product;
+
+const product = await loadProduct(productId); // the slow query
+await redis.set(key, JSON.stringify(product), 'EX', 60); // TTL: 60s
+return product;
+```
+
 ## 5. Execution Workflow (Step-by-Step)
 
 1. **Step 1: Parse Task** — Restate what is slow, for whom, and the target metric.
