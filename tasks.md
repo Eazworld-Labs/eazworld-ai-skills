@@ -352,17 +352,33 @@ sweep clean; tests 8/8 and validator PASS (31 skills).
 
 ### 9.1 Pre-Release Audit
 
-- [ ] Run `npm run validate` across all 31 skills.
-- [ ] Perform automated secret scanning across entire Git history.
-- [ ] Audit code snippets for OWASP Top 10 compliance.
-- [ ] Confirm MIT license information in all files.
+- [x] Run `npm run validate` across all 31 skills.
+- [x] Perform automated secret scanning across entire Git history.
+- [x] Audit code snippets for OWASP Top 10 compliance.
+- [x] Confirm MIT license information in all files.
 
 ### 9.2 Release Artifacts
 
-- [ ] Update `CHANGELOG.md` for Release v1.0.0.
-- [ ] Update version tags in root files.
+- [x] Update `CHANGELOG.md` for Release v1.0.0.
+- [x] Update version tags in root files.
 - [ ] Create Git release tag `v1.0.0`.
 - [ ] Publish public GitHub repository.
+
+**Evidence (§9.1):** Validator PASS — 31/31 skills, 0 errors, 0 warnings. History
+scan — every commit in `git rev-list --all` searched for key, token, private-key,
+database-URI, and cloud-credential patterns: clean. OWASP review — all skill
+snippets scanned for injection, weak crypto, misconfiguration, and SSRF patterns:
+no interpolated SQL, no eval, no MD5/SHA1 for security, no wildcard CORS, no
+disabled TLS verification; representative manual review confirms parameterized
+validation (Zod), timing-safe HMAC verification, and RBAC-scoped examples; the only
+`Math.random()` is backoff jitter (not security randomness); test-harness
+`spawnSync` uses fixed argv with no shell. Licenses — 31/31 SKILL.md files carry
+`license: MIT`, root `LICENSE` present, `package.json` license is MIT.
+
+**Evidence (§9.2 items 1–2):** CHANGELOG `[1.0.0]` now covers all 31 skills across
+4 departments, validation tooling, governance & CI/CD templates, and developer
+documentation. Version fields verified at 1.0.0: `package.json`, README text and
+badge, `PROJECT_SPEC.md`, and all 31 skill metadata blocks — no stale 0.x values.
 
 **Completion Criteria:** Public v1.0.0 release tagged and published on GitHub.
 
