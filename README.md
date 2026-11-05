@@ -18,9 +18,18 @@ npx skills add Eazworld-Labs/eazworld-ai-skills
 ```
 
 This copies all 32 skills into your project's `.claude/skills/`, ready for both
-Claude Code and OpenCode to discover automatically at startup — or use
-`--skill <name>` for a single skill. Full setup options (shell installers,
-submodules, updates) live in [User Installation & Setup](#user-installation--setup).
+Claude Code and OpenCode to discover automatically at startup.
+
+Only need some of them? Install a subset instead — same command, one flag:
+
+```bash
+npx skills add Eazworld-Labs/eazworld-ai-skills --skill nigeria-payments --skill pos-inventory
+```
+
+The shell installers support the same selection
+(`bash scripts/install.sh --skill nigeria-payments`). Full setup options (shell
+installers, submodules, updates) live in
+[User Installation & Setup](#user-installation--setup).
 (During the move to the `eazworld` org, `fekt2016/eazworld-ai-skills` also works.)
 
 ---
