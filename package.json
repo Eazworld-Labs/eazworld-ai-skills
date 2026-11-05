@@ -1,0 +1,15 @@
+{
+  "name": "eazworld-ai-skills",
+  "version": "1.0.0",
+  "description": "Single source of truth AI agent skills library for Claude Code and OpenCode",
+  "license": "MIT",
+  "author": "Eazworld",
+  "private": true,
+  "scripts": {
+    "validate": "node scripts/validate-skills.js",
+    "test": "node --test \"scripts/**/*.test.js\""
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

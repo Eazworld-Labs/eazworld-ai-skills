@@ -1,0 +1,34 @@
+name: Lint Skills
+
+# Phase 2 quality gate: every push and pull request to main must pass
+# the skill validator and its test suite before merging.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate skills & security scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Zero-dependency project: no npm install required.
+      - name: Run validator test suite
+        run: node --test "scripts/**/*.test.js"
+
+      - name: Run skill validation linter
+        run: node scripts/validate-skills.js
