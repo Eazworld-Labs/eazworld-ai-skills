@@ -361,8 +361,13 @@ sweep clean; tests 8/8 and validator PASS (31 skills).
 
 - [x] Update `CHANGELOG.md` for Release v1.0.0.
 - [x] Update version tags in root files.
-- [ ] Create Git release tag `v1.0.0`.
-- [ ] Publish public GitHub repository.
+- [x] Create Git release tag `v1.0.0`.
+- [x] Publish public GitHub repository.
+
+**Evidence (§9.2 items 3–4):** Annotated tag `v1.0.0` created on `aa335a8` and
+pushed to origin; GitHub Release published at
+https://github.com/fekt2016/eazworld-ai-skills/releases/tag/v1.0.0. Repository
+visibility confirmed PUBLIC via `gh repo view`.
 
 **Evidence (§9.1):** Validator PASS — 31/31 skills, 0 errors, 0 warnings. History
 scan — every commit in `git rev-list --all` searched for key, token, private-key,
