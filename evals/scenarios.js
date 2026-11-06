@@ -89,11 +89,49 @@ function bandedPng(rows, width = 96, bandHeight = 32) {
   ]);
 }
 
+// Skill names belonging to a department, read from each skill's metadata.department.
+function skillsInDepartment(department) {
+  const root = path.join(__dirname, '..', '.claude', 'skills');
+  return fs.readdirSync(root, { withFileTypes: true })
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name)
+    .filter((name) => {
+      try {
+        const text = fs.readFileSync(path.join(root, name, 'SKILL.md'), 'utf8');
+        return new RegExp(`^\\s+department:\\s*${department}\\s*$`, 'm').test(text);
+      } catch { return false; }
+    });
+}
+
+function invokesOneOf(names) {
+  return (ctx) =>
+    ctx.skillsInvoked.some((s) => names.includes(s)) ||
+    `invoked: ${ctx.skillsInvoked.join(', ') || 'none'}; expected one of ${names.length} skills`;
+}
+
 const SEED_NEXT_PACKAGE = JSON.stringify(
   { name: 'school-site', private: true, dependencies: { next: '16.0.0', react: '19.0.0' } },
   null,
   2
 );
+
+// Compatibility scenarios (tasks.md Phase 7.1): one realistic prompt per department, checking
+// that a skill from that department activates. Run only on request — they call the model.
+function compatScenario(id, department, prompt) {
+  return {
+    id,
+    slow: true,
+    description: `A ${department} request activates a ${department} skill (Claude Code compatibility).`,
+    turns: [prompt],
+    checks: [
+      { name: `invokes a ${department} skill`, test: invokesOneOf(skillsInDepartment(department)) },
+      {
+        name: 'writes no source files while planning',
+        test: (ctx) => createdSource(ctx).length === 0 || `created: ${createdSource(ctx).join(', ')}`,
+      },
+    ],
+  };
+}
 
 module.exports = [
   {
@@ -345,6 +383,73 @@ module.exports = [
       {
         name: 'asks for approval in the final reply',
         test: (ctx) => askedAbout(ctx.turns[ctx.turns.length - 1].final, /approv/i),
+      },
+    ],
+  },
+
+  compatScenario(
+    'compat-digital-marketing',
+    'digital-marketing',
+    'I am running a Google Ads search campaign for a Lagos fashion store with a monthly budget of ' +
+      '200,000 naira. How should I structure the campaigns and keywords?'
+  ),
+  compatScenario(
+    'compat-ai-automation',
+    'ai-automation',
+    'I want an n8n workflow that receives a Paystack payment webhook and sends our team a WhatsApp ' +
+      'message. What is the right design?'
+  ),
+  compatScenario(
+    'compat-business-solutions',
+    'business-solutions',
+    'We run a school in Kumasi and want parents to pay fees by Mobile Money. How should we handle ' +
+      'payments and fee records?'
+  ),
+
+  {
+    id: 'backend-task-asks-architecture-choices',
+    description: 'A new-backend request invokes the backend skill and asks architecture questions before code.',
+    slow: true,
+    seed: {
+      'PROJECT.md': [
+        '# PROJECT.md',
+        '',
+        '- **Name:** Zuri Atelier shop',
+        '- **Type:** e-commerce',
+        '- **Front end:** Next.js (App Router)',
+        '- **Back end / API:** TBD',
+        '- **Primary market / region:** Nigeria',
+        '',
+      ].join('\n'),
+    },
+    turns: ['Build the backend for our online shop: customer accounts, orders, and payments.'],
+    checks: [
+      {
+        name: 'invokes eaz-backend-engineering',
+        test: (ctx) => ctx.skillsInvoked.includes('eaz-backend-engineering') || `invoked: ${ctx.skillsInvoked.join(', ') || 'none'}`,
+      },
+      {
+        name: 'asks about the authentication method',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /authenticat|sign.?in|log.?in|password|one-time|OTP/i),
+      },
+      {
+        name: 'asks about the architecture, hosting, or integrations',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /hosting|VPS|deploy|monolith|architecture|integrat|queue|background/i),
+      },
+      {
+        name: 'gives recommendations, not bare questions',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /recommend|suggest/i),
+      },
+      {
+        name: 'asks 2-5 questions in the first batch',
+        test: (ctx) => {
+          const n = numberedItems(ctx.turns[0].final);
+          return (n >= 2 && n <= 5) || `found ${n} numbered questions`;
+        },
+      },
+      {
+        name: 'writes no server code before the answers arrive',
+        test: (ctx) => createdSource(ctx).length === 0 || `created: ${createdSource(ctx).join(', ')}`,
       },
     ],
   },

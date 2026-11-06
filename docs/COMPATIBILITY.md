@@ -8,7 +8,7 @@ test outcomes and runner versions for every compatibility check in tasks.md Phas
 | Component | Version |
 | --- | --- |
 | OpenCode | v2.0.15 |
-| Claude Code CLI | 2.1.312 |
+| Claude Code CLI | 2.1.319 (Claude Code checks, 2026-11-06); 2.1.312 (OpenCode-era checks) |
 | Node.js | v24.21.0 |
 | Library size | 33 skills — 14 software-engineering, 7 digital-marketing, 5 ai-automation, 7 business-solutions |
 | Skill source | `.claude/skills/<skill-name>/SKILL.md` (one level deep — deeper nesting is not discovered) |
@@ -36,26 +36,44 @@ Shared loader reading `.claude/skills/`.
 
 ## Claude Code Verification
 
-Native loader reading `.claude/skills/`.
+Native loader reading `.claude/skills/`. Verified 2026-11-06 on Claude Code 2.1.319 by
+running `claude -p` headless against throwaway projects (`npm run eval`); raw transcripts
+are written locally to `evals/results/` (git-ignored) and can be regenerated.
 
 | Check | Status | Evidence |
 | --- | --- | --- |
-| Native skill discovery | PENDING | CLI returns the weekly-limit message (resets 12am Africa/Accra) |
-| Activation on domain triggers | PENDING | Blocked by the same quota |
-| Relative `references/` link resolution | PENDING (static PASS) | Static resolution passes 3/3; runtime confirmation awaits quota |
-| Representative skills across all 4 departments | PENDING | Blocked by the same quota |
+| Native skill discovery | PASS | All 33 `eaz-` skills appear in the session's startup skill list |
+| Activation on domain triggers | PASS | Each prompt below activated a skill from the expected department |
+| Relative `references/` link resolution | PASS | The agent read 14 files through `references/` links during live runs; the validator also resolves every link statically |
+| Representative skills across all 4 departments | PASS | See the table below |
+
+| Department | Prompt (summary) | Skills activated |
+| --- | --- | --- |
+| software-engineering | New e-commerce project; a UI task; a new backend | `eaz-project-kickoff`, `eaz-frontend-design`, `eaz-backend-engineering` |
+| digital-marketing | Google Ads campaign structure for a Lagos store | `eaz-google-ads` |
+| ai-automation | n8n workflow from a Paystack webhook to WhatsApp | `eaz-n8n-automation`, `eaz-whatsapp-automation` |
+| business-solutions | School fees by Mobile Money in Kumasi | `eaz-school-management`, `eaz-ghana-payments` |
+
+Reproduce with `npm run eval -- --scenario compat-digital-marketing` (and the other
+`compat-*` scenarios). These runs call the model and cost a few cents each.
+
+Limits: one run per department, a single Claude Code version, and the checks only confirm
+that a skill from the expected department activated — not that every skill works.
 
 ## Discrepancy Log
 
 | # | Environment | Discrepancy | Resolution |
 | --- | --- | --- | --- |
-| 1 | OpenCode | `frontend-design` ID shadowed by a built-in skill | Resolved: all skills renamed with the `eaz-` prefix |
+| 1 | OpenCode | `frontend-design` ID shadowed by a built-in skill | Renamed: every skill now carries the `eaz-` prefix. Not yet re-verified in OpenCode (see Next Run) |
 | 2 | OpenCode | Transient availability churn on some skill IDs | Self-resolved; no action required |
-| 3 | Claude Code | Verification blocked by weekly quota | Re-run §7.1 checks when quota resets |
+| 3 | Claude Code | Verification blocked by weekly quota | Resolved 2026-11-06 — §7.1 checks completed (see above) |
 
-## Next Run (to close tasks.md §7.1)
+## Next Run (to close the OpenCode half of tasks.md §7)
 
-1. Run a `claude -p` discovery probe from the repository root.
-2. Activate one representative skill per department (4 total).
-3. Confirm `references/` links resolve at runtime.
-4. Update this matrix to PASS for Claude Code and close §7.1.
+The OpenCode results above were recorded on v2.0.15 **before** the `eaz-` rename and the
+flat layout. Re-run them:
+
+1. Open the repository in OpenCode and confirm all 33 `eaz-` skills are listed.
+2. Activate one skill per department.
+3. Confirm a `references/` link resolves at runtime.
+4. Update the OpenCode table and close discrepancy #1.

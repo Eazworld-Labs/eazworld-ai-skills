@@ -41,6 +41,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`eaz-backend-engineering` v1.1.0 — stack-agnostic backend:** works on Node.js (Express,
+  Fastify, NestJS), Laravel, Django/FastAPI, and ASP.NET Core instead of Node/Express only.
+  It detects the stack, then asks architecture questions before building (custom backend or
+  not, architecture shape, authentication, integrations, background work, hosting,
+  compliance) — at most five at a time, one decision each, with recommendations. New
+  references: `discovery-questions`, `auth-and-access`, `jobs-webhooks-idempotency`,
+  `errors-logging-observability`, and one note per stack. The kickoff `PROJECT.md` template
+  gains Authentication and Background jobs / integrations lines.
+- **Claude Code compatibility verified (tasks.md Phase 7.1):** discovery, activation across
+  all four departments, and `references/` link resolution, recorded in
+  `docs/COMPATIBILITY.md`. OpenCode needs re-verification after the `eaz-` rename.
+
 - **`eaz-frontend-design` v1.5.0 — design inspiration:** the skill now asks, as its own
   question, for pages, apps, or images whose look the client likes (website links,
   screenshots in an `inspiration/` folder, or attachments) and one they dislike. It
