@@ -9,7 +9,7 @@ result is written to the project's `tasks.md` (skeleton:
 
 | # | Phase | Goal | Skills that usually apply | Stop for approval after? |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | **Discovery** | Answers gathered, `PROJECT.md` and `DESIGN.md` written, core fields filled | `eaz-project-kickoff`, `eaz-frontend-design` (questions), `eaz-software-architecture` | **Yes** |
+| 1 | **Discovery** | Answers gathered; `PROJECT.md`, `SPEC.md`, `ARCHITECTURE.md`, `DESIGN.md`, `README.md` and `tasks.md` written; core fields filled | `eaz-project-kickoff`, `eaz-frontend-design` (questions), `eaz-software-architecture` | **Yes** |
 | 2 | **Foundation** | Tokens, theme, global styles, fonts, base components, project scaffolding | `eaz-frontend-design`, `eaz-cloud-devops` (repo, CI) | No |
 | 3 | **Layout & structure** | Page templates, navigation, responsive grid, placeholder content | `eaz-frontend-design`, `eaz-seo-engineering` (URL structure) | **Yes** |
 | 4 | **Pages & features** | Real content page by page; features with loading, empty, and error states | `eaz-frontend-design`, `eaz-backend-engineering`, `eaz-api-development`, `eaz-database-architecture`, region payments skill, business skills | No |
@@ -36,6 +36,12 @@ summary.
 
 ## Rules
 
+- **Requirements come from `SPEC.md`.** A task that delivers a feature names its feature ID
+  (`Delivers: F4`) and is done when that feature's acceptance test passes. Scope added later
+  becomes a new feature ID in `SPEC.md` with a change-log line, then a new task.
+- **Documents are tasks.** Each document in [Documents](./documents.md) is created by a
+  task in the phase that table names — not all at the start — so none is forgotten and none
+  is written before the thing it describes exists.
 - Every task has an **acceptance criterion** — a check someone can run, not a feeling
   ("tokens defined, contrast verified at 4.5:1", not "colors done").
 - Name the **skill** that applies to each task so the right standards load.

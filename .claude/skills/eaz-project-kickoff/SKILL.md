@@ -3,25 +3,29 @@ name: eaz-project-kickoff
 description: Run the kickoff for a new client project before any code is written.
   Use when starting a new website, web app, mobile app, e-commerce store, or
   automation project, onboarding a client, or setting up a repository that has no
-  PROJECT.md. Captures stack, region, and design choices, creates PROJECT.md,
-  DESIGN.md, and a phased tasks.md, and recommends which skills to apply in what order.
+  PROJECT.md. Captures stack, region, and design choices, creates PROJECT.md, SPEC.md,
+  ARCHITECTURE.md, DESIGN.md, README.md, and a phased tasks.md, and recommends which skills
+  to apply in what order.
 license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.3.1"
+  version: "1.4.0"
 ---
 
 # Project Kickoff
 
 ## 1. Overview & Purpose
 
-Gives every new project the same start. The skill asks the kickoff questions once,
-records the answers in `PROJECT.md` and `DESIGN.md`, breaks the work into approved
-phases in a `tasks.md`, recommends which library skills fit the project and in what
-order, and stops for human approval before any building begins. Every later skill reads those two files first, so decisions are made once and
-stay consistent across the team and across projects. It plans and records; it never
-scaffolds code, installs dependencies, or changes infrastructure.
+Gives every new project the same start. The skill asks the kickoff questions in small
+batches and records the answers in a core set of project documents: `PROJECT.md` (what was
+decided), `SPEC.md` (what it must do), `ARCHITECTURE.md` (how it is built), `DESIGN.md`
+(how it looks), `README.md`, and a phased `tasks.md`. It recommends which library skills
+fit the project and in what order, and stops for human approval before any building
+begins. Later documents (data model, API, runbook, handoff) are created by tasks in the
+phase where they belong. Every later skill reads these files first, so decisions are made
+once and stay consistent across the team and across projects. It plans and records; it
+never scaffolds code, installs dependencies, or changes infrastructure.
 
 ## 2. Activation Conditions & Triggers
 
@@ -43,7 +47,7 @@ scaffolds code, installs dependencies, or changes infrastructure.
      automation.
   3. Region and market, because payments, compliance, and language depend on it.
 - **Project Audit Checklist:**
-  1. Look for an existing `PROJECT.md`, `DESIGN.md`, `README`, and manifests
+  1. Look for existing `PROJECT.md`, `SPEC.md`, `ARCHITECTURE.md`, `DESIGN.md`, `README`, and manifests
      (`package.json`, `pubspec.yaml`, `composer.json`) and read them before asking.
      Never re-ask what the repository already answers.
   2. Look for a brief, Figma link, or brand guidelines the user already has.
@@ -57,9 +61,26 @@ scaffolds code, installs dependencies, or changes infrastructure.
   reason for each open decision instead of an empty question; the stack is the client's
   choice, so never impose one.
 - **Fill the templates:** write `PROJECT.md` from
-  [Project Template](./references/project-template.md) and `DESIGN.md` from
-  [Design Template](./references/design-template.md). Leave unknown fields marked
+  [Project Template](./references/project-template.md), `SPEC.md` from
+  [Spec Template](./references/spec-template.md), `DESIGN.md` from
+  [Design Template](./references/design-template.md), and a first `README.md` from
+  [README Template](./references/readme-template.md). Leave unknown fields marked
   `TBD` — never invent a value.
+- **Write a specification, not just a plan.** `SPEC.md` states what the product must do:
+  goal and non-goals, users and roles, key journeys, features each with an ID and a
+  checkable acceptance test, rules and edge cases, and quality requirements. Derive it from
+  the answers already given and ask only for what is missing. Keep it short — a page or
+  two for a small site. A Must feature with no acceptance test is a blocker, not a note.
+- **Hand the architecture to eaz-software-architecture — by invoking it.** Once the user
+  has accepted the stack, invoke the `eaz-software-architecture` skill with the Skill tool
+  to write the ADR and `ARCHITECTURE.md` (components, folder structure, data flows,
+  authentication, integrations, environments, deployment, conventions). Do not improvise
+  the architecture document, and do not start it before the stack is accepted.
+- **Create the core set now; later documents are tasks.** Follow
+  [Documents](./references/documents.md): the core set is written at kickoff; `DATA-MODEL.md`,
+  `API.md`, and `CONTENT.md` appear when the project type needs them; `RUNBOOK.md`,
+  `HANDOFF.md`, and `CHANGELOG.md` are phase 6 tasks. Do not write a later document early —
+  a document written before the thing exists is a guess.
 - **Hand design choices to eaz-frontend-design — by invoking it.** Before asking any
   design question, invoke the `eaz-frontend-design` skill with the Skill tool and run
   its discovery and choice flow (styling method, visual direction, token values, motion
@@ -74,7 +95,8 @@ scaffolds code, installs dependencies, or changes infrastructure.
   ask for them, and do not recommend moving to implementation. An approval given while
   core fields are still `TBD` does not open the gate — show exactly which fields are
   open and get an explicit "build anyway" for those named fields, then record it as
-  "approved with open items" in `PROJECT.md`.
+  "approved with open items" in `PROJECT.md`. The same applies to the spec: building does
+  not start while a Must feature in `SPEC.md` has no acceptance test.
 - **State known trade-offs, then follow the client.** When the chosen stack, styling
   method, or library has a known cost (client-side runtime in a server-rendering
   framework, a library with an uncertain maintenance status, a heavy dependency for a
@@ -93,9 +115,9 @@ scaffolds code, installs dependencies, or changes infrastructure.
   passes, update its status in the same step as the work, and add new scope as a new
   task — never inside a finished phase.
 - **Never write secrets** — no API keys, passwords, tokens, or connection strings — in
-  `PROJECT.md` or `DESIGN.md`. Name environment variables instead.
-- **Do not overwrite** an existing `PROJECT.md` or `DESIGN.md`; show a diff of proposed
-  changes and wait for approval.
+  any project document. Name environment variables instead.
+- **Do not overwrite** an existing project document; show a diff of proposed changes and
+  wait for approval.
 
 ## 5. Execution Workflow (Step-by-Step)
 
@@ -106,20 +128,24 @@ scaffolds code, installs dependencies, or changes infrastructure.
 3. **Step 3: Formulate Plan** — Ask the grouped kickoff questions for the missing items
    only, with a recommendation on each open decision. Invoke `eaz-frontend-design` with the Skill
    tool first and run its choice flow for styling method, visual direction, tokens, and
-   motion — never skip this step or improvise the design questions.
+   motion — never skip this step or improvise the design questions. When the stack has
+   been accepted, invoke `eaz-software-architecture` for the architecture document.
 4. **Step 4: Verify Security** — Confirm no secrets or private client data are in the
    answers about to be written; replace any with environment variable names.
-5. **Step 5: Apply Edits** — Create `PROJECT.md`, `DESIGN.md`, and `tasks.md` at the
-   repository root from the templates, with `TBD` for unknowns and phases trimmed to
-   the project type. Append the block from
+5. **Step 5: Apply Edits** — Create `PROJECT.md`, `SPEC.md`, `DESIGN.md`, `README.md`, and
+   `tasks.md` at the repository root from the templates, with `TBD` for unknowns and phases
+   trimmed to the project type; `ARCHITECTURE.md` and the ADR come from
+   `eaz-software-architecture`. Every task that delivers a feature names its feature ID.
+   Append the block from
    [Agent Instructions Block](./references/agent-instructions-template.md) to
    `CLAUDE.md` (and `AGENTS.md` if it exists) without overwriting anything there.
-6. **Step 6: Execute Tests** — Re-read all three files and check: every field is filled
-   or marked `TBD`, every task has a skill and an acceptance criterion, every
-   recommended skill exists in the library, and nothing in the files looks like a
-   secret.
+6. **Step 6: Execute Tests** — Re-read all the files and check: every field is filled or
+   marked `TBD`; every Must feature has an ID and an acceptance test; every feature maps
+   to a component in `ARCHITECTURE.md` and to a task; every task has a skill and an
+   acceptance criterion; every recommended skill exists in the library; and nothing in
+   the files looks like a secret.
 7. **Step 7: Report Status** — Present a short kickoff summary: decisions recorded, open
-   `TBD` items with the core-field blockers called out first, trade-offs noted, the
+   `TBD` items with the core-field blockers called out first, the documents written, trade-offs noted, the
    phase plan with its stop points, the recommended skill order with a one-line reason
    each, and the first build steps. Stop
    and wait for the user's approval before any implementation; apply the build gate
@@ -140,7 +166,12 @@ scaffolds code, installs dependencies, or changes infrastructure.
 
 ## 7. Definition of Done & Quality Gates
 
-- [ ] `PROJECT.md`, `DESIGN.md`, and `tasks.md` exist at the repository root.
+- [ ] `PROJECT.md`, `SPEC.md`, `ARCHITECTURE.md`, `DESIGN.md`, `README.md`, and `tasks.md`
+      exist at the repository root.
+- [ ] `SPEC.md` gives every Must feature an ID and an acceptance test; each feature maps
+      to a component in `ARCHITECTURE.md` and to a task.
+- [ ] `eaz-software-architecture` was invoked after the stack was accepted, and the
+      architecture was not improvised.
 - [ ] `CLAUDE.md` carries the Eazworld project rules block (existing content untouched).
 - [ ] `tasks.md` follows the standard phases, trimmed to the project type, with a skill
       and an acceptance criterion on every task and stop points after phases 1, 3, 5.
@@ -159,7 +190,14 @@ scaffolds code, installs dependencies, or changes infrastructure.
 
 ## 8. Supporting References & Assets
 
+- [Documents](./references/documents.md) — every project document, its job, its owner
+  skill, and the phase that creates it.
 - [Project Template](./references/project-template.md) — the `PROJECT.md` skeleton.
+- [Spec Template](./references/spec-template.md) — the `SPEC.md` skeleton.
+- [README Template](./references/readme-template.md) — the first project `README.md`.
+- [Content Template](./references/content-template.md) — `CONTENT.md` for content-heavy
+  projects.
+- [Handoff Template](./references/handoff-template.md) — `HANDOFF.md`, written in phase 6.
 - [Design Template](./references/design-template.md) — the `DESIGN.md` skeleton.
 - [Agent Instructions Block](./references/agent-instructions-template.md) — the
   `CLAUDE.md` / `AGENTS.md` block that keeps later sessions on the same rules.

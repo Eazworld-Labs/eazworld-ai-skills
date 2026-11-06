@@ -38,10 +38,16 @@ Agents update statuses as work completes. Never put secrets in this file.
 - [ ] **1.2 Design discovery and choices** — *skill: eaz-frontend-design*
   - Done when: `DESIGN.md` has purpose, styling method, visual direction, tokens, a
     Discovery section, and an Inspiration table (or "none given").
-- [ ] **1.3 Architecture decision** — *skill: eaz-software-architecture*
-  - Done when: an ADR records the chosen approach and rejected options.
-- [ ] **1.4 Core fields closed** — one job, one impression, primary action, stack, region
+- [ ] **1.3 Specification** — *skill: eaz-project-kickoff*
+  - Done when: `SPEC.md` has goal and non-goals, roles, key journeys, features with IDs,
+    and an acceptance test for every Must feature (or `TBD` flagged as a blocker).
+- [ ] **1.4 Architecture decision and ARCHITECTURE.md** — *skill: eaz-software-architecture*
+  - Done when: an ADR records the chosen approach and rejected options, `ARCHITECTURE.md`
+    describes the accepted stack and structure, and every Must feature maps to a component.
+- [ ] **1.5 Core fields closed** — one job, one impression, primary action, stack, region
   - Done when: none are `TBD`, or the client approved building with them named as open.
+- [ ] **1.6 First README and agent rules** — *skill: eaz-project-kickoff*
+  - Done when: `README.md` (first version) exists and `CLAUDE.md` carries the rules block.
 
 **Approval:** [?] Client approved Phase 1 — date: ____
 
@@ -52,7 +58,15 @@ Agents update statuses as work completes. Never put secrets in this file.
 **Goal:** a project that builds and carries the design system.
 
 - [ ] **2.1 Scaffold and CI** — *skill: eaz-cloud-devops*
-  - Done when: install, lint, type-check, and build commands pass.
+  - Done when: install, lint, type-check, and build commands pass, the folder structure
+    matches `ARCHITECTURE.md`, and `README.md` lists the real run, test, and build commands.
+- [ ] **2.1a Data model** *(if the project has a database)* — *skill: eaz-database-architecture*
+  - Done when: migrations run up, down, and up on a real engine, and `DATA-MODEL.md`
+    matches the schema.
+- [ ] **2.1b API contract** *(if the project exposes an API)* — *skill: eaz-api-development*
+  - Done when: `API.md` (or an OpenAPI file) lists the endpoints for the Must features.
+- [ ] **2.1c Content inventory** *(content-heavy projects)* — *skill: eaz-project-kickoff*
+  - Done when: `CONTENT.md` lists every page, its copy and media status, and who supplies it.
 - [ ] **2.2 Tokens and theme** — *skill: eaz-frontend-design*
   - Done when: tokens defined once; contrast verified at 4.5:1; token check clean.
 - [ ] **2.3 Base components** — *skill: eaz-frontend-design*
@@ -77,8 +91,8 @@ Agents update statuses as work completes. Never put secrets in this file.
 
 **Goal:** real content and working features.
 
-- [ ] **4.1 <page or feature>** — *skill: <skill>*
-  - Done when: <check, including loading, empty, and error states>
+- [ ] **4.1 <page or feature>** — *skill: <skill>* — **Delivers: F#** (from `SPEC.md`)
+  - Done when: the acceptance test for F# passes, including loading, empty, and error states.
 
 ---
 
@@ -107,7 +121,13 @@ Agents update statuses as work completes. Never put secrets in this file.
   - Done when: no open high-severity findings; no secrets in the repository.
 - [ ] **6.3 Deploy** — *skill: eaz-cloud-devops* (needs explicit human confirmation)
   - Done when: production is live, with monitoring and a rollback path.
-- [ ] **6.4 Client handoff**
-  - Done when: client has access, documentation, and a change process.
+- [ ] **6.4 Runbook** — *skill: eaz-cloud-devops*
+  - Done when: `RUNBOOK.md` is written from the real setup and checked by someone other
+    than its author.
+- [ ] **6.5 Client handoff** — *skill: eaz-project-kickoff*
+  - Done when: `HANDOFF.md` is complete, and the client has access, documentation, and a
+    change process.
+- [ ] **6.6 Changelog**
+  - Done when: `CHANGELOG.md` records the first release.
 
 **Approval:** [?] Final sign-off — date: ____

@@ -326,7 +326,7 @@ module.exports = [
 
   {
     id: 'kickoff-completes-after-answers',
-    description: 'After the answers, the kickoff writes the planning files and still does not build.',
+    description: 'After the answers, the kickoff writes the core documents and still does not build.',
     slow: true,
     turns: [
       'New project: an online shop for a fashion brand in Lagos.',
@@ -340,17 +340,41 @@ module.exports = [
     ],
     checks: [
       {
-        name: 'invokes eaz-project-kickoff and eaz-frontend-design',
+        name: 'invokes eaz-project-kickoff, eaz-frontend-design and eaz-software-architecture',
         test: (ctx) => {
-          const missing = ['eaz-project-kickoff', 'eaz-frontend-design'].filter((s) => !ctx.skillsInvoked.includes(s));
+          const missing = ['eaz-project-kickoff', 'eaz-frontend-design', 'eaz-software-architecture'].filter((s) => !ctx.skillsInvoked.includes(s));
           return missing.length === 0 || `not invoked: ${missing.join(', ')}`;
         },
       },
       {
-        name: 'writes PROJECT.md, DESIGN.md and tasks.md',
+        name: 'writes PROJECT.md, SPEC.md, ARCHITECTURE.md, DESIGN.md, README.md and tasks.md',
         test: (ctx) => {
-          const missing = ['PROJECT.md', 'DESIGN.md', 'tasks.md'].filter((f) => !ctx.files.includes(f));
+          const need = ['PROJECT.md', 'SPEC.md', 'ARCHITECTURE.md', 'DESIGN.md', 'README.md', 'tasks.md'];
+          const missing = need.filter((f) => !ctx.files.includes(f));
           return missing.length === 0 || `missing: ${missing.join(', ')}`;
+        },
+      },
+      {
+        name: 'SPEC.md gives features IDs and acceptance tests',
+        test: (ctx) => {
+          const t = ctx.read('SPEC.md') || '';
+          const ids = new Set(t.match(/\bF\d+\b/g) || []).size;
+          return (ids >= 3 && /acceptance|done when/i.test(t)) || `feature ids: ${ids}; acceptance wording: ${/acceptance|done when/i.test(t)}`;
+        },
+      },
+      {
+        name: 'ARCHITECTURE.md describes the stack, structure, and components',
+        test: (ctx) => {
+          const t = ctx.read('ARCHITECTURE.md') || '';
+          const hits = ['stack', 'structure', 'component', 'deploy'].filter((w) => new RegExp(w, 'i').test(t));
+          return hits.length >= 3 || `only mentions: ${hits.join(', ') || 'nothing'}`;
+        },
+      },
+      {
+        name: 'does not write the later documents early (runbook, handoff, changelog)',
+        test: (ctx) => {
+          const early = ['RUNBOOK.md', 'HANDOFF.md', 'CHANGELOG.md'].filter((f) => ctx.files.includes(f));
+          return early.length === 0 || `written too early: ${early.join(', ')}`;
         },
       },
       {

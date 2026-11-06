@@ -41,6 +41,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Project documents — spec, architecture, and the rest (`eaz-project-kickoff` v1.4.0):**
+  the kickoff now writes a core set — `PROJECT.md` (what was decided), `SPEC.md` (what it
+  must do: goal and non-goals, roles, journeys, features with IDs and acceptance tests),
+  `ARCHITECTURE.md` (how it is built), `DESIGN.md`, a first `README.md`, and `tasks.md` —
+  and invokes `eaz-software-architecture` for the architecture once the stack is accepted.
+  Later documents are created by tasks in the phase where they belong: `DATA-MODEL.md`
+  (`eaz-database-architecture` v1.1.0), `API.md` (`eaz-api-development` v1.1.0), `CONTENT.md`,
+  `RUNBOOK.md` (`eaz-cloud-devops` v1.1.0), `HANDOFF.md`, and `CHANGELOG.md`. Tasks that
+  deliver a feature name its feature ID and are done when its acceptance test passes. New
+  `documents` reference maps every document to its job, owner skill, and phase.
+- **`eaz-software-architecture` v1.1.0:** owns the project `ARCHITECTURE.md` (a living
+  description, kept in step with the ADRs that record why), and no longer prescribes a fixed
+  "Eazworld stack" — the stack is the client's choice, taken from `PROJECT.md`.
+- The frontend, backend, and review skills now read `SPEC.md` and `ARCHITECTURE.md` and
+  build and review against them.
+
 - **`eaz-brand-identity` v1.1.0:** reconciled with `eaz-frontend-design`. The 3-zone layout
   and component blueprints are now defaults for conversion-focused marketing pages, not
   mandates for every project; social proof must be real and supplied by the client (invented

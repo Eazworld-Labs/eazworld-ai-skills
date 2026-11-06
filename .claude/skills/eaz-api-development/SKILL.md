@@ -8,7 +8,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # API Development
@@ -49,6 +49,10 @@ Before drafting a contract, inspect the target repository:
 
 ## 4. Technical Standards & Rules
 
+- Keep the contract written down: an OpenAPI file, or `API.md` from the
+  [API Document Template](./references/api-doc-template.md) when the project has no
+  OpenAPI file. Write it from what is implemented, link each endpoint to its feature ID in
+  `SPEC.md` when one exists, and update it in the same change as any endpoint.
 - Resources are plural nouns (`/orders`, `/customers`); HTTP verbs carry the semantics —
   GET is safe and idempotent, POST creates, PUT replaces, PATCH updates, DELETE removes.
 - Status codes tell the truth: 200/201/204 on success, 400 malformed input, 401
@@ -109,6 +113,7 @@ Example of the single error envelope every failure uses:
 ## 7. Definition of Done & Quality Gates
 
 - [ ] Specification matches the implementation — routes and schemas validated against it.
+- [ ] `API.md` (or the OpenAPI file) exists, is current, and links endpoints to feature IDs.
 - [ ] Status codes verified for success, validation failure, denial, and rate limit paths.
 - [ ] Auth tested: allowed request passes, denied request returns 401/403 as designed.
 - [ ] Webhook handler verified against a correctly signed sample payload.
@@ -118,3 +123,5 @@ Example of the single error envelope every failure uses:
 ## 8. Supporting References & Assets
 
 - Checklist: [OpenAPI Review Checklist](./references/openapi-checklist.md)
+- [API Document Template](./references/api-doc-template.md) — the project-root `API.md`
+  skeleton: base URL, authentication, conventions, endpoints, webhooks.

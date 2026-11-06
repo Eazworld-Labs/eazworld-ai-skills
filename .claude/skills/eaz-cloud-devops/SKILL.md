@@ -8,7 +8,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Cloud DevOps
@@ -49,6 +49,12 @@ repository, pinned dependencies, and a tested way back when a release goes wrong
 
 ## 4. Technical Standards & Rules
 
+- At launch (phase 6), write `RUNBOOK.md` from the
+  [Runbook Template](./references/runbook-template.md): service map, deploy, rollback,
+  backups and restore, secret rotation, common problems, incident response, and routine
+  maintenance. Write it from the setup that actually exists, and update it whenever the
+  operating setup changes. Production deploys, rollbacks, and restores need explicit human
+  confirmation.
 - CI runs lint and tests before any merge; the pipeline is the gate, not a suggestion.
 - Workflow permissions are least-privilege — read-only by default, write only where a
   step genuinely requires it.
@@ -115,11 +121,14 @@ jobs:
 - [ ] Pipeline runs lint and tests on every pull request and blocks on failure.
 - [ ] Deploy succeeds and the health check endpoint reports healthy afterward.
 - [ ] Rollback path documented and exercised at least once.
+- [ ] `RUNBOOK.md` written from the template and checked against the real setup by someone
+      other than its author.
 - [ ] Workflow permissions read-only by default; actions pinned to exact versions.
 - [ ] No secrets in the repository, workflow files, images, or logs.
 - [ ] Monitoring or alerting in place so failures are visible without reading logs.
 
 ## 8. Supporting References & Assets
 
-- No supporting files — this skill is self-contained; the target platform's documentation
-  is the reference at implementation time.
+- [Runbook Template](./references/runbook-template.md) — the project-root `RUNBOOK.md`
+  skeleton for launch and operations. The target platform's documentation is the
+  reference at implementation time.

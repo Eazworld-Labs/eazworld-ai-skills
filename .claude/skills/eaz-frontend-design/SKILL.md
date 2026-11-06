@@ -69,7 +69,9 @@ Before writing any UI code, inspect the target repository:
   2. Content and copy that the interface must display (final text, not lorem ipsum).
   3. Target viewports/devices and browser or OS support expectations.
 - **Stack Detection (do this first, never assume):**
-  1. Read `PROJECT.md` if present — it states the stack and brand tokens.
+  1. Read `PROJECT.md`, `SPEC.md`, `ARCHITECTURE.md`, and `DESIGN.md` if present — they
+     state the stack, what the screen must do (feature IDs), the project structure, and
+     the brand tokens.
   2. Otherwise infer from manifests: `package.json` (react, next, vue, nuxt, svelte,
      astro, react-native, expo), `pubspec.yaml` (Flutter), `composer.json` (Laravel,
      WordPress), or template directories.

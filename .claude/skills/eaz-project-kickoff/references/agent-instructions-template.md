@@ -9,7 +9,9 @@ every later session in the project follows the same rules without being reminded
 ```markdown
 ## Eazworld project rules
 
-- Read `PROJECT.md`, `DESIGN.md`, and `tasks.md` before starting any task.
+- Read `PROJECT.md`, `SPEC.md`, `ARCHITECTURE.md`, `DESIGN.md`, and `tasks.md` before
+  starting any task, and build only what `SPEC.md` describes in the structure
+  `ARCHITECTURE.md` sets out.
 - For any UI work, use the `eaz-frontend-design` skill. `tasks.md` names the skill that
   applies to each task — use it.
 - Do not start building while a core field in `PROJECT.md` or `DESIGN.md` is `TBD`

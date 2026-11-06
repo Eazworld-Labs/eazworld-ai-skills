@@ -47,8 +47,11 @@ Before writing server code, inspect the target repository:
   2. The environment variable schema (`.env.example`) the service expects.
   3. The authentication model: who calls the service and how they prove who they are.
 - **Stack Detection (do this first, never assume):**
-  1. Read `PROJECT.md`, `DESIGN.md`, and `tasks.md` if present — they hold the stack, the
-     decisions already made, and the current phase.
+  1. Read `PROJECT.md`, `SPEC.md`, `ARCHITECTURE.md`, and `tasks.md` if present — they hold
+     the stack and decisions, what each feature must do (feature IDs and acceptance
+     tests), the structure to build in, and the current phase. Build what `SPEC.md`
+     describes in the structure `ARCHITECTURE.md` sets out; when the work changes a
+     boundary, update `ARCHITECTURE.md` and add an ADR.
   2. Otherwise infer from manifests: `package.json` (express, fastify, `@nestjs/core`,
      next), `composer.json` (laravel/framework), `pyproject.toml` or `requirements.txt`
      (django, fastapi), `*.csproj` (Microsoft.AspNetCore), `go.mod`, `Gemfile`.

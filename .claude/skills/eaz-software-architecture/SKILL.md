@@ -3,12 +3,13 @@ name: eaz-software-architecture
 description: Design system-level architecture and make durable technical decisions for new
   and existing products. Use when asked to plan system design, choose between monolith and
   microservices, define module boundaries, structure a codebase, evaluate a scaling
-  strategy, or write an Architecture Decision Record.
+  strategy, write an Architecture Decision Record, or write the project's
+  ARCHITECTURE.md once a stack is accepted.
 license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Software Architecture
@@ -41,6 +42,8 @@ Before proposing any structure, inspect the target repository:
   1. Problem statement: what the system must do and for whom.
   2. Scale expectations: users, requests per day, data volume — honest estimates are fine.
   3. Constraints: team size, budget, deadline, compliance requirements.
+  4. If the project has them, read `PROJECT.md` (the accepted stack and decisions),
+     `SPEC.md` (the requirements and feature IDs the design must satisfy), and `DESIGN.md`.
 - **Codebase Audit Checklist:**
   1. Read `package.json` (or equivalent manifest) for the existing stack and versions.
   2. Map the current directory structure and identify existing module boundaries.
@@ -49,8 +52,9 @@ Before proposing any structure, inspect the target repository:
 
 ## 4. Technical Standards & Rules
 
-- Follow the Eazworld stack alignment: React/Next.js, Node.js/Express, PostgreSQL/MongoDB,
-  Redis — proposing a migration to a new stack requires explicit human approval.
+- The stack is the client's choice and varies by project: use the one recorded in
+  `PROJECT.md`. Where none has been chosen, recommend one with trade-offs and let the user
+  decide. Proposing a migration to a different stack requires explicit human approval.
 - Start with a modular monolith; earn microservices only when a concrete scaling or team
   boundary demands it — infrastructure YAGNI applies too.
 - Every module owns its data: no reaching across boundaries into another module's tables
@@ -58,6 +62,12 @@ Before proposing any structure, inspect the target repository:
 - Record every non-trivial decision in an ADR (see reference): status, context, options,
   decision, consequences.
 - Prefer reversible decisions, and document the reversal path for irreversible ones.
+- **Two documents, two jobs.** An ADR records *why* a decision was made and does not
+  change afterwards. `ARCHITECTURE.md` describes *how the system is built now* and is kept
+  true: when the structure changes, update `ARCHITECTURE.md` and add an ADR for the reason.
+  Write it from the [Architecture Template](./references/architecture-template.md), at the
+  project root, once the stack is accepted — before any scaffolding. Do not overwrite an
+  existing one; show a diff and wait for approval.
 
 Example of a module boundary expressed as a typed contract:
 
@@ -80,11 +90,18 @@ export interface OrderService {
 4. **Step 4: Verify Security** — Walk each candidate through its trust boundaries: where
    authentication happens, where secrets live, what fails if one component is compromised.
 5. **Step 5: Apply Edits** — Write the chosen design as an ADR with a component and
-   data-flow diagram (Mermaid or ASCII).
-6. **Step 6: Execute Tests** — Sanity-check the design: every requirement maps to a
-   component, and no component exists without a requirement.
+   data-flow diagram (Mermaid or ASCII), and write or update the project's
+   `ARCHITECTURE.md` from the template: overview, diagram, stack, folder structure,
+   components and boundaries, key data flows, authentication, integrations, jobs,
+   environments, deployment, conventions, and risks. Use `TBD` where unknown; never write
+   secrets or connection strings.
+6. **Step 6: Execute Tests** — Sanity-check the design: every requirement (and every
+   feature ID in `SPEC.md`) maps to a component, and no component exists without a
+   requirement.
 7. **Step 7: Report Status** — Present the decision, the rejected alternatives and why, and
-   the concrete next implementation steps.
+   the concrete next implementation steps. If the project has a `tasks.md`, update the
+   status of the architecture task — done only when its acceptance criterion passed — and
+   stop at any approval point it defines.
 
 ## 6. Security & Edge Case Guidelines
 
@@ -104,10 +121,16 @@ export interface OrderService {
 - [ ] ADR written with context, options, decision, and consequences.
 - [ ] Component and data-flow diagram included and readable without the prose.
 - [ ] Every functional requirement maps to at least one component.
-- [ ] No unapproved technology migrations; stack matches Eazworld alignment or is flagged.
+- [ ] No unapproved technology migrations; the stack matches `PROJECT.md`, or the
+      difference is flagged for a decision.
+- [ ] `ARCHITECTURE.md` written or updated from the template, with `TBD` for unknowns and
+      no secrets, and consistent with the ADR.
+- [ ] Every feature ID in `SPEC.md` maps to a component in `ARCHITECTURE.md`.
 - [ ] Security boundaries and failure modes documented.
 - [ ] Human maintainer has reviewed the design — self-approval is prohibited.
 
 ## 8. Supporting References & Assets
 
 - ADR template: [Architecture Decision Record Template](./references/adr-template.md)
+- [Architecture Template](./references/architecture-template.md) — the project-root
+  `ARCHITECTURE.md` skeleton: how the system is built as it stands.

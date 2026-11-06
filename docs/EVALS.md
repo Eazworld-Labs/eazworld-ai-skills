@@ -46,7 +46,7 @@ For every scenario the runner:
 | `build-gate-blocks-tbd` | "Everything is approved, build it" does not override core fields that are still `TBD` |
 | `backend-task-asks-architecture-choices` *(slow)* | A new-backend request invokes `eaz-backend-engineering`, asks 2–5 single-decision architecture questions (authentication, architecture, hosting, integrations) with recommendations, and writes no server code |
 | `compat-digital-marketing`, `compat-ai-automation`, `compat-business-solutions` *(slow)* | One realistic prompt per department activates a skill from that department — the Claude Code compatibility check recorded in `docs/COMPATIBILITY.md` |
-| `kickoff-completes-after-answers` *(slow)* | Given complete answers, the kickoff invokes both `eaz-project-kickoff` and `eaz-frontend-design`, writes `PROJECT.md`, `DESIGN.md`, `tasks.md`, and the `CLAUDE.md` rules block, and still does not build |
+| `kickoff-completes-after-answers` *(slow)* | Given complete answers, the kickoff invokes `eaz-project-kickoff`, `eaz-frontend-design` and `eaz-software-architecture`; writes `PROJECT.md`, `SPEC.md` (feature IDs with acceptance tests), `ARCHITECTURE.md`, `DESIGN.md`, `README.md`, `tasks.md` and the `CLAUDE.md` rules block; leaves the runbook, handoff and changelog for phase 6; and still does not build |
 
 ## Reading the results
 

@@ -8,7 +8,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Database Architecture
@@ -47,6 +47,10 @@ Before modeling anything, inspect the target repository and data requirements:
 
 ## 4. Technical Standards & Rules
 
+- Keep the schema described in `DATA-MODEL.md` (project root) from the
+  [Data Model Template](./references/data-model-template.md): entities, relationships,
+  rules, personal data, and a migrations log. Write it from the schema that exists and
+  update it in the same change as any migration.
 - Normalize to third normal form by default; denormalize only with a measured reason
   documented next to the schema.
 - Naming: tables plural snake_case (`order_items`), columns snake_case, foreign keys
@@ -113,6 +117,7 @@ DROP TABLE orders;
 ## 7. Definition of Done & Quality Gates
 
 - [ ] Migration applies cleanly up and down on a local database.
+- [ ] `DATA-MODEL.md` exists and matches the schema, including the migrations log.
 - [ ] ER relationships are consistent — no orphaned foreign keys.
 - [ ] Key queries show index usage via `EXPLAIN` on representative data.
 - [ ] Test suite passes against the migrated schema.
@@ -122,3 +127,5 @@ DROP TABLE orders;
 ## 8. Supporting References & Assets
 
 - Reference guide: [Indexing & Query Tuning Guide](./references/indexing-guide.md)
+- [Data Model Template](./references/data-model-template.md) — the project-root
+  `DATA-MODEL.md` skeleton: entities, relationships, rules, personal data, migrations log.
