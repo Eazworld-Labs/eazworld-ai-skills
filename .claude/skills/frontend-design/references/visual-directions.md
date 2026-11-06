@@ -25,6 +25,24 @@ with the client, not a default of this skill.
 | **Editorial** | Content-first, typographic | Blogs, news, portfolios | Serif or expressive display type, tight grid, minimal color |
 | **Utility / dashboard** | Dense, efficient, clear | Admin tools, POS, internal systems | Compact spacing, strong table and form styles, status colors |
 
+## Direction recipes
+
+A direction is more than a palette. For the one you pick, specify all five parts and
+record them in `DESIGN.md`. Typeface names are examples — confirm availability and
+license, self-host, and limit weights.
+
+| Direction | Type pairing (display + body) | Layout pattern | Component feel | Motion default |
+| :--- | :--- | :--- | :--- | :--- |
+| **Clean & minimal** | One family at two weights, e.g. a geometric sans | Wide margins, single column, strong left alignment | Hairline borders, small radii, almost no shadow | Subtle: fades, 150ms |
+| **Bold & vibrant** | Characterful display sans + a quiet text sans | Oversized headings, asymmetric blocks, full-bleed color | Large radii, solid fills, strong press states | Expressive: springs, scroll reveals |
+| **Dark & premium** | High-contrast serif or refined sans + neutral sans | Generous space, centered hero, restrained accent | Surface-fill elevation, thin accent lines, soft glow only on focus | Subtle to expressive: slow fades, view transitions |
+| **Warm & friendly** | Soft rounded display + highly legible sans | Rounded containers, photo-led sections, short paragraphs | Pill buttons, soft shadows, friendly empty states | Subtle: gentle bounce on confirmation |
+| **Editorial** | Expressive serif display + clean sans | Strong grid, large type, pull quotes, image-led spreads | Minimal chrome, underlines instead of boxes | Subtle: image and text reveals on scroll |
+| **Utility / dashboard** | One sans plus a monospace for figures | Dense grid, sticky navigation, tables and filters | Compact controls, clear status colors, visible focus | None to subtle: instant feedback |
+
+Whatever the direction, add the **signature element** from
+[Design Quality](./design-quality.md) — one memorable detail, used in two places.
+
 ## Choosing token values
 
 Decide these with the client, in this order:

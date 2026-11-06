@@ -26,6 +26,15 @@ plain HTML/CSS sites.
 - Make client-editable content editable: use blocks, ACF fields, or menus rather than
   hardcoding copy in templates.
 
+## Animation
+
+- Multi-page sites can get smooth page-to-page transitions with
+  `@view-transition { navigation: auto; }` — a progressive enhancement (Chrome/Edge 126,
+  Safari 18.2; other browsers navigate normally). Details and fallbacks in
+  [Motion & Animation](./motion-and-animation.md).
+- Keep animation in the theme's stylesheet, tied to motion tokens, and enqueue any
+  animation script through the CMS's normal asset system.
+
 ## Performance & accessibility
 
 - Responsive images with `srcset`/`sizes`, explicit width and height to prevent layout

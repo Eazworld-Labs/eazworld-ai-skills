@@ -25,6 +25,14 @@ APIs.
 - Match the UI library already installed (Vuetify, PrimeVue, Nuxt UI) before
   building primitives.
 
+## Animation
+
+- Use the built-in `<Transition>` and `<TransitionGroup>` with CSS classes tied to the
+  motion tokens in [Motion & Animation](./motion-and-animation.md); add a library only
+  with approval.
+- Nuxt page and layout transitions are configured in the app or per page — keep them
+  short and honor `prefers-reduced-motion`.
+
 ## Safety
 
 - Avoid `v-html`; if unavoidable, sanitize with a reviewed library and document why.

@@ -45,6 +45,24 @@ Border-radius tiers `sm` 4px → `xl` 16px plus `full`; shadow elevation tiers
 `sm` / `md` / `lg`. Elevation expresses hierarchy, so shadows are assigned by layer,
 never by taste.
 
+## Motion tokens
+
+Durations and easings are tokens, like spacing: `--duration-fast` (150ms),
+`--duration-base` (250ms), `--duration-slow` (400ms), plus `--ease-standard`,
+`--ease-enter`, and `--ease-exit`. Full values, patterns, and the reduced-motion rules
+live in [Motion & Animation](./motion-and-animation.md).
+
+## Fluid type (optional)
+
+When the design benefits from type that scales smoothly between mobile and desktop, keep
+the 1.250 scale as the source of the steps and map each step to a `clamp()` range — see
+[Modern CSS](./modern-css.md). Never use `vw` alone.
+
+## Theme tokens
+
+Define each color token's light and dark value together with `light-dark()` and set
+`color-scheme: light dark` on `:root` — see [Modern CSS](./modern-css.md).
+
 ## Adapting to a client brand
 
 1. Replace primitives with the client palette; keep the semantic names unchanged.

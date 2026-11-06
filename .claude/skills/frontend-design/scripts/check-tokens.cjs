@@ -7,6 +7,7 @@
  * Scans UI source for raw design values that should be design tokens:
  *   - hex colors (#rgb, #rrggbb, #rrggbbaa) and rgb()/rgba()/hsl()/hsla() colors
  *   - px values that are not on the 4px grid (0, 1px and 2px are allowed for borders)
+ *   - raw animation durations (e.g. 300ms, 0.3s) on transition/animation/delay lines
  *
  * Token files (theme, tokens, variables, global styles, Tailwind config) are skipped,
  * and so are custom-property declarations (`--color-x: #123456`) and media/container
@@ -35,6 +36,8 @@ const HEX_RE = /#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})\b/;
 const FUNC_COLOR_RE = /\b(?:rgba?|hsla?)\(/i;
 const PX_RE = /(?<![\w.#-])(\d+(?:\.\d+)?)px\b/g;
 const CUSTOM_PROP_RE = /^\s*--[\w-]+\s*:/;
+const MOTION_LINE_RE = /transition|animation|duration|delay/i;
+const DURATION_RE = /(?<![\w.#-])(\d+(?:\.\d+)?)(ms|s)\b/g;
 const BREAKPOINT_RE = /@media|@container|min-width|max-width|min-height|max-height|breakpoint/i;
 const HEX_ENTITY_RE = /&#\d+;|#(?:[0-9a-fA-F]+)\s*(?:\{|,\s*\.)/; // CSS id selectors like #main {
 
@@ -87,6 +90,12 @@ function checkLine(line) {
       if (n % 4 !== 0) hits.push(['off-grid px', `${m[1]}px`]);
     }
   }
+  if (MOTION_LINE_RE.test(line) && !/prefers-reduced-motion/i.test(line)) {
+    for (const m of line.matchAll(DURATION_RE)) {
+      if (parseFloat(m[1]) === 0) continue;
+      hits.push(['raw duration', `${m[1]}${m[2]}`]);
+    }
+  }
   return hits;
 }
 
@@ -117,7 +126,8 @@ function main() {
     for (const f of findings) console.log(`${f.file}:${f.line}  ${f.kind}  ${f.value}`);
     console.log(`\nFiles scanned: ${scanned} | Raw values: ${findings.length}`);
     if (findings.length) {
-      console.log('Replace each with a design token, or justify it (e.g. one-off SVG art) in the report.');
+      console.log('Replace each with a design token (colors, spacing, --duration-*), or justify it');
+      console.log('(e.g. one-off SVG art, a spinner) in the report.');
     }
   }
   process.exit(findings.length ? 1 : 0);

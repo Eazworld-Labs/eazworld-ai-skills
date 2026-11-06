@@ -29,6 +29,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`frontend-design` v1.4.0 — modern design and motion:**
+  - New references: `motion-and-animation` (motion levels none/subtle/expressive, motion
+    tokens, CSS-first patterns with browser support checked on 2026-11-06, libraries per
+    stack, reduced-motion rules, motion QA), `modern-css` (support policy, container
+    queries, fluid type, `light-dark()` theming, color pitfalls), and `design-quality`
+    (avoiding the generic look, one signature element, hierarchy, state design, visual
+    QA procedure and rubric).
+  - `visual-directions` gains a recipe per direction (type pairing, layout pattern,
+    component feel, motion default); `visual-system` gains motion and theme tokens; the
+    stack notes gain animation guidance; motion level becomes a fourth design choice and
+    visual QA a workflow step and Definition of Done item.
+  - `check-tokens.cjs` also flags raw animation durations, and now has tests.
+
 - **`project-kickoff` v1.2.0:** generates a phased `tasks.md` (six standard phases,
   trimmed per project type, each task with a skill and an acceptance criterion, approval
   stops after phases 1, 3, and 5) from new `phases` and `tasks-template` references; the

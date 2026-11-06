@@ -56,7 +56,8 @@ the design rests on real content, features, and constraints instead of guesses.
 - Any third-party tools to connect — analytics, email, chat, CRM, maps?
 
 ### Behavior
-- How much motion? *(recommend: one subtle moment; respect reduced motion)*
+- How much motion — none, subtle, or expressive? *(recommend: subtle; see Motion &
+  Animation)*
 - Light, dark, or both? *(recommend: light only unless the audience expects dark)*
 - Any accessibility requirements beyond WCAG AA — such as large-text users or
   low-vision audiences?

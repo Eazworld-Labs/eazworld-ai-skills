@@ -34,6 +34,19 @@ manifest shows `react` or `next`. Match the project's installed versions — che
 - Forms: associate every input with a label, announce validation errors, and keep
   server-side validation authoritative.
 
+## Animation
+
+- CSS first (transitions, `@starting-style`, view transitions, scroll-driven animation) —
+  see [Motion & Animation](./motion-and-animation.md). Add **Motion** (npm `motion`,
+  import from `motion/react`) only when CSS cannot do the job and a dependency is
+  approved.
+- Motion components need the client. Keep them in small leaf components marked
+  `"use client"` so the surrounding page stays a Server Component.
+- Wire the reduced-motion setting (Motion offers `MotionConfig` with
+  `reducedMotion="user"` — confirm in the installed version's docs).
+- Animate `transform` and `opacity`; use `AnimatePresence` or CSS for exits rather than
+  unmounting instantly.
+
 ## Verification
 
 Run the project's scripts — typically `tsc --noEmit`, `npm run lint`, `npm test`, and

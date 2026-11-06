@@ -35,6 +35,19 @@ and Flutter. App structure, navigation, builds, and store release belong to the
   constants file — no literals in widgets.
 - Use `ListView.builder` for long lists and `LayoutBuilder` / breakpoints for tablets.
 
+## Animation
+
+- **React Native / Expo:** use Reanimated for entering/exiting and layout animations so
+  motion runs on the UI thread; honor the system "reduce motion" setting (Reanimated
+  provides `useReducedMotion` — confirm in the installed version).
+- **Flutter:** start with implicit animations (`AnimatedContainer`, `AnimatedOpacity`),
+  move to explicit controllers only when needed, and respect the platform's disable-
+  animations setting.
+- Use **Rive** or **Lottie** for illustrated animation, with a static fallback and a
+  file-size check.
+- Durations and curves come from a shared constants file mirroring the web motion
+  tokens in [Motion & Animation](./motion-and-animation.md).
+
 ## Verification
 
 Run the project's analyzer and tests (`tsc` + lint + tests, or `flutter analyze` +

@@ -27,6 +27,8 @@ put secrets in this file.
 
 - **Styling method:** <!-- Tailwind | plain CSS | CSS Modules | SCSS | CSS-in-JS | library theming | native -->
 - **Visual direction:** <!-- clean & minimal | bold & vibrant | dark & premium | warm & friendly | editorial | dashboard -->
+- **Motion level:** <!-- none | subtle | expressive -->
+- **Signature element:** <!-- the one memorable detail, used in two places -->
 - **Theme modes:** <!-- light | dark | both -->
 
 ## Tokens

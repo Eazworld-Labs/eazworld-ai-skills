@@ -4,12 +4,12 @@ description: Design and build accessible, responsive, performant user interfaces
   websites and apps on any front-end stack (React/Next.js, Vue/Nuxt, server-rendered
   templates, WordPress/Blade, React Native, Flutter). Use when creating UI components
   or pages, establishing design tokens, fixing styling and layout bugs, improving
-  accessibility, or optimizing Core Web Vitals.
+  accessibility, adding animation and motion, or optimizing Core Web Vitals.
 license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Frontend Design
@@ -53,6 +53,8 @@ ships out of the file, however good it looks in isolation.
 - **Trigger 2:** When fixing styling bugs, responsive breakpoints, or visual regressions.
 - **Trigger 3:** When improving accessibility, contrast, keyboard navigation, or Core Web
   Vitals (LCP, CLS, INP).
+- **Trigger 4:** When adding or changing animation, transitions, or scroll effects, or
+  when a design needs to feel more polished or less generic.
 - **Anti-Trigger:** Do not activate for API contracts, server-side logic, or database
   work — route those to the department's backend skills. For native mobile app
   structure, navigation, and release, route to mobile-app-development; this skill
@@ -79,11 +81,14 @@ Before writing any UI code, inspect the target repository:
   project type needs, at most 5 at a time, each with a recommended answer. Record
   answers in the "Discovery" section of `DESIGN.md`; leave unknowns as `TBD`.
 - **Design Choices (ask, never assume):** unless `PROJECT.md`, `DESIGN.md`, or the
-  existing code already settles them, get the user's decision on three things before
+  existing code already settles them, get the user's decision on four things before
   building — each with a recommendation and a one-line trade-off:
   1. **Styling method** — see [Styling Methods](./references/styling-methods.md).
   2. **Visual direction** — see [Visual Directions](./references/visual-directions.md).
   3. **Token values** — brand colors, typefaces, scale, spacing, radius, light/dark.
+  4. **Motion level** — none, subtle (recommended default), or expressive, with the
+     animation approach for the stack — see
+     [Motion & Animation](./references/motion-and-animation.md).
   Record the answers in `DESIGN.md` so later work does not re-ask.
 - **Codebase Audit Checklist:**
   1. Review the existing component library and reuse its primitives before adding new
@@ -118,6 +123,17 @@ Before writing any UI code, inspect the target repository:
   `DESIGN.md`; where none exist, propose a starter set from
   [Visual System Reference](./references/visual-system.md) for approval — its palette,
   type scale, spacing grid, and surface rules are defaults, not mandates.
+- **Design for quality, not just correctness.** Avoid the generic templated look, give
+  the project one signature element used in two places, build a clear hierarchy with one
+  primary action per view, and design every state — see
+  [Design Quality](./references/design-quality.md).
+- **Prefer the platform.** Use modern CSS (container queries, fluid `clamp()` type,
+  `color-scheme` and `light-dark()`, view transitions) before adding a library, and
+  follow the support policy in [Modern CSS](./references/modern-css.md): features that
+  are not Baseline widely available need a fallback or are progressive enhancement only.
+- **Motion has a purpose, tokens, and a reduced-motion path.** Durations and easings are
+  tokens; animate `transform` and `opacity`; every animation respects
+  `prefers-reduced-motion`; anything that loops can be paused.
 
 Example of a typed, single-purpose component (React/TypeScript shown; the same shape
 applies in any stack):
@@ -150,7 +166,10 @@ export function Badge({ label, tone }: BadgeProps) {
    check the screen at all target viewports or devices. Then run the token check
    (`node scripts/check-tokens.cjs <source-dir>` from this skill's folder) and replace
    every raw color or off-grid pixel value it reports with a token — or justify the
-   few that must stay (for example one-off SVG artwork) in the report.
+   few that must stay (for example one-off SVG artwork) in the report. Finally do the
+   visual QA from [Design Quality](./references/design-quality.md): render the screen,
+   capture it at 360 / 768 / 1440 px (plus dark mode and reduced motion when in scope)
+   with browser tooling if available, review it against the rubric, fix, and re-capture.
 7. **Step 7: Report Status** — Summarize what shipped, the stack detected, verification
    results, and any visual or accessibility caveats. If the project has a `tasks.md`,
    update the status of each task you worked on — mark it done only when its
@@ -189,6 +208,11 @@ export function Badge({ label, tone }: BadgeProps) {
       and shadows are referenced strictly via tokens (CSS variables, framework theme,
       or the platform's theme object) — zero raw hex or arbitrary pixel values in
       component files.
+- [ ] **Visual QA done:** the rendered result was captured at three widths and reviewed
+      against the design-quality rubric (or the user was given exact steps when no
+      browser tooling was available); fixes re-captured.
+- [ ] **Motion QA:** motion level recorded; animations have a purpose, use tokens,
+      animate `transform`/`opacity`, and have a tested reduced-motion path.
 - [ ] **Token check run:** `scripts/check-tokens.cjs` reports no raw colors or off-grid
       px values in component files, or each remaining hit is justified in the report.
 - [ ] **Type Scale Compliance:** All heading and body text sizing follows the project's
@@ -201,6 +225,13 @@ export function Badge({ label, tone }: BadgeProps) {
 - [Token Check Script](./scripts/check-tokens.cjs) — zero-dependency scan for raw
   colors and off-grid pixel values outside token files; run it from Step 6 on any
   stack with text-based styles.
+- [Motion & Animation](./references/motion-and-animation.md) — motion levels, motion
+  tokens, CSS-first patterns with verified browser support, libraries per stack, and
+  motion QA.
+- [Modern CSS](./references/modern-css.md) — support policy, container queries, fluid
+  type, theming with `light-dark()`, and color pitfalls.
+- [Design Quality](./references/design-quality.md) — avoiding the generic look,
+  hierarchy, composition, state design, and the visual QA procedure and rubric.
 - [Styling Methods](./references/styling-methods.md) — Tailwind, plain CSS, CSS
   Modules, SCSS, CSS-in-JS, library theming: how to choose and where tokens live.
 - [Visual Directions](./references/visual-directions.md) — design directions to offer
