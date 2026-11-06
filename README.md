@@ -24,9 +24,13 @@ The installer first asks **which AI tools to install into** and lists every tool
 (AiderDesk, AstrBot, and many others). Select **Claude Code** and/or **OpenCode** (Space to
 toggle, Enter to confirm) and leave the rest unselected — or skip the question with
 `npx skills add Eazworld-Labs/eazworld-ai-skills --agent claude-code opencode`. The installer
-may also create a `.agents/skills/` folder and a `skills-lock.json` in your project; both are
-its own bookkeeping. If you only use OpenCode or want a plain copy into `.claude/skills/`, the
-shell installers below do exactly that.
+always keeps the real files in `.agents/skills/` (the shared location many tools read) and, for
+Claude Code, adds links to them in `.claude/skills/`, plus a `skills-lock.json` file — all normal.
+Prefer plain copies in `.claude/skills/` and nothing else? Use the shell installer:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Eazworld-Labs/eazworld-ai-skills/main/scripts/install.sh | bash -s -- .
+```
 
 Every skill name starts with `eaz-` (for example `eaz-frontend-design`). That keeps the
 library from colliding with your own or built-in skills of the same name — a personal
