@@ -200,7 +200,7 @@ every skill with an `eaz-` prefix; the OpenCode result above predates that renam
 - [x] Include structured research and audience analysis procedures.
 - [x] Establish measurable campaign KPI evaluation logic.
 - [x] Validate every skill using `scripts/validate-skills.js`.
-- [?] Verify cross-agent execution in Claude Code and OpenCode. *(Claude Code verified 2026-11-06; the OpenCode check predates the `eaz-` rename — re-run to close.)*
+- [x] Verify cross-agent execution in Claude Code and OpenCode. *(Both verified 2026-11-06 — see `docs/COMPATIBILITY.md`.)*
 
 **Evidence:** All 7 skills contain a target-users statement, named platform policies,
 an activation-triggers section, a Research & Audience Audit Checklist, and KPI
@@ -233,7 +233,7 @@ creation. Claude Code check remains open: CLI returns the weekly-limit message
 - [x] Enforce strict environment variable isolation for API keys.
 - [x] Include retry logic, exponential backoff, and error-handling workflows.
 - [x] Validate every skill via automated linter.
-- [?] Verify cross-agent execution in Claude Code and OpenCode. *(Claude Code verified 2026-11-06; the OpenCode check predates the `eaz-` rename — re-run to close.)*
+- [x] Verify cross-agent execution in Claude Code and OpenCode. *(Both verified 2026-11-06 — see `docs/COMPATIBILITY.md`.)*
 
 **Evidence:** Sweep across all 5 skills confirmed 5/5 for "Supported architectures"
 statements, an Environment Isolation rule in every §6, and exponential backoff plus an
@@ -268,7 +268,7 @@ message (resets 12am Africa/Accra).
 - [x] Address regional payment callback verification and idempotency rules.
 - [x] Include offline-first and POS sync considerations where relevant.
 - [x] Validate every skill via automated linter.
-- [?] Verify cross-agent execution in Claude Code and OpenCode. *(Claude Code verified 2026-11-06; the OpenCode check predates the `eaz-` rename — re-run to close.)*
+- [x] Verify cross-agent execution in Claude Code and OpenCode. *(Both verified 2026-11-06 — see `docs/COMPATIBILITY.md`.)*
 
 **Evidence:** Flattened-text sweep confirmed 6/6 across all six skills for RBAC role
 definitions, data privacy/retention rules, audit logging, payment callback
@@ -306,7 +306,7 @@ weekly-limit message (resets 12am Africa/Accra).
 ### 7.3 Compatibility Matrix Logging
 
 - [x] Document test outcomes and agent runner versions in `docs/COMPATIBILITY.md`.
-- [?] Resolve any execution discrepancies across environments. *(Claude Code discrepancy resolved; OpenCode shadowing fixed by the `eaz-` rename but not yet re-verified there.)*
+- [x] Resolve any execution discrepancies across environments.
 
 **Evidence (§7.2):** Discovery — all 31 skills registered live in OpenCode v2.0.15
 as created. Activation — `api-development` loaded end to end via the skill tool with
@@ -325,8 +325,15 @@ activated a skill from that department: software-engineering (`eaz-project-kicko
 ai-automation (`eaz-n8n-automation`, `eaz-whatsapp-automation`), business-solutions
 (`eaz-school-management`, `eaz-ghana-payments`). One run per department; reproduce with
 `npm run eval -- --scenario compat-<department>`. Matrix updated in `docs/COMPATIBILITY.md`.
-**Still open:** the OpenCode results (§7.2) were recorded on v2.0.15 before the `eaz-` rename
-and flat layout — re-run them to close Phase 7.
+**Evidence (§7.2 re-verification, 2026-11-06, OpenCode v2.0.15, free model
+`opencode/nemotron-3.5-super-vl-free`):** the earlier OpenCode results predated the `eaz-`
+rename and flat layout, so they were re-run. Discovery — all 33 `eaz-` skills named by the
+agent with no tool calls. Activation — one prompt per department made OpenCode call its
+`skill` tool and load a matching skill (`eaz-google-ads`; `eaz-n8n-automation` and
+`eaz-whatsapp-automation`; `eaz-school-management` and `eaz-ghana-payments`;
+`eaz-api-development`). References — loading `eaz-api-development` listed its `references/`
+files and the agent read `openapi-checklist.md`. The `frontend-design` shadowing discrepancy is
+resolved by the rename. One run per prompt, one model.
 
 **Completion Criteria:** Compatibility Matrix fully populated with passing status across both agents.
 
@@ -453,17 +460,16 @@ only the named skills (bash installer end-to-end tested for the selection path).
 - [x] Phase 1: Repository Foundation Completed
 - [x] Phase 2: Automated Validation & CI/CD Pipeline Completed
 - [x] Phase 3: 14 Software Engineering Skills Completed
-- [ ] Phase 4: 7 Digital Marketing Skills Completed
-- [ ] Phase 5: 5 AI & Automation Skills Completed
-- [ ] Phase 6: 7 Business Solutions Skills Completed
-- [ ] Phase 7: Cross-Agent Compatibility Matrix Verified
+- [x] Phase 4: 7 Digital Marketing Skills Completed
+- [x] Phase 5: 5 AI & Automation Skills Completed
+- [x] Phase 6: 7 Business Solutions Skills Completed
+- [x] Phase 7: Cross-Agent Compatibility Matrix Verified
 - [x] Phase 8: Public Developer Experience & Docs Completed
 - [x] Phase 9: Security Audit & Public v1.0.0 Tagged
 
-**Note (2026-11-06):** Phase 3 is now complete — Claude Code and OpenCode discovery are both
-verified. Phases 4–6 stay open only for the OpenCode half of their cross-agent check, and
-Phase 7 for re-verifying OpenCode after the `eaz-` rename and flat layout (Claude Code
-verification is done). All 33 skills are shipped and validated.
+**Note (2026-11-06):** Phases 3–7 are complete. Claude Code and OpenCode were both verified
+against the final 33-skill, `eaz-`-prefixed, flat layout and recorded in
+`docs/COMPATIBILITY.md`. Phase 10 items stay open by design (ongoing maintenance).
 
 ---
 

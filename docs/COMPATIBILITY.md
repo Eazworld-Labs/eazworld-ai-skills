@@ -7,7 +7,7 @@ test outcomes and runner versions for every compatibility check in tasks.md Phas
 
 | Component | Version |
 | --- | --- |
-| OpenCode | v2.0.15 |
+| OpenCode | v2.0.15 (checked 2026-11-06 with the free model `opencode/nemotron-3.5-super-vl-free`) |
 | Claude Code CLI | 2.1.319 (Claude Code checks, 2026-11-06); 2.1.312 (OpenCode-era checks) |
 | Node.js | v24.21.0 |
 | Library size | 33 skills — 14 software-engineering, 7 digital-marketing, 5 ai-automation, 7 business-solutions |
@@ -15,14 +15,28 @@ test outcomes and runner versions for every compatibility check in tasks.md Phas
 
 ## OpenCode Verification
 
-Shared loader reading `.claude/skills/`.
+Shared loader reading `.claude/skills/`. Re-verified 2026-11-06 on OpenCode v2.0.15, after
+the `eaz-` rename and the flat layout, by running `opencode run --standalone` against a
+throwaway project that held a copy of the skills, using the free model
+`opencode/nemotron-3.5-super-vl-free` (no charge).
 
 | Check | Status | Evidence |
 | --- | --- | --- |
-| Skill discovery from `.claude/skills/` | PASS | All 31 skills registered live as they were created; IDs present in the session's available skill list |
-| Activation on domain triggers | PASS | `eaz-api-development` loaded end to end through the skill tool — full SKILL.md content returned |
-| Relative `references/` link resolution | PASS | Static resolution 3/3 (eaz-api-development, eaz-software-architecture, eaz-database-architecture); the live load resolved `./references/openapi-checklist.md` to its file |
+| Skill discovery from `.claude/skills/` | PASS | Asked to list its skills, the agent named all 33 `eaz-` skills with no tool calls — the names came from OpenCode's own skill list |
+| Activation on domain triggers | PASS | Each prompt below made OpenCode call its `skill` tool and load a matching skill |
+| Relative `references/` link resolution | PASS | Loading `eaz-api-development` returned its `references/` files in the skill's file list, and the agent then read `references/openapi-checklist.md` |
 | No duplicate skills under `.opencode/` | PASS | No `.opencode/` directory exists in the repository |
+
+| Department | Prompt (summary) | Skills loaded |
+| --- | --- | --- |
+| digital-marketing | Google Ads campaign structure for a Lagos store | `eaz-google-ads` |
+| ai-automation | n8n workflow from a Paystack webhook to WhatsApp | `eaz-n8n-automation`, `eaz-whatsapp-automation` (and `eaz-ghana-payments`) |
+| business-solutions | School fees by Mobile Money in Kumasi | `eaz-school-management`, `eaz-ghana-payments` |
+| software-engineering | Reviewing an OpenAPI spec for an orders API | `eaz-api-development` |
+
+Limits: one run per prompt, one OpenCode version, one free model — other models may choose
+different skills. The checks confirm that the right skills are discovered and load, not
+that every skill works.
 
 ### Known observations (OpenCode)
 
@@ -64,16 +78,13 @@ that a skill from the expected department activated — not that every skill wor
 
 | # | Environment | Discrepancy | Resolution |
 | --- | --- | --- | --- |
-| 1 | OpenCode | `frontend-design` ID shadowed by a built-in skill | Renamed: every skill now carries the `eaz-` prefix. Not yet re-verified in OpenCode (see Next Run) |
+| 1 | OpenCode | `frontend-design` ID shadowed by a built-in skill | Resolved 2026-11-06: every skill carries the `eaz-` prefix, and OpenCode lists and loads all 33 |
 | 2 | OpenCode | Transient availability churn on some skill IDs | Self-resolved; no action required |
 | 3 | Claude Code | Verification blocked by weekly quota | Resolved 2026-11-06 — §7.1 checks completed (see above) |
 
-## Next Run (to close the OpenCode half of tasks.md §7)
+## Maintaining This Matrix
 
-The OpenCode results above were recorded on v2.0.15 **before** the `eaz-` rename and the
-flat layout. Re-run them:
-
-1. Open the repository in OpenCode and confirm all 33 `eaz-` skills are listed.
-2. Activate one skill per department.
-3. Confirm a `references/` link resolves at runtime.
-4. Update the OpenCode table and close discrepancy #1.
+Re-run both agents' checks when Claude Code or OpenCode ships a major change, or when the
+skill layout or naming changes. Claude Code: `npm run eval -- --scenario compat-<department>`
+(calls the model, a few cents per run). OpenCode: `opencode run --standalone --format json -m <model> "<prompt>"`
+in a throwaway project, then read the `skill` tool calls in the output.

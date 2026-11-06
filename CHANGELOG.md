@@ -83,9 +83,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   references: `discovery-questions`, `auth-and-access`, `jobs-webhooks-idempotency`,
   `errors-logging-observability`, and one note per stack. The kickoff `PROJECT.md` template
   gains Authentication and Background jobs / integrations lines.
-- **Claude Code compatibility verified (tasks.md Phase 7.1):** discovery, activation across
-  all four departments, and `references/` link resolution, recorded in
-  `docs/COMPATIBILITY.md`. OpenCode needs re-verification after the `eaz-` rename.
+- **Claude Code and OpenCode compatibility verified (tasks.md Phase 7):** discovery, activation
+  across all four departments, and `references/` link resolution, recorded in
+  `docs/COMPATIBILITY.md`. OpenCode was re-verified after the `eaz-` rename and flat layout
+  using a free model, which also closes the old `frontend-design` shadowing issue.
 
 - **`eaz-frontend-design` v1.5.0 — design inspiration:** the skill now asks, as its own
   question, for pages, apps, or images whose look the client likes (website links,
