@@ -20,6 +20,14 @@ npx skills add Eazworld-Labs/eazworld-ai-skills
 This copies all 33 skills into your project's `.claude/skills/`, ready for both
 Claude Code and OpenCode to discover automatically at startup.
 
+The installer first asks **which AI tools to install into** and lists every tool it supports
+(AiderDesk, AstrBot, and many others). Select **Claude Code** and/or **OpenCode** (Space to
+toggle, Enter to confirm) and leave the rest unselected — or skip the question with
+`npx skills add Eazworld-Labs/eazworld-ai-skills --agent claude-code opencode`. The installer
+may also create a `.agents/skills/` folder and a `skills-lock.json` in your project; both are
+its own bookkeeping. If you only use OpenCode or want a plain copy into `.claude/skills/`, the
+shell installers below do exactly that.
+
 Every skill name starts with `eaz-` (for example `eaz-frontend-design`). That keeps the
 library from colliding with your own or built-in skills of the same name — a personal
 skill called `frontend-design` would otherwise win over a project skill and silently
