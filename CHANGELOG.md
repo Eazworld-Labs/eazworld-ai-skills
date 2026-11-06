@@ -11,6 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **`PROJECT_TEMPLATE.md` and `DESIGN_TEMPLATE.md`:** per-project context files
+  (stack, region, brand, design choices) that skills read first so they stop
+  re-asking and stay consistent across client projects.
+- **`frontend-design` references:** `styling-methods`, `visual-directions`,
+  `react-next`, `vue-nuxt`, `native-mobile`, `server-rendered`, and `visual-system`.
+
+### Changed
+
+- **`frontend-design` v1.1.0:** stack-agnostic core with stack detection; asks the user
+  to choose styling method, visual direction, and token values before building. The
+  visual system moved to a reference file and is now a default, not a mandate.
+
 - **`nigeria-payments` skill:** Nigerian rails — Paystack, Flutterwave, OPay, and
   bank transfers — with kobo-denominated charges, per-provider timing-safe webhook
   verification, USSD and transfer pending states with reconciliation, and

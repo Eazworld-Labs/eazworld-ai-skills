@@ -1,24 +1,26 @@
 ---
 name: frontend-design
-description: Design and build accessible, responsive user interfaces with React, Next.js,
-  TypeScript, and Tailwind CSS. Use when creating UI components or pages, establishing
-  design tokens, fixing styling and layout bugs, improving accessibility, or optimizing
-  Core Web Vitals.
+description: Design and build accessible, responsive, performant user interfaces for
+  websites and apps on any front-end stack (React/Next.js, Vue/Nuxt, server-rendered
+  templates, WordPress/Blade, React Native, Flutter). Use when creating UI components
+  or pages, establishing design tokens, fixing styling and layout bugs, improving
+  accessibility, or optimizing Core Web Vitals.
 license: MIT
 metadata:
   author: Eazworld
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Frontend Design
 
 ## 1. Overview & Purpose
 
-Turns designs, specs, and descriptions into production-quality user interfaces. Covers
-component implementation, responsive layout, accessibility, styling systems, and
-performance on the client. Delivers components that are keyboard-reachable, readable by
-screen readers, and fast on mid-range mobile devices — not just correct in a desktop
-browser.
+Turns designs, specs, and descriptions into production-quality user interfaces on
+whatever stack the project already uses. The standards below are stack-agnostic —
+purpose, tokens, accessibility, states, and performance — and stack-specific idioms
+load on demand from `references/`. Delivers interfaces that are keyboard-reachable,
+readable by screen readers, and fast on mid-range mobile devices — not just correct in
+a desktop browser.
 
 ## 1A. Design Purpose (Define Before Any Pixel)
 
@@ -45,13 +47,15 @@ ships out of the file, however good it looks in isolation.
 
 ## 2. Activation Conditions & Triggers
 
-- **Trigger 1:** When a user asks to build, restyle, or refactor a UI component, page, or
-  layout.
+- **Trigger 1:** When a user asks to build, restyle, or refactor a UI component, page,
+  screen, or layout — web or mobile.
 - **Trigger 2:** When fixing styling bugs, responsive breakpoints, or visual regressions.
 - **Trigger 3:** When improving accessibility, contrast, keyboard navigation, or Core Web
   Vitals (LCP, CLS, INP).
 - **Anti-Trigger:** Do not activate for API contracts, server-side logic, or database
-  work — route those to the department's backend skills.
+  work — route those to the department's backend skills. For native mobile app
+  structure, navigation, and release, route to mobile-app-development; this skill
+  still governs the UI inside it.
 
 ## 3. Required Inputs & Project Audit
 
@@ -60,53 +64,57 @@ Before writing any UI code, inspect the target repository:
 - **Mandatory Inputs:**
   1. Design reference: screenshot, Figma frame, `DESIGN.md`, or a written description.
   2. Content and copy that the interface must display (final text, not lorem ipsum).
-  3. Target viewports and browser support expectations.
+  3. Target viewports/devices and browser or OS support expectations.
+- **Stack Detection (do this first, never assume):**
+  1. Read `PROJECT.md` if present — it states the stack and brand tokens.
+  2. Otherwise infer from manifests: `package.json` (react, next, vue, nuxt, svelte,
+     astro, react-native, expo), `pubspec.yaml` (Flutter), `composer.json` (Laravel,
+     WordPress), or template directories.
+  3. Load the matching stack file from Section 8. If none matches, apply the core
+     rules in the project's own idiom — and say which stack you detected.
+- **Design Choices (ask, never assume):** unless `PROJECT.md`, `DESIGN.md`, or the
+  existing code already settles them, get the user's decision on three things before
+  building — each with a recommendation and a one-line trade-off:
+  1. **Styling method** — see [Styling Methods](./references/styling-methods.md).
+  2. **Visual direction** — see [Visual Directions](./references/visual-directions.md).
+  3. **Token values** — brand colors, typefaces, scale, spacing, radius, light/dark.
+  Record the answers in `DESIGN.md` so later work does not re-ask.
 - **Codebase Audit Checklist:**
-  1. Inspect `package.json` for React/Next.js/Tailwind versions and existing UI
-     dependencies.
-  2. Review the existing component library and reuse its primitives before adding new ones.
-  3. Check lint and format configuration (ESLint, Prettier) and match its conventions.
-  4. Look for existing design tokens, theme files, or global styles.
+  1. Review the existing component library and reuse its primitives before adding new
+     ones.
+  2. Check lint and format configuration and match its conventions.
+  3. Look for existing design tokens, theme files, or global styles.
 
 ## 4. Technical Standards & Rules
 
-- Strict TypeScript: no `any` in component props; interfaces for every public component
-  API.
-- Mobile-first responsive design — verify at 360px, 768px, and 1440px at minimum.
-- Semantic HTML first; ARIA only where native semantics cannot express the pattern.
-- Full keyboard support: every interactive element reachable and operable without a mouse,
-  with a visible focus state.
-- Contrast ratio of at least 4.5:1 for body text (WCAG AA).
+- Follow the project's existing stack, language, and conventions; never migrate or add
+  a framework as a side effect of a UI task.
+- Typed component APIs wherever the language allows it (TypeScript, Dart, PHP types) —
+  no untyped catch-all props.
+- Mobile-first responsive design — verify at 360px, 768px, and 1440px at minimum (web);
+  small and large device sizes for native apps.
+- Semantic structure first (HTML elements, native platform controls); ARIA or
+  accessibility labels only where native semantics cannot express the pattern.
+- Full keyboard and assistive-technology support: every interactive element reachable
+  and operable without a mouse, with a visible focus state; touch targets at least
+  44×44 px (48dp on Android).
+- Contrast ratio of at least 4.5:1 for body text (WCAG AA); respect reduced-motion and
+  system text-size settings.
 - Compose small components; prefer composition over configuration-heavy prop APIs.
-- Server Components by default — add `"use client"` only when the component genuinely
-  needs state, effects, or browser APIs.
+- Ship the least client-side code the stack allows (server rendering, static output,
+  lazy loading) — each stack file states its default.
 - No new dependencies without explicit human approval.
-- **Visual System & Aesthetic Standards:** the design-token contract every UI
-  implements, layered so brand values change in exactly one place — components quote
-  token names, never raw values.
-- **Color tokens — three layers:** a primitive base (raw palette values, no meaning),
-  a semantic intent layer (what a color means — `--color-bg-app`,
-  `--color-surface-base`, `--color-surface-elevated`, `--color-border-subtle`,
-  `--color-text-primary`, `--color-text-muted`, `--color-action-primary`,
-  `--color-action-accent`), and a component scope that aliases semantic names for one
-  fixed purpose. Components consume only semantic and component names.
-- **Dark-mode surfaces:** deep neutral app backgrounds (`#090d16` / `#0b0e14`);
-  elevation by sequential surface fills or low-opacity white overlays — never pure
-  black panels stacked on pure black backgrounds.
-- **Glassmorphism (strict):** `backdrop-filter: blur(12px)` plus a translucent fill
-  plus a 1px border — only on neutral surfaces (navbars, dialogs, panels), never
-  behind primary action buttons or body copy.
-- **Typography — 1.250 modular scale (Major Third):** `xs` 0.75rem → `2xl` 1.953rem
-  in 1.250 steps; weights 400 (body) through 700 (display and emphasis only).
-  Display type serves headings and hero moments (line height 1.1); body type serves
-  reading (line height 1.5) — nothing in between is invented.
-- **Spatial grid:** 8px base grid with 4px half-steps — every margin, padding, and
-  gap resolves to the grid; no arbitrary offsets.
-- **Surface finishes:** border-radius tiers `sm` 4px → `xl` 16px plus `full`; shadow
-  elevation tiers `sm` / `md` / `lg`. Elevation expresses hierarchy, so shadows are
-  assigned by layer, never by taste.
+- **Design tokens — three layers:** primitive (raw values, no meaning), semantic
+  (what a value means: `--color-bg-app`, `--color-text-primary`,
+  `--color-action-primary`), and component scope. Components consume only semantic and
+  component names, never raw values, so brand values change in exactly one place.
+- **Brand values come from the project, not this skill.** Use the client's tokens or
+  `DESIGN.md`; where none exist, propose a starter set from
+  [Visual System Reference](./references/visual-system.md) for approval — its palette,
+  type scale, spacing grid, and surface rules are defaults, not mandates.
 
-Example of a typed, single-purpose component:
+Example of a typed, single-purpose component (React/TypeScript shown; the same shape
+applies in any stack):
 
 ```tsx
 type BadgeProps = { label: string; tone: 'info' | 'warn' | 'danger' };
@@ -122,48 +130,68 @@ export function Badge({ label, tone }: BadgeProps) {
    empty, error), and its responsive requirements. Then write the one-line design
    purpose (Section 1A) — audience, one job, one impression, primary action — before
    opening any file.
-2. **Step 2: Inspect Context** — Execute the audit checklist; identify which existing
-   components and tokens can be reused.
-3. **Step 3: Formulate Plan** — Sketch the component tree and state ownership before
-   writing code.
+2. **Step 2: Inspect Context** — Detect the stack (Section 3), load its reference file,
+   execute the audit checklist, and identify which existing components and tokens can
+   be reused.
+3. **Step 3: Formulate Plan** — Settle the design choices (Section 3) with the user,
+   then sketch the component tree and state ownership before writing code.
 4. **Step 4: Verify Security** — Confirm no secrets or private data will be shipped in the
-   client bundle.
+   client bundle or app binary.
 5. **Step 5: Apply Edits** — Implement the components with atomic, scoped changes to
    related files only.
-6. **Step 6: Execute Tests** — Run type-check, lint, and the test suite; check the page at
-   all target viewports.
-7. **Step 7: Report Status** — Summarize what shipped, verification results, and any
-   visual or accessibility caveats.
+6. **Step 6: Execute Tests** — Run the project's type-check, lint, and test commands;
+   check the screen at all target viewports or devices.
+7. **Step 7: Report Status** — Summarize what shipped, the stack detected, verification
+   results, and any visual or accessibility caveats.
 
 ## 6. Security & Edge Case Guidelines
 
-- **Zero Hardcoding:** No API keys or secrets in client code — the browser bundle is
-  public. Use `NEXT_PUBLIC_*` variables only for values that are meant to be public.
+- **Zero Hardcoding:** No API keys or secrets in client code — browser bundles and app
+  binaries are public. Only values meant to be public may use the stack's public-env
+  convention.
 - **Input Sanitization:** Treat all user-generated content as hostile — escape on render
   and never inject raw HTML unless it passes an explicit sanitizer.
-- **Safe HTML:** Avoid `dangerouslySetInnerHTML`; if unavoidable, sanitize with a reviewed
-  library and document why.
+- **Safe HTML:** Avoid raw-HTML injection APIs (`dangerouslySetInnerHTML`, `v-html`,
+  unescaped template output); if unavoidable, sanitize with a reviewed library and
+  document why.
 - **External Links:** Open external links with `rel="noopener noreferrer"`.
 - **Edge States:** Every data-driven view implements loading, empty, and error states — a
   spinner is not an error state.
 
 ## 7. Definition of Done & Quality Gates
 
+- [ ] Stack detected and stated in the report; matching reference file followed.
 - [ ] Design purpose written before implementation and stated in the report.
-- [ ] Type-check, lint, and test suite pass (`tsc`, `npm run lint`, `npm test`).
-- [ ] Layout verified at 360px, 768px, and 1440px viewports.
-- [ ] Keyboard path works end to end with visible focus states.
+- [ ] Styling method, visual direction, and token values chosen by the user (or taken
+      from existing project files) and recorded in `DESIGN.md`.
+- [ ] Project's type-check, lint, and test commands pass.
+- [ ] Layout verified at 360px, 768px, and 1440px (web) or small and large devices
+      (native).
+- [ ] Keyboard and screen-reader path works end to end with visible focus states.
 - [ ] Text contrast meets WCAG AA (4.5:1).
-- [ ] No secrets or private data present in the client bundle.
+- [ ] No secrets or private data present in the client bundle or app binary.
 - [ ] Loading, empty, and error states implemented for data-driven views.
 - [ ] **Design Token Enforcement:** All colors, gaps, margins, padding, radii,
-      and shadows are referenced strictly via CSS variables or framework theme
-      tokens (zero raw/hardcoded hex or arbitrary pixel values in component files).
-- [ ] **Type Scale Compliance:** All heading and body text sizing adheres to the
-      1.250 modular type scale (`xs` through `2xl`) with no arbitrary font size
-      overrides.
+      and shadows are referenced strictly via tokens (CSS variables, framework theme,
+      or the platform's theme object) — zero raw hex or arbitrary pixel values in
+      component files.
+- [ ] **Type Scale Compliance:** All heading and body text sizing follows the project's
+      type scale with no arbitrary font-size overrides.
 
 ## 8. Supporting References & Assets
 
-- No supporting files — this skill is self-contained; design tokens and component
-  conventions live in the target project's own theme and component library.
+- [Styling Methods](./references/styling-methods.md) — Tailwind, plain CSS, CSS
+  Modules, SCSS, CSS-in-JS, library theming: how to choose and where tokens live.
+- [Visual Directions](./references/visual-directions.md) — design directions to offer
+  the client and how to turn the pick into token values.
+- [Visual System Reference](./references/visual-system.md) — default tokens, color
+  layers, type scale, spacing grid, glass and surface rules. Load when the project has
+  no token set or when extending one.
+- [React & Next.js Notes](./references/react-next.md) — load when the manifest shows
+  `react` or `next`.
+- [Vue & Nuxt Notes](./references/vue-nuxt.md) — load when the manifest shows `vue` or
+  `nuxt`.
+- [Native Mobile UI Notes](./references/native-mobile.md) — load for React Native,
+  Expo, or Flutter.
+- [Server-Rendered & CMS Notes](./references/server-rendered.md) — load for Laravel
+  Blade, WordPress themes, Django/Rails templates, or plain HTML/CSS sites.
