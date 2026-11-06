@@ -518,6 +518,54 @@ module.exports = [
   },
 
   {
+    id: 'mobile-task-asks-approach-choices',
+    description: 'A new mobile app request invokes the mobile skill and asks approach questions before code.',
+    slow: true,
+    seed: {
+      'PROJECT.md': [
+        '# PROJECT.md',
+        '',
+        '- **Name:** Bright Future School app',
+        '- **Type:** mobile app',
+        '- **One-line purpose:** Let parents in Accra see fees and pay them.',
+        '- **Mobile approach:** TBD',
+        '- **Primary market / region:** Ghana',
+        '',
+      ].join('\n'),
+    },
+    turns: ['Build a mobile app for our school so parents can see their fees and pay them.'],
+    checks: [
+      {
+        name: 'invokes eaz-mobile-app-development',
+        test: (ctx) => ctx.skillsInvoked.includes('eaz-mobile-app-development') || `invoked: ${ctx.skillsInvoked.join(', ') || 'none'}`,
+      },
+      {
+        name: 'asks about the approach (native, cross-platform, or web-based)',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /react native|flutter|expo|native|cross-platform|pwa|capacitor|approach/i),
+      },
+      {
+        name: 'asks about platforms, offline use, or the phones and networks',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /android|ios|offline|low-end|slow|network|data/i),
+      },
+      {
+        name: 'gives recommendations, not bare questions',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /recommend|suggest/i),
+      },
+      {
+        name: 'asks 2-5 questions in the first batch',
+        test: (ctx) => {
+          const n = numberedItems(ctx.turns[0].final);
+          return (n >= 2 && n <= 5) || `found ${n} numbered questions`;
+        },
+      },
+      {
+        name: 'writes no app code before the answers arrive',
+        test: (ctx) => createdSource(ctx).length === 0 || `created: ${createdSource(ctx).join(', ')}`,
+      },
+    ],
+  },
+
+  {
     id: 'backend-task-asks-architecture-choices',
     description: 'A new-backend request invokes the backend skill and asks architecture questions before code.',
     slow: true,

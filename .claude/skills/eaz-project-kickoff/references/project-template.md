@@ -16,6 +16,7 @@ Delete any line that does not apply. Never put secrets or credentials in this fi
 
 - **Front end:** <!-- e.g. Next.js, Nuxt, Laravel Blade, WordPress, React Native, Flutter -->
 - **Styling method:** <!-- e.g. Tailwind, plain CSS, CSS Modules, SCSS, library theming -->
+- **Mobile approach / platforms:** <!-- e.g. React Native with Expo; Android 8+ and iOS 15+; or n/a -->
 - **Back end / API:** <!-- e.g. Laravel modular monolith, Next.js route handlers, none -->
 - **Authentication:** <!-- e.g. email + password, phone one-time code, managed provider; roles -->
 - **Database:**

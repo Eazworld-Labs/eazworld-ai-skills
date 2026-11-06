@@ -41,6 +41,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`eaz-mobile-app-development` v1.1.0 — any mobile approach:** works on React Native with
+  Expo, Flutter, native Swift and Kotlin, and web-based apps (Capacitor or a PWA) instead of
+  React Native only. It detects the approach and asks before building — approach, platforms and
+  minimum OS, offline needs, sign-in, push, payments, distribution, and the audience's phones
+  and networks — at most five questions at a time, one decision each, with recommendations. New
+  references: `discovery-questions`, `offline-and-networking` (offline levels, queued writes
+  with idempotency keys, conflicts, slow and metered networks), `release-and-stores` (account
+  ownership, signing, store readiness, staged rollout, policy checks), and one note per
+  approach. The kickoff `PROJECT.md` template gains a mobile approach line.
+
 - **`eaz-code-review` v1.1.0:** reviews on any stack and ties into the project documents —
   it reads `SPEC.md`, `ARCHITECTURE.md`, `DESIGN.md`, and `tasks.md`, checks the change
   against the feature it claims to deliver and the architecture, and holds each area to the
