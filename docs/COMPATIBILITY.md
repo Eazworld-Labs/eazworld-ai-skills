@@ -10,7 +10,7 @@ test outcomes and runner versions for every compatibility check in tasks.md Phas
 | OpenCode | v2.0.15 |
 | Claude Code CLI | 2.1.312 |
 | Node.js | v24.21.0 |
-| Library size | 32 skills — 13 software-engineering, 7 digital-marketing, 5 ai-automation, 7 business-solutions |
+| Library size | 33 skills — 14 software-engineering, 7 digital-marketing, 5 ai-automation, 7 business-solutions |
 | Skill source | `.claude/skills/<department>/<skill-name>/SKILL.md` |
 
 ## OpenCode Verification

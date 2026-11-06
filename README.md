@@ -5,7 +5,7 @@
 [![Version][version-badge]][version]
 [![Supported Agents][agents-badge]][agents]
 
-> A production-grade, open-source collection of **32 AI agent skills** that standardizes
+> A production-grade, open-source collection of **33 AI agent skills** that standardizes
 > how AI coding agents design, engineer, secure, and deliver software — from core web
 > platforms to digital marketing, business automation, and West African fintech.
 
@@ -17,7 +17,7 @@
 npx skills add Eazworld-Labs/eazworld-ai-skills
 ```
 
-This copies all 32 skills into your project's `.claude/skills/`, ready for both
+This copies all 33 skills into your project's `.claude/skills/`, ready for both
 Claude Code and OpenCode to discover automatically at startup.
 
 Only need some of them? Install a subset instead — same command, one flag:
@@ -49,20 +49,21 @@ Every skill is authored **once** and stored in a single authoritative location �
 Progressive disclosure keeps context efficient: metadata loads at startup, instructions
 load on trigger, and deep reference assets load only on demand.
 
-### Skills Portfolio — 32 Skills Across 4 Departments
+### Skills Portfolio — 33 Skills Across 4 Departments
 
 | Department | Skills | Focus Areas |
 | :--- | :---: | :--- |
-| **1. Software Engineering** | 13 | Core tech stack, system architecture, mobile, APIs, databases, testing, DevOps |
+| **1. Software Engineering** | 14 | Core tech stack, system architecture, mobile, APIs, databases, testing, DevOps |
 | **2. Digital Marketing** | 7 | Technical SEO, Google/Meta advertising, brand identity, conversion optimization |
 | **3. AI & Automation** | 5 | Custom AI agent frameworks, n8n workflows, WhatsApp API, LLM chatbots, CRM pipelines |
 | **4. Business Solutions** | 7 | School/Church ERPs, POS & inventory, booking engines, regional fintech (Paystack/MoMo) |
-| **Total** | **32** | **Comprehensive enterprise & open-source coverage** |
+| **Total** | **33** | **Comprehensive enterprise & open-source coverage** |
 
-- **Software Engineering (13):** `software-architecture`, `frontend-design`,
+- **Software Engineering (14):** `software-architecture`, `frontend-design`,
   `backend-engineering`, `api-development`, `database-architecture`,
   `ecommerce-development`, `mobile-app-development`, `software-testing`, `code-review`,
-  `security-audit`, `performance-optimization`, `seo-engineering`, `cloud-devops`
+  `security-audit`, `performance-optimization`, `seo-engineering`, `cloud-devops`,
+  `project-kickoff`
 - **Digital Marketing (7):** `seo-strategy`, `google-ads`, `meta-ads`,
   `social-media-management`, `brand-identity`, `email-marketing`,
   `conversion-optimization`
@@ -165,7 +166,7 @@ directly.
 
 1. Open the same workspace (`opencode` from the repository root).
 2. `.claude/skills/` is picked up natively with no extra configuration.
-3. Verify by checking the session's skill list — all 32 skills register on startup.
+3. Verify by checking the session's skill list — all 33 skills register on startup.
 
 **Requirements:** Node.js 18+ for the validator and test suite (library CI runs on
 Node 24). Cross-agent test results live in
@@ -193,7 +194,7 @@ project's agent folders in one command:
 npx skills add Eazworld-Labs/eazworld-ai-skills
 ```
 
-- Add `--skill <name>` to install one skill instead of all 32 — for example
+- Add `--skill <name>` to install one skill instead of all 33 — for example
   `npx skills add Eazworld-Labs/eazworld-ai-skills --skill nigeria-payments`.
 - Add `--agent claude-code` (or `--agent opencode`) to target one agent, `-g` to
   install globally for all projects, and run `npx skills update` any time to pull

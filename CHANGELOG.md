@@ -11,9 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **`PROJECT_TEMPLATE.md` and `DESIGN_TEMPLATE.md`:** per-project context files
-  (stack, region, brand, design choices) that skills read first so they stop
-  re-asking and stay consistent across client projects.
+- **`project-kickoff` skill:** runs the kickoff for a new client project — asks the
+  stack, region, and design questions once, creates `PROJECT.md` and `DESIGN.md`
+  (templates ship inside the skill's `references/`), recommends which skills to
+  apply in build order, and waits for approval before any building.
 - **`frontend-design` references:** `styling-methods`, `visual-directions`,
   `react-next`, `vue-nuxt`, `native-mobile`, `server-rendered`, and `visual-system`.
 
