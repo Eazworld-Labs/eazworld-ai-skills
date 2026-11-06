@@ -9,7 +9,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: digital-marketing
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Brand Identity
@@ -69,6 +69,10 @@ only one half drifts.
 
 ### Modular Type Scale — 1.250 (Major Third)
 
+Default scale. Confirm it per client and record the result in the project's
+`DESIGN.md`; eaz-frontend-design owns the full type, spacing, and motion token
+set, so do not keep a second copy here.
+
 | Size | Value | Use |
 |------|-------|-----|
 | xs | 0.75rem | captions, small labels |
@@ -87,13 +91,24 @@ reading — no sizes outside the scale.
 **Banned:**
 - Unstyled floating AI gradients — decorative gradients without a content reason.
 - Generic AI copy — no "synergistic paradigm shifts" or insider-only buzzwords.
+- Invented proof — no fabricated client logos, ratings, testimonials, or case results.
 
-**Required 3-zone visual layout:**
+**Default 3-zone layout for conversion-focused marketing and landing pages:**
 1. Primary Hero — single offer, one CTA, above the fold.
-2. Social Proof Bar — client logos, ratings, or case results under the hero.
+2. Social Proof Bar — client logos, ratings, or case results under the hero. Every
+   item must be **real and supplied by the client**; if none exist yet, leave the bar
+   out or use a plain factual line (years trading, a real number) instead of a
+   placeholder.
 3. High-Contrast Section Alternation — dark surface / light surface throughout the page.
 
+This is a starting structure, not a mandate. For apps, dashboards, portals, and
+content-led sites, follow the project's own structure, and give every project one
+signature element so the page does not read as a template — see Design Quality in
+eaz-frontend-design.
+
 ### Production Component Blueprints
+
+Starting points for marketing pages — adapt them to the client's brand and purpose.
 
 **Hero Block:** headline (type-xl), one subhead (type-base), primary CTA button,
 hero image or illustration, action-primary / action-accent tokens only.
@@ -106,6 +121,12 @@ headline, one outlined + one filled CTA, form fields with radius-md and
 border-subtle.
 
 ### CSS Token Architecture
+
+The block below shows the token **format** — semantic names, layers, and a dark
+pairing. The values are examples. Each client's real values live in the project's
+`DESIGN.md`, and eaz-frontend-design defines the layers and enforces them; replace
+the values per client, keep the semantic names, and never maintain a second copy
+of the token system.
 
 ```css
 /* Color tokens — Eazworld agency palette (EXAMPLE-ONLY input values). */
@@ -200,7 +221,8 @@ Voice Trait: Confident, Never Arrogant.
    competitor's distinctive elements are being imitated.
 5. **Step 5: Apply Edits** — Finalize the system: tokens, logo rules, type
    scale, voice pairs, and do/don'ts, written as a guide others can follow.
-   Prepare the engineering handover to eaz-frontend-design.
+   Record the result in the project's `DESIGN.md` and prepare the engineering
+   handover to eaz-frontend-design.
 6. **Step 6: Execute Tests** — Apply the system to three real surfaces (a
    product page, a social post, an email) and check that both a designer and a
    developer could produce matching output from the guide alone.
@@ -236,15 +258,19 @@ Voice Trait: Confident, Never Arrogant.
       surfaces, asset reuse rate, and brand-search volume over time.
 - [ ] Guide tested by applying it to three real surfaces successfully.
 - [ ] Anti-vibecoding check passed: zero unstyled floating gradients, zero
-      generic AI buzzwords, clear 3-zone visual layout.
+      generic AI buzzwords, zero invented proof, and the 3-zone layout used where
+      the project is a conversion-focused marketing page.
+- [ ] Social proof is real and supplied by the client, or omitted.
 - [ ] Fast-track client intake audit documented.
 - [ ] Production component blueprints mapped for rapid engineering handover.
 - [ ] Design Token Enforcement: All colors, spacing, radii, and shadows
       referenced strictly via CSS variables or framework tokens.
 - [ ] Type Scale Compliance: All heading and body text sizing adheres to the
-      1.250 modular type scale (xs through 2xl).
+      project's type scale (default 1.250 modular, xs through 2xl).
 
 ## 8. Supporting References & Assets
 
 - No supporting files — this skill is self-contained; the finished guide lives in
-  the project's own brand documentation as the single source of truth.
+  the project's own brand documentation (`DESIGN.md`) as the single source of truth.
+  Token layers, motion, modern CSS, and design-quality rules live in
+  eaz-frontend-design.

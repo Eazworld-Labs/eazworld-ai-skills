@@ -41,6 +41,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`eaz-brand-identity` v1.1.0:** reconciled with `eaz-frontend-design`. The 3-zone layout
+  and component blueprints are now defaults for conversion-focused marketing pages, not
+  mandates for every project; social proof must be real and supplied by the client (invented
+  logos, ratings, and testimonials are banned); and the token CSS is a format example —
+  each client's values live in `DESIGN.md`, with `eaz-frontend-design` owning the token
+  layers, type scale, and motion, so there is no second copy to drift.
+
 - **`eaz-backend-engineering` v1.1.0 — stack-agnostic backend:** works on Node.js (Express,
   Fastify, NestJS), Laravel, Django/FastAPI, and ASP.NET Core instead of Node/Express only.
   It detects the stack, then asks architecture questions before building (custom backend or
