@@ -20,13 +20,25 @@ npx skills add Eazworld-Labs/eazworld-ai-skills
 This copies all 33 skills into your project's `.claude/skills/`, ready for both
 Claude Code and OpenCode to discover automatically at startup.
 
-The installer first asks **which AI tools to install into** and lists every tool it supports
-(AiderDesk, AstrBot, and many others). Select **Claude Code** and/or **OpenCode** (Space to
-toggle, Enter to confirm) and leave the rest unselected — or skip the question with
-`npx skills add Eazworld-Labs/eazworld-ai-skills --agent claude-code opencode`. The installer
-always keeps the real files in `.agents/skills/` (the shared location many tools read) and, for
-Claude Code, adds links to them in `.claude/skills/`, plus a `skills-lock.json` file — all normal.
-Prefer plain copies in `.claude/skills/` and nothing else? Use the shell installer:
+The installer shows two selection screens, and neither is ticked for you:
+
+1. **Select skills to install** — nothing is selected. Press **Space** on "Select All (0/33)",
+   then **Enter**.
+2. **Which agents do you want to install to?** — OpenCode and the other tools that read
+   `.agents/skills` are always included. **Claude Code is in the "Additional agents" list and is
+   not ticked.** Scroll to "Claude Code (.claude/skills)" (or type `claude` to search), press
+   **Space** to tick it, then **Enter**.
+
+If you skip the Claude Code tick, the skills land only in `.agents/skills/` and Claude Code will
+not see them. To skip both screens and install straight into `.claude/skills/`:
+
+```bash
+npx skills add Eazworld-Labs/eazworld-ai-skills --agent claude-code --skill '*' -y
+```
+
+When several tools are selected, the installer keeps the real files in `.agents/skills/` and links
+Claude Code to them, and it writes a `skills-lock.json` file — all normal. Prefer plain copies in
+`.claude/skills/` and nothing else? Use the shell installer:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Eazworld-Labs/eazworld-ai-skills/main/scripts/install.sh | bash -s -- .

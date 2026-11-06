@@ -38,11 +38,12 @@ Common causes, in order of frequency:
 
 ### A skill does not appear in the agent's skill list
 
-0. **Installed with `npx skills add`?** The installer asks which AI tools to install into. If
-   Claude Code or OpenCode was not selected, the skills land only in `.agents/skills/`, which
-   those tools do not read — check that `.claude/skills/` exists in your project. Fix it by
-   re-running `npx skills add Eazworld-Labs/eazworld-ai-skills --agent claude-code opencode -y`
-   in that folder, then restart the agent session.
+0. **Installed with `npx skills add`?** In its "Which agents" screen, Claude Code is in the
+   "Additional agents" list and is **not ticked by default** — if you pressed Enter without
+   ticking it, the skills landed only in `.agents/skills/`, which Claude Code does not read.
+   Check that `.claude/skills/` exists. Fix it by re-running
+   `npx skills add Eazworld-Labs/eazworld-ai-skills --agent claude-code --skill '*' -y` in that
+   folder, then restart the agent session.
 1. Confirm the file exists at `.claude/skills/<skill-name>/SKILL.md` — exactly one
    folder below `skills/`. Skills nested in a subfolder (such as an old
    `software-engineering/` folder) are not discovered.
