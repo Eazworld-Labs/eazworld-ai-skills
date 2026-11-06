@@ -20,6 +20,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`project-kickoff` v1.2.0:** generates a phased `tasks.md` (six standard phases,
+  trimmed per project type, each task with a skill and an acceptance criterion, approval
+  stops after phases 1, 3, and 5) from new `phases` and `tasks-template` references; the
+  `DESIGN.md` template gains a Discovery section.
+- **`frontend-design` v1.3.0:** adds `discovery-questions` — grouped questions by project
+  type, at most five at a time with recommended answers — and keeps `tasks.md` statuses
+  current as work completes.
+
 - **`project-kickoff` v1.1.0:** adds a build gate (the one job, impression, primary
   action, stack, and region must be filled before building; an approval with core fields
   still `TBD` must name them and be confirmed) and records known trade-offs of the

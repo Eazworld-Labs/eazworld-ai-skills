@@ -3,13 +3,13 @@ name: project-kickoff
 description: Run the kickoff for a new client project before any code is written.
   Use when starting a new website, web app, mobile app, e-commerce store, or
   automation project, onboarding a client, or setting up a repository that has no
-  PROJECT.md. Captures stack, region, and design choices, creates PROJECT.md and
-  DESIGN.md, and recommends which skills to apply in what order.
+  PROJECT.md. Captures stack, region, and design choices, creates PROJECT.md,
+  DESIGN.md, and a phased tasks.md, and recommends which skills to apply in what order.
 license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Project Kickoff
@@ -17,9 +17,9 @@ metadata:
 ## 1. Overview & Purpose
 
 Gives every new project the same start. The skill asks the kickoff questions once,
-records the answers in `PROJECT.md` and `DESIGN.md`, recommends which library skills
-fit the project and in what order, and stops for human approval before any building
-begins. Every later skill reads those two files first, so decisions are made once and
+records the answers in `PROJECT.md` and `DESIGN.md`, breaks the work into approved
+phases in a `tasks.md`, recommends which library skills fit the project and in what
+order, and stops for human approval before any building begins. Every later skill reads those two files first, so decisions are made once and
 stay consistent across the team and across projects. It plans and records; it never
 scaffolds code, installs dependencies, or changes infrastructure.
 
@@ -77,6 +77,14 @@ scaffolds code, installs dependencies, or changes infrastructure.
   small site), say so in one line before recording it, tell the user to check the
   library's current maintenance status, and write the note under "Decisions &
   Trade-offs" in `PROJECT.md`. The client's choice stands; never swap it silently.
+- **Plan in phases.** Generate `tasks.md` from [Tasks Template](./references/tasks-template.md)
+  using the six standard phases in [Phases](./references/phases.md), trimmed to the
+  project type with every change stated to the user. Each task names its skill and an
+  acceptance criterion. Work stops for client approval after phases 1, 3, and 5 and at
+  final sign-off.
+- **Keep `tasks.md` true.** Mark a task done only after its acceptance criterion
+  passes, update its status in the same step as the work, and add new scope as a new
+  task — never inside a finished phase.
 - **Never write secrets** — no API keys, passwords, tokens, or connection strings — in
   `PROJECT.md` or `DESIGN.md`. Name environment variables instead.
 - **Do not overwrite** an existing `PROJECT.md` or `DESIGN.md`; show a diff of proposed
@@ -93,14 +101,17 @@ scaffolds code, installs dependencies, or changes infrastructure.
    flow for styling method, visual direction, and tokens.
 4. **Step 4: Verify Security** — Confirm no secrets or private client data are in the
    answers about to be written; replace any with environment variable names.
-5. **Step 5: Apply Edits** — Create `PROJECT.md` and `DESIGN.md` at the repository root
-   from the templates, with `TBD` for unknowns.
-6. **Step 6: Execute Tests** — Re-read both files and check: every field is filled or
-   marked `TBD`, every recommended skill exists in the library, and nothing in the files
-   looks like a secret.
+5. **Step 5: Apply Edits** — Create `PROJECT.md`, `DESIGN.md`, and `tasks.md` at the
+   repository root from the templates, with `TBD` for unknowns and phases trimmed to
+   the project type.
+6. **Step 6: Execute Tests** — Re-read all three files and check: every field is filled
+   or marked `TBD`, every task has a skill and an acceptance criterion, every
+   recommended skill exists in the library, and nothing in the files looks like a
+   secret.
 7. **Step 7: Report Status** — Present a short kickoff summary: decisions recorded, open
    `TBD` items with the core-field blockers called out first, trade-offs noted, the
-   recommended skill order with a one-line reason each, and the first build steps. Stop
+   phase plan with its stop points, the recommended skill order with a one-line reason
+   each, and the first build steps. Stop
    and wait for the user's approval before any implementation; apply the build gate
    (Section 4) before treating an approval as final.
 
@@ -119,7 +130,9 @@ scaffolds code, installs dependencies, or changes infrastructure.
 
 ## 7. Definition of Done & Quality Gates
 
-- [ ] `PROJECT.md` and `DESIGN.md` exist at the repository root.
+- [ ] `PROJECT.md`, `DESIGN.md`, and `tasks.md` exist at the repository root.
+- [ ] `tasks.md` follows the standard phases, trimmed to the project type, with a skill
+      and an acceptance criterion on every task and stop points after phases 1, 3, 5.
 - [ ] Every field is filled or explicitly marked `TBD`; no invented values.
 - [ ] No secrets or private client data in either file.
 - [ ] Styling method, visual direction, and token values were chosen by the user
@@ -136,5 +149,8 @@ scaffolds code, installs dependencies, or changes infrastructure.
 
 - [Project Template](./references/project-template.md) — the `PROJECT.md` skeleton.
 - [Design Template](./references/design-template.md) — the `DESIGN.md` skeleton.
+- [Phases](./references/phases.md) — the six standard phases, trimming rules by project
+  type, and approval stops.
+- [Tasks Template](./references/tasks-template.md) — the `tasks.md` skeleton.
 - [Skill Selection Guide](./references/skill-selection.md) — which library skills fit
   which project type, and in what order.

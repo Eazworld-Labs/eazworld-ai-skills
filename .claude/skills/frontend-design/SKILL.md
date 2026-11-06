@@ -9,7 +9,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Frontend Design
@@ -73,6 +73,11 @@ Before writing any UI code, inspect the target repository:
      WordPress), or template directories.
   3. Load the matching stack file from Section 8. If none matches, apply the core
      rules in the project's own idiom — and say which stack you detected.
+- **Discovery (ask before choosing):** gather content, features, brand references, and
+  constraints with the grouped questions in
+  [Discovery Questions](./references/discovery-questions.md) — only the groups the
+  project type needs, at most 5 at a time, each with a recommended answer. Record
+  answers in the "Discovery" section of `DESIGN.md`; leave unknowns as `TBD`.
 - **Design Choices (ask, never assume):** unless `PROJECT.md`, `DESIGN.md`, or the
   existing code already settles them, get the user's decision on three things before
   building — each with a recommendation and a one-line trade-off:
@@ -147,7 +152,9 @@ export function Badge({ label, tone }: BadgeProps) {
    every raw color or off-grid pixel value it reports with a token — or justify the
    few that must stay (for example one-off SVG artwork) in the report.
 7. **Step 7: Report Status** — Summarize what shipped, the stack detected, verification
-   results, and any visual or accessibility caveats.
+   results, and any visual or accessibility caveats. If the project has a `tasks.md`,
+   update the status of each task you worked on — mark it done only when its
+   acceptance criterion passed — and stop at any approval point it defines.
 
 ## 6. Security & Edge Case Guidelines
 
@@ -167,6 +174,8 @@ export function Badge({ label, tone }: BadgeProps) {
 
 - [ ] Stack detected and stated in the report; matching reference file followed.
 - [ ] Design purpose written before implementation and stated in the report.
+- [ ] Discovery answers recorded in `DESIGN.md` (unknowns marked `TBD`); `tasks.md`
+      updated if the project has one.
 - [ ] Styling method, visual direction, and token values chosen by the user (or taken
       from existing project files) and recorded in `DESIGN.md`.
 - [ ] Project's type-check, lint, and test commands pass.
@@ -187,6 +196,8 @@ export function Badge({ label, tone }: BadgeProps) {
 
 ## 8. Supporting References & Assets
 
+- [Discovery Questions](./references/discovery-questions.md) — grouped questions by
+  project type, how many to ask at once, and how to record answers.
 - [Token Check Script](./scripts/check-tokens.js) — zero-dependency scan for raw
   colors and off-grid pixel values outside token files; run it from Step 6 on any
   stack with text-based styles.

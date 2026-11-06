@@ -11,6 +11,18 @@ put secrets in this file.
 - **The one impression:**
 - **Primary action:**
 
+## Discovery
+
+<!-- One line per answer from the discovery questions; TBD where open. -->
+
+- **Pages / screens at launch:**
+- **Copy status:**
+- **Photos and media:**
+- **Features at launch:**
+- **Who edits content after launch:**
+- **Reference sites (liked / disliked):**
+- **Constraints (deadline, budget, hosting):**
+
 ## Choices
 
 - **Styling method:** <!-- Tailwind | plain CSS | CSS Modules | SCSS | CSS-in-JS | library theming | native -->
