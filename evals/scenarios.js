@@ -431,6 +431,93 @@ module.exports = [
   ),
 
   {
+    id: 'review-flags-planted-bugs',
+    description: 'A diff with planted defects gets a request-changes verdict that names them with severity labels.',
+    slow: true,
+    seed: {
+      'change.diff': [
+        'diff --git a/src/routes/orders.ts b/src/routes/orders.ts',
+        'new file mode 100644',
+        '--- /dev/null',
+        '+++ b/src/routes/orders.ts',
+        '@@ -0,0 +1,17 @@',
+        "+import { Router } from 'express';",
+        "+import { db } from '../db';",
+        "+import { chargeCard } from '../payments';",
+        '+',
+        '+export const orders = Router();',
+        '+',
+        '+// POST /orders/:id/pay - charge the customer for an order',
+        "+orders.post('/orders/:id/pay', async (req, res) => {",
+        '+  const { amount, currency } = req.body;',
+        '+  try {',
+        '+    const order = await db.query(`SELECT * FROM orders WHERE id = ${req.params.id}`);',
+        '+    await chargeCard({ amount, currency, orderId: order.rows[0].id });',
+        "+    await db.query(`UPDATE orders SET status = 'paid' WHERE id = ${req.params.id}`);",
+        '+    res.json({ ok: true });',
+        '+  } catch (e) {',
+        '+    console.log(e);',
+        '+    res.json({ ok: true });',
+        '+  }',
+        '+});',
+        'diff --git a/tests/orders.test.ts b/tests/orders.test.ts',
+        'new file mode 100644',
+        '--- /dev/null',
+        '+++ b/tests/orders.test.ts',
+        '@@ -0,0 +1,5 @@',
+        "+import { orders } from '../src/routes/orders';",
+        '+',
+        "+test('orders route exists', () => {",
+        '+  expect(orders).toBeDefined();',
+        '+});',
+        '',
+      ].join('\n'),
+    },
+    turns: ['Please review the change in change.diff. It adds a route that takes payment for an order.'],
+    checks: [
+      {
+        name: 'invokes eaz-code-review',
+        test: (ctx) => ctx.skillsInvoked.includes('eaz-code-review') || `invoked: ${ctx.skillsInvoked.join(', ') || 'none'}`,
+      },
+      {
+        name: 'gives an explicit request-changes verdict',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /request(s|ed)? changes|do not merge|not (ready|safe) to merge/i),
+      },
+      {
+        name: 'uses severity labels',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /blocker/i),
+      },
+      {
+        name: 'flags the client-supplied payment amount',
+        test: (ctx) => {
+          const t = ctx.turns[0].final;
+          return (/amount/i.test(t) && /client|request body|payload|trust|server-side|recompute/i.test(t)) || 'never flags the client-supplied amount';
+        },
+      },
+      {
+        name: 'flags the SQL built from request input',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /inject|parameteri[sz]ed|string interpolation|concatenat/i),
+      },
+      {
+        name: 'flags the missing authentication or ownership check',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /authori[sz]|authenticat|owner|access control|who may|auth check/i),
+      },
+      {
+        name: 'flags the swallowed error that still reports success',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /swallow|always (return|respond)|ok: ?true|hides? (the )?(error|failure)|reports? success/i),
+      },
+      {
+        name: 'says what it verified and what it could not',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /could not|couldn't|did not run|not run|unable to run|verif/i),
+      },
+      {
+        name: 'changes nothing and posts nothing',
+        test: (ctx) => ctx.created.length === 0 || `created: ${ctx.created.join(', ')}`,
+      },
+    ],
+  },
+
+  {
     id: 'backend-task-asks-architecture-choices',
     description: 'A new-backend request invokes the backend skill and asks architecture questions before code.',
     slow: true,

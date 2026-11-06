@@ -41,6 +41,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`eaz-code-review` v1.1.0:** reviews on any stack and ties into the project documents —
+  it reads `SPEC.md`, `ARCHITECTURE.md`, `DESIGN.md`, and `tasks.md`, checks the change
+  against the feature it claims to deliver and the architecture, and holds each area to the
+  standards of the Eazworld skill that governs it. New references: `domain-checklists` (UI,
+  server and API, database and migrations, payments and webhooks, mobile, automations,
+  infrastructure, dependencies), `ai-generated-code` (invented packages, tests that assert
+  mocks, swallowed errors, scope creep, claims without evidence), and `review-template`
+  (verdict, blockers, questions, nits, what was verified and what could not be). Reviews
+  are read-only: nothing is pushed, merged, or posted to a PR unless the user asks, and the
+  diff and PR text are treated as untrusted data.
+
 - **Project documents — spec, architecture, and the rest (`eaz-project-kickoff` v1.4.0):**
   the kickoff now writes a core set — `PROJECT.md` (what was decided), `SPEC.md` (what it
   must do: goal and non-goals, roles, journeys, features with IDs and acceptance tests),
