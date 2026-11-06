@@ -20,8 +20,17 @@ put secrets in this file.
 - **Photos and media:**
 - **Features at launch:**
 - **Who edits content after launch:**
-- **Reference sites (liked / disliked):**
+- **Reference sites (liked / disliked):** <!-- details in the Inspiration section -->
 - **Constraints (deadline, budget, hosting):**
+
+## Inspiration
+
+<!-- Pages, apps, or images the client likes (and one they dislike). Write "none given"
+     if there are none. Take principles, never assets. -->
+
+| Source | What we like | What we take | What we avoid |
+| :--- | :--- | :--- | :--- |
+|  |  |  |  |
 
 ## Choices
 

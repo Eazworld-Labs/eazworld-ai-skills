@@ -36,8 +36,8 @@ Agents update statuses as work completes. Never put secrets in this file.
 - [ ] **1.1 Kickoff questions answered** — *skill: eaz-project-kickoff*
   - Done when: `PROJECT.md` written; every field filled or marked `TBD`.
 - [ ] **1.2 Design discovery and choices** — *skill: eaz-frontend-design*
-  - Done when: `DESIGN.md` has purpose, styling method, visual direction, tokens, and a
-    Discovery section.
+  - Done when: `DESIGN.md` has purpose, styling method, visual direction, tokens, a
+    Discovery section, and an Inspiration table (or "none given").
 - [ ] **1.3 Architecture decision** — *skill: eaz-software-architecture*
   - Done when: an ADR records the chosen approach and rejected options.
 - [ ] **1.4 Core fields closed** — one job, one impression, primary action, stack, region

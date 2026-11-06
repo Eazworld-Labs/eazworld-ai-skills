@@ -48,7 +48,8 @@ the design rests on real content, features, and constraints instead of guesses.
 
 ### Brand
 - Do they already have a logo, colors, and fonts? *(if yes, collect the files)*
-- Two or three sites they like, and one they dislike — and why?
+- Do they have pages or apps whose look they like — links, screenshots, or images — and
+  one they dislike, and why? *(see Inspiration; ask it as its own single question)*
 - Any words the tone must or must not use?
 
 ### Features

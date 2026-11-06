@@ -50,6 +50,45 @@ function rulesBlock() {
   return m[1];
 }
 
+// Builds a small PNG from horizontal color bands, so a scenario can seed a real image
+// without committing a binary file. rows: [[r,g,b], ...], each band is bandHeight px.
+function bandedPng(rows, width = 96, bandHeight = 32) {
+  const zlib = require('zlib');
+  const crcTable = Array.from({ length: 256 }, (_, n) => {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+    return c >>> 0;
+  });
+  const crc32 = (buf) => {
+    let c = 0xffffffff;
+    for (const b of buf) c = crcTable[(c ^ b) & 0xff] ^ (c >>> 8);
+    return (c ^ 0xffffffff) >>> 0;
+  };
+  const chunk = (type, data) => {
+    const len = Buffer.alloc(4); len.writeUInt32BE(data.length);
+    const body = Buffer.concat([Buffer.from(type), data]);
+    const crc = Buffer.alloc(4); crc.writeUInt32BE(crc32(body));
+    return Buffer.concat([len, body, crc]);
+  };
+  const height = rows.length * bandHeight;
+  const raw = [];
+  rows.forEach(([r, g, b]) => {
+    for (let y = 0; y < bandHeight; y++) {
+      raw.push(0); // filter type: none
+      for (let x = 0; x < width; x++) raw.push(r, g, b);
+    }
+  });
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(width, 0); ihdr.writeUInt32BE(height, 4);
+  ihdr[8] = 8; ihdr[9] = 2; // 8-bit RGB
+  return Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    chunk('IHDR', ihdr),
+    chunk('IDAT', zlib.deflateSync(Buffer.from(raw))),
+    chunk('IEND', Buffer.alloc(0)),
+  ]);
+}
+
 const SEED_NEXT_PACKAGE = JSON.stringify(
   { name: 'school-site', private: true, dependencies: { next: '16.0.0', react: '19.0.0' } },
   null,
@@ -130,7 +169,58 @@ module.exports = [
         test: (ctx) => askedAbout(ctx.turns[0].final, /motion|subtle|expressive|animation level/i),
       },
       {
+        name: 'asks for inspiration and offers links or images',
+        test: (ctx) => {
+          const t = ctx.turns[0].final;
+          return (/inspiration|reference|sites? (you|they) like|look you like/i.test(t) &&
+            /link|url|screenshot|image|upload|attach|drop/i.test(t)) ||
+            'reply does not ask for inspiration with a way to share it';
+        },
+      },
+      {
         name: 'writes no component code before the answers arrive',
+        test: (ctx) => createdSource(ctx).length === 0 || `created: ${createdSource(ctx).join(', ')}`,
+      },
+    ],
+  },
+
+  {
+    id: 'inspiration-image-is-read',
+    description: 'A screenshot dropped in inspiration/ is opened and described, then confirmed with the user.',
+    seed: {
+      'package.json': SEED_NEXT_PACKAGE,
+      'PROJECT.md': [
+        '# PROJECT.md',
+        '',
+        '- **Name:** Bright Future School',
+        '- **Type:** marketing site',
+        '- **One-line purpose:** Help parents in Accra trust the school and enquire about admission.',
+        '- **Front end:** Next.js (App Router)',
+        '- **Primary market / region:** Ghana',
+        '',
+      ].join('\n'),
+      // deep blue, warm orange, off-white bands
+      'inspiration/reference-homepage.png': bandedPng([[22, 40, 110], [240, 140, 40], [245, 242, 235]]),
+    },
+    turns: ['Design the homepage for the school site. I put a screenshot of a page I like in the inspiration folder.'],
+    checks: [
+      {
+        name: 'opens the image with the file-reading tool',
+        test: (ctx) =>
+          ctx.turns.some((t) =>
+            t.toolUses.some((u) => u.name === 'Read' && /reference-homepage\.png$/.test(String(u.input.file_path || '')))
+          ) || 'the image was never read',
+      },
+      {
+        name: 'describes what it saw (colors or layout)',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /blue|navy|orange|cream|off-white|warm|band|stripe|section/i),
+      },
+      {
+        name: 'confirms what it takes before designing',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /take|avoid|inspir|like about|confirm|does that|is that right/i),
+      },
+      {
+        name: 'writes no component code before the user confirms',
         test: (ctx) => createdSource(ctx).length === 0 || `created: ${createdSource(ctx).join(', ')}`,
       },
     ],

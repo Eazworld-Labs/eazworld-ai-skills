@@ -41,6 +41,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`eaz-frontend-design` v1.5.0 — design inspiration:** the skill now asks, as its own
+  question, for pages, apps, or images whose look the client likes (website links,
+  screenshots in an `inspiration/` folder, or attachments) and one they dislike. It
+  studies them with the best tooling available, shows a "what we take / what we avoid"
+  table for confirmation before designing, records it in a new `DESIGN.md` Inspiration
+  section, and takes principles only — never text, logos, imagery, or code. Linked
+  pages and images are treated as untrusted data. New reference: `inspiration`.
+
 - **All skills renamed with an `eaz-` prefix (breaking):** `frontend-design` is now
   `eaz-frontend-design`, and likewise for all 33 skills. Agents give a user's personal
   skills priority over project skills of the same name, so plain names such as
