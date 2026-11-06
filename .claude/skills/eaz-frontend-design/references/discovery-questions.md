@@ -9,8 +9,11 @@ the design rests on real content, features, and constraints instead of guesses.
    the codebase first. Never re-ask.
 2. **Only the groups this project type needs** (table below). A marketing site does not
    get payment questions.
-3. **At most 5 questions at a time**, each with a recommended answer the client can
-   accept in one word. Wait for answers before the next batch.
+3. **At most 5 questions at a time, each asking for one decision**, with a recommended
+   answer the client can accept in one word. Do not bundle several decisions into one
+   numbered question (for example product type, market, payments, and delivery in a
+   single "Selling" item) — split them across batches. Wait for answers before the next
+   batch.
 4. **Unanswered becomes `TBD`.** Record it in `DESIGN.md` under "Discovery"; the build
    gate in `eaz-project-kickoff` treats open core fields as blockers.
 5. Record answers in `DESIGN.md` so later work reads them instead of asking again.

@@ -7,7 +7,9 @@
   "private": true,
   "scripts": {
     "validate": "node scripts/validate-skills.js",
-    "test": "node --test"
+    "test": "node --test",
+    "eval": "node evals/run-evals.js",
+    "eval:all": "node evals/run-evals.js --all"
   },
   "engines": {
     "node": ">=18"

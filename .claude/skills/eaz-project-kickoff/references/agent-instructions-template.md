@@ -1,0 +1,22 @@
+# Agent Instructions Block
+
+Companion to the `eaz-project-kickoff` skill. Append this block to the project's
+`CLAUDE.md` (create it if missing) — and to `AGENTS.md` too when that file exists — so
+every later session in the project follows the same rules without being reminded.
+**Append only: never overwrite or reorder existing content.** If a block headed
+"Eazworld project rules" is already there, leave it as it is.
+
+```markdown
+## Eazworld project rules
+
+- Read `PROJECT.md`, `DESIGN.md`, and `tasks.md` before starting any task.
+- For any UI work, use the `eaz-frontend-design` skill. `tasks.md` names the skill that
+  applies to each task — use it.
+- Do not start building while a core field in `PROJECT.md` or `DESIGN.md` is `TBD`
+  (the one job, one impression, primary action, front-end stack, region).
+- Pass a phase stop in `tasks.md` only on an explicit approval message from the client
+  or owner; answering questions is not approval.
+- Mark a task done only after its acceptance criterion passes, and update `tasks.md` in
+  the same step.
+- Never write secrets into files; name environment variables instead.
+```

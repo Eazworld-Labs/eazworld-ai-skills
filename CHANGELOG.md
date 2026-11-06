@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Behavior evals (`evals/`, `npm run eval`):** runs Claude Code headless against
+  throwaway projects and checks that the skills change what the agent does — kickoff
+  asks before building, UI work asks for design choices first, and the build gate holds
+  against "just build it". See `docs/EVALS.md`.
+- **`CLAUDE.md` rules block (`eaz-project-kickoff` v1.3.0):** the kickoff appends a short
+  block to `CLAUDE.md` (and `AGENTS.md` if present) so later sessions read the planning
+  files, use the `eaz-` skills, and respect the build gate and phase stops.
+
 - **`project-kickoff` skill:** runs the kickoff for a new client project — asks the
   stack, region, and design questions once, creates `PROJECT.md` and `DESIGN.md`
   (templates ship inside the skill's `references/`), recommends which skills to
@@ -20,6 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **`eaz-project-kickoff` v1.3.1 / `eaz-frontend-design`:** kickoff questions are asked in
+  small batches (at most five), each asking for **one decision** — never several bundled
+  into one numbered question — and the kickoff must invoke `eaz-frontend-design` before
+  asking any design question, found by the new behavior evals.
 - **`project-kickoff` v1.2.1:** phase approvals must be an explicit message (answering
   next-phase questions is not approval), and partly verified tasks are marked `[?]`
   instead of `[x]` — found when a test project recorded a phase as approved by

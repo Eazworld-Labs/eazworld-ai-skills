@@ -9,7 +9,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.2.1"
+  version: "1.3.1"
 ---
 
 # Project Kickoff
@@ -51,15 +51,19 @@ scaffolds code, installs dependencies, or changes infrastructure.
 
 ## 4. Technical Standards & Rules
 
-- **Ask in one organized pass,** grouped as: project, stack, region and business,
-  design. Offer a recommendation with a one-line reason for each open decision instead
-  of an empty question; the stack is the client's choice, so never impose one.
+- **Ask in small batches,** grouped as: project, stack, region and business, design —
+  at most five questions per batch, each asking for **one decision**. Never bundle
+  several decisions into one numbered question. Offer a recommendation with a one-line
+  reason for each open decision instead of an empty question; the stack is the client's
+  choice, so never impose one.
 - **Fill the templates:** write `PROJECT.md` from
   [Project Template](./references/project-template.md) and `DESIGN.md` from
   [Design Template](./references/design-template.md). Leave unknown fields marked
   `TBD` — never invent a value.
-- **Hand design choices to eaz-frontend-design:** styling method, visual direction, and
-  token values are settled by that skill's choice flow; copy its outcome into
+- **Hand design choices to eaz-frontend-design — by invoking it.** Before asking any
+  design question, invoke the `eaz-frontend-design` skill with the Skill tool and run
+  its discovery and choice flow (styling method, visual direction, token values, motion
+  level). Do not improvise the design questions from memory; copy the outcome into
   `DESIGN.md`.
 - **Recommend skills from the map in
   [Skill Selection Guide](./references/skill-selection.md),** using only skills that
@@ -100,13 +104,16 @@ scaffolds code, installs dependencies, or changes infrastructure.
 2. **Step 2: Inspect Context** — Execute the audit checklist; list what is already known
    and what is missing.
 3. **Step 3: Formulate Plan** — Ask the grouped kickoff questions for the missing items
-   only, with a recommendation on each open decision. Open the eaz-frontend-design choice
-   flow for styling method, visual direction, and tokens.
+   only, with a recommendation on each open decision. Invoke `eaz-frontend-design` with the Skill
+   tool first and run its choice flow for styling method, visual direction, tokens, and
+   motion — never skip this step or improvise the design questions.
 4. **Step 4: Verify Security** — Confirm no secrets or private client data are in the
    answers about to be written; replace any with environment variable names.
 5. **Step 5: Apply Edits** — Create `PROJECT.md`, `DESIGN.md`, and `tasks.md` at the
    repository root from the templates, with `TBD` for unknowns and phases trimmed to
-   the project type.
+   the project type. Append the block from
+   [Agent Instructions Block](./references/agent-instructions-template.md) to
+   `CLAUDE.md` (and `AGENTS.md` if it exists) without overwriting anything there.
 6. **Step 6: Execute Tests** — Re-read all three files and check: every field is filled
    or marked `TBD`, every task has a skill and an acceptance criterion, every
    recommended skill exists in the library, and nothing in the files looks like a
@@ -134,12 +141,14 @@ scaffolds code, installs dependencies, or changes infrastructure.
 ## 7. Definition of Done & Quality Gates
 
 - [ ] `PROJECT.md`, `DESIGN.md`, and `tasks.md` exist at the repository root.
+- [ ] `CLAUDE.md` carries the Eazworld project rules block (existing content untouched).
 - [ ] `tasks.md` follows the standard phases, trimmed to the project type, with a skill
       and an acceptance criterion on every task and stop points after phases 1, 3, 5.
 - [ ] Every field is filled or explicitly marked `TBD`; no invented values.
 - [ ] No secrets or private client data in either file.
-- [ ] Styling method, visual direction, and token values were chosen by the user
-      through the eaz-frontend-design flow, or are marked `TBD` with the reason.
+- [ ] `eaz-frontend-design` was invoked, and styling method, visual direction, token
+      values, and motion level were chosen by the user through its flow, or are marked
+      `TBD` with the reason.
 - [ ] Recommended skills all exist in the library and are listed in build order with a
       one-line reason each.
 - [ ] Core fields (one job, one impression, primary action, front-end stack, region) are
@@ -152,6 +161,8 @@ scaffolds code, installs dependencies, or changes infrastructure.
 
 - [Project Template](./references/project-template.md) — the `PROJECT.md` skeleton.
 - [Design Template](./references/design-template.md) — the `DESIGN.md` skeleton.
+- [Agent Instructions Block](./references/agent-instructions-template.md) — the
+  `CLAUDE.md` / `AGENTS.md` block that keeps later sessions on the same rules.
 - [Phases](./references/phases.md) — the six standard phases, trimming rules by project
   type, and approval stops.
 - [Tasks Template](./references/tasks-template.md) — the `tasks.md` skeleton.

@@ -113,6 +113,10 @@ node scripts/validate-skills.js
 
 If validation fails, fix the reported errors before pushing your code.
 
+If you changed what a skill makes the agent *do* (the questions it asks, when it stops),
+also run the behavior evals — see [docs/EVALS.md](docs/EVALS.md). They call the real
+model, so they cost a little and are not part of CI.
+
 ### Step 5: Commit Your Changes
 
 Follow conventional commit standards:
