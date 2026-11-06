@@ -148,7 +148,7 @@ export function Badge({ label, tone }: BadgeProps) {
    related files only.
 6. **Step 6: Execute Tests** — Run the project's type-check, lint, and test commands;
    check the screen at all target viewports or devices. Then run the token check
-   (`node scripts/check-tokens.js <source-dir>` from this skill's folder) and replace
+   (`node scripts/check-tokens.cjs <source-dir>` from this skill's folder) and replace
    every raw color or off-grid pixel value it reports with a token — or justify the
    few that must stay (for example one-off SVG artwork) in the report.
 7. **Step 7: Report Status** — Summarize what shipped, the stack detected, verification
@@ -189,7 +189,7 @@ export function Badge({ label, tone }: BadgeProps) {
       and shadows are referenced strictly via tokens (CSS variables, framework theme,
       or the platform's theme object) — zero raw hex or arbitrary pixel values in
       component files.
-- [ ] **Token check run:** `scripts/check-tokens.js` reports no raw colors or off-grid
+- [ ] **Token check run:** `scripts/check-tokens.cjs` reports no raw colors or off-grid
       px values in component files, or each remaining hit is justified in the report.
 - [ ] **Type Scale Compliance:** All heading and body text sizing follows the project's
       type scale with no arbitrary font-size overrides.
@@ -198,7 +198,7 @@ export function Badge({ label, tone }: BadgeProps) {
 
 - [Discovery Questions](./references/discovery-questions.md) — grouped questions by
   project type, how many to ask at once, and how to record answers.
-- [Token Check Script](./scripts/check-tokens.js) — zero-dependency scan for raw
+- [Token Check Script](./scripts/check-tokens.cjs) — zero-dependency scan for raw
   colors and off-grid pixel values outside token files; run it from Step 6 on any
   stack with text-based styles.
 - [Styling Methods](./references/styling-methods.md) — Tailwind, plain CSS, CSS

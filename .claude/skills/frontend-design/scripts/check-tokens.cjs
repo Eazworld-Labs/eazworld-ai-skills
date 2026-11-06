@@ -13,7 +13,7 @@
  * query breakpoints. Zero dependencies; works on any stack that keeps styles in text
  * files.
  *
- * Usage: node check-tokens.js [dir ...] [--ignore <regex>] [--json]
+ * Usage: node check-tokens.cjs [dir ...] [--ignore <regex>] [--json]
  * Exit codes: 0 = clean, 1 = raw values found, 2 = usage error.
  */
 
@@ -57,7 +57,7 @@ function parseArgs(argv) {
 
 function usage(msg, code = 2) {
   if (msg) console.error(`Error: ${msg}`);
-  console.error('Usage: node check-tokens.js [dir ...] [--ignore <regex>] [--json]');
+  console.error('Usage: node check-tokens.cjs [dir ...] [--ignore <regex>] [--json]');
   process.exit(code);
 }
 

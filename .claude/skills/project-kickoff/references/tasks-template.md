@@ -89,7 +89,7 @@ Agents update statuses as work completes. Never put secrets in this file.
 - [ ] **5.1 Accessibility pass** — *skill: frontend-design*
   - Done when: keyboard path and screen-reader check pass on every page.
 - [ ] **5.2 Token check** — *skill: frontend-design*
-  - Done when: `check-tokens.js` is clean, or each hit is justified.
+  - Done when: `check-tokens.cjs` is clean, or each hit is justified.
 - [ ] **5.3 Performance** — *skill: performance-optimization*
   - Done when: Core Web Vitals targets agreed in discovery are met.
 - [ ] **5.4 Tests and review** — *skill: software-testing, code-review*

@@ -9,7 +9,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.2.0"
+  version: "1.2.1"
 ---
 
 # Project Kickoff
@@ -82,6 +82,9 @@ scaffolds code, installs dependencies, or changes infrastructure.
   project type with every change stated to the user. Each task names its skill and an
   acceptance criterion. Work stops for client approval after phases 1, 3, and 5 and at
   final sign-off.
+- **Approvals are explicit.** Record a phase as approved only on a clear approval
+  message, with its date; answering later questions or continuing to talk does not
+  count. A criterion verified only in part is `[?]` with the gap named, not `[x]`.
 - **Keep `tasks.md` true.** Mark a task done only after its acceptance criterion
   passes, update its status in the same step as the work, and add new scope as a new
   task — never inside a finished phase.

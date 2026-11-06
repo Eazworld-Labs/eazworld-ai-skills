@@ -18,6 +18,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`frontend-design` references:** `styling-methods`, `visual-directions`,
   `react-next`, `vue-nuxt`, `native-mobile`, `server-rendered`, and `visual-system`.
 
+### Fixed
+
+- **`project-kickoff` v1.2.1:** phase approvals must be an explicit message (answering
+  next-phase questions is not approval), and partly verified tasks are marked `[?]`
+  instead of `[x]` — found when a test project recorded a phase as approved by
+  implication.
+- **`check-tokens` crashed in ES-module projects:** the script is now `check-tokens.cjs`,
+  so it runs in projects whose `package.json` sets `"type": "module"`.
+
 ### Changed
 
 - **`project-kickoff` v1.2.0:** generates a phased `tasks.md` (six standard phases,
@@ -32,7 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   action, stack, and region must be filled before building; an approval with core fields
   still `TBD` must name them and be confirmed) and records known trade-offs of the
   chosen stack under a new "Decisions & Trade-offs" section of `PROJECT.md`.
-- **`frontend-design` v1.2.0:** adds `scripts/check-tokens.js`, a zero-dependency scan
+- **`frontend-design` v1.2.0:** adds `scripts/check-tokens.cjs`, a zero-dependency scan
   for raw colors and off-grid pixel values outside token files, wired into the
   execution workflow and Definition of Done; asks for missing purpose fields instead of
   building on guesses.

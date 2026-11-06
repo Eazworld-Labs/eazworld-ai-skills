@@ -44,5 +44,14 @@ summary.
   `tasks.md` in the same step as the work.
 - A stop point means: summarize what was built, show what changed, list open items,
   and wait for explicit approval before starting the next phase.
+- **Approval must be explicit.** A stop point is passed only by a clear message from the
+  client or owner approving that phase, recorded with the date. Answering questions
+  about the next phase, continuing the conversation, or silence is not approval — ask
+  directly.
+- A task whose acceptance criterion could only be partly verified (for example, tested
+  on an in-memory database but not the real one) is marked `[?]` with the gap named,
+  not `[x]`.
+- Keep task numbers in order; add new tasks at the end of their phase with the next
+  number.
 - Scope added later goes in a new task or phase with its own criterion, not into a
   finished one.
