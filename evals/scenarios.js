@@ -566,6 +566,73 @@ module.exports = [
   },
 
   {
+    id: 'design-completes-full-token-set',
+    description: 'Given the few human choices, the design flow generates every token, checks contrast with the script, and records it all.',
+    slow: true,
+    seed: {
+      'package.json': SEED_NEXT_PACKAGE,
+      'PROJECT.md': [
+        '# PROJECT.md',
+        '',
+        '- **Name:** Bright Future School',
+        '- **Type:** marketing site',
+        '- **One-line purpose:** Help parents in Accra trust the school and enquire about admission.',
+        '- **Front end:** Next.js (App Router)',
+        '- **Styling method:** Tailwind CSS',
+        '- **Primary market / region:** Ghana',
+        '',
+      ].join('\n'),
+    },
+    turns: [
+      'Create the design file for the school site. Ask me what you need.',
+      'The brand color is deep blue #1F3A93. The feel is warm and friendly. Use Fraunces for headings and ' +
+        'Inter for body text. Light mode only, no inspiration to share. Please complete the whole design ' +
+        'file with every token, check the contrast, and treat this as my approval of the palette.',
+    ],
+    checks: [
+      {
+        name: 'writes DESIGN.md',
+        test: (ctx) => ctx.files.includes('DESIGN.md') || 'DESIGN.md was not written',
+      },
+      {
+        name: 'records every required color token with a hex value',
+        test: (ctx) => {
+          const d = ctx.read('DESIGN.md') || '';
+          const need = ['bg-app', 'surface', 'border', 'text-primary', 'text-muted', 'action-primary',
+            'text-on-action', 'accent', 'success', 'warning', 'danger', 'focus-ring'];
+          const missing = need.filter((n) => !new RegExp('`' + n + '`\\s*\\|\\s*#[0-9a-fA-F]{3,6}').test(d));
+          return missing.length === 0 || `no hex value for: ${missing.join(', ')}`;
+        },
+      },
+      {
+        name: 'runs the contrast script',
+        test: (ctx) =>
+          ctx.turns.some((t) => t.toolUses.some((u) => u.name === 'Bash' && /check-contrast/.test(String(u.input.command || '')))) ||
+          'check-contrast.cjs was never run',
+      },
+      {
+        name: 'writes calculated ratios into the Contrast Check section',
+        test: (ctx) => {
+          const d = ctx.read('DESIGN.md') || '';
+          const m = d.match(/## Contrast Check[\s\S]*/);
+          return (m && /\d+(\.\d+)?\s*\|\s*(Pass|FAIL)/.test(m[0])) || 'Contrast Check has no calculated ratios';
+        },
+      },
+      {
+        name: 'records the palette approval and the typefaces',
+        test: (ctx) => {
+          const d = ctx.read('DESIGN.md') || '';
+          return (/palette approved/i.test(d) && /fraunces/i.test(d) && /inter/i.test(d)) || 'approval or typefaces missing';
+        },
+      },
+      {
+        name: 'writes no app code',
+        test: (ctx) => createdSource(ctx).length === 0 || `created: ${createdSource(ctx).join(', ')}`,
+      },
+    ],
+  },
+
+  {
     id: 'backend-task-asks-architecture-choices',
     description: 'A new-backend request invokes the backend skill and asks architecture questions before code.',
     slow: true,

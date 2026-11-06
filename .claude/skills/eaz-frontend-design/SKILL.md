@@ -9,7 +9,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.5.0"
+  version: "1.6.0"
 ---
 
 # Frontend Design
@@ -92,7 +92,11 @@ Before writing any UI code, inspect the target repository:
   building — each with a recommendation and a one-line trade-off:
   1. **Styling method** — see [Styling Methods](./references/styling-methods.md).
   2. **Visual direction** — see [Visual Directions](./references/visual-directions.md).
-  3. **Token values** — brand colors, typefaces, scale, spacing, radius, light/dark.
+  3. **Token values — a complete set, not a partial one.** Ask only what needs a person
+     (brand color, feel, typefaces, light/dark), then **generate every other token**
+     (surfaces, text, borders, status colors, focus ring, dark values), verify contrast by
+     calculation, and get **one** approval of the whole set — see
+     [Token Completeness](./references/token-completeness.md).
   4. **Motion level** — none, subtle (recommended default), or expressive, with the
      animation approach for the stack — see
      [Motion & Animation](./references/motion-and-animation.md).
@@ -226,6 +230,9 @@ export function Badge({ label, tone }: BadgeProps) {
       browser tooling was available); fixes re-captured.
 - [ ] **Motion QA:** motion level recorded; animations have a purpose, use tokens,
       animate `transform`/`opacity`, and have a tested reduced-motion path.
+- [ ] **Token set complete:** every required token row in `DESIGN.md` has a value (or a
+      `TBD` with a reason and an owner), `scripts/check-contrast.cjs DESIGN.md` exits 0, the
+      Contrast Check section was written by the script, and the client approved the palette.
 - [ ] **Token check run:** `scripts/check-tokens.cjs` reports no raw colors or off-grid
       px values in component files, or each remaining hit is justified in the report.
 - [ ] **Type Scale Compliance:** All heading and body text sizing follows the project's
@@ -235,6 +242,10 @@ export function Badge({ label, tone }: BadgeProps) {
 
 - [Discovery Questions](./references/discovery-questions.md) — grouped questions by
   project type, how many to ask at once, and how to record answers.
+- [Token Completeness](./references/token-completeness.md) — which tokens are required, what
+  to ask versus generate, how to derive them, and how to get one approval of the whole set.
+- [Contrast Check Script](./scripts/check-contrast.cjs) — calculates WCAG contrast for the
+  standard pairs from the `DESIGN.md` token table and can write the results into it.
 - [Token Check Script](./scripts/check-tokens.cjs) — zero-dependency scan for raw
   colors and off-grid pixel values outside token files; run it from Step 6 on any
   stack with text-based styles.

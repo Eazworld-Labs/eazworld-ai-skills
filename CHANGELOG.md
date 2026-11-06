@@ -41,6 +41,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Complete design tokens — ask, generate, confirm, record (`eaz-frontend-design` v1.6.0,
+  `eaz-project-kickoff` v1.5.0):** the design flow no longer leaves surfaces, text colors,
+  borders, status colors, the focus ring, or dark values to be invented during the build. It
+  asks only what needs a person (brand color, feel, typefaces, light/dark), generates every
+  other token, verifies contrast by calculation, and gets one approval of the whole palette. New
+  `token-completeness` reference, a `check-contrast.cjs` script (with tests) that calculates
+  WCAG contrast for the standard pairs from the `DESIGN.md` token table and can write the
+  results into it, and a `DESIGN.md` template with a required row for every token. The kickoff
+  now sorts every leftover `TBD` into needed-now, needed-by-Phase-2, and can-wait, asks only
+  about the first group, and gives every remaining `TBD` a reason and an owner.
+
 - **`eaz-mobile-app-development` v1.1.0 — any mobile approach:** works on React Native with
   Expo, Flutter, native Swift and Kotlin, and web-based apps (Capacitor or a PWA) instead of
   React Native only. It detects the approach and asks before building — approach, platforms and

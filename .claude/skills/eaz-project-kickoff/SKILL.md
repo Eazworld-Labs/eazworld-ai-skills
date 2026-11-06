@@ -10,7 +10,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # Project Kickoff
@@ -81,11 +81,19 @@ never scaffolds code, installs dependencies, or changes infrastructure.
   `API.md`, and `CONTENT.md` appear when the project type needs them; `RUNBOOK.md`,
   `HANDOFF.md`, and `CHANGELOG.md` are phase 6 tasks. Do not write a later document early —
   a document written before the thing exists is a guess.
+- **Finish with nothing left to guess.** Before presenting the summary, list every remaining
+  `TBD` and sort it into three groups: **needed now** (blocks Phase 1 approval), **needed by
+  Phase 2**, and **can wait**. Ask only about the first group, one decision at a time. Where a
+  value can be derived — a full color palette, neutrals, status colors, sensible defaults —
+  propose it, show it, and ask the client to confirm once, instead of leaving it blank or
+  asking about each piece. Every `TBD` that remains gets a reason and an owner.
 - **Hand design choices to eaz-frontend-design — by invoking it.** Before asking any
   design question, invoke the `eaz-frontend-design` skill with the Skill tool and run
   its discovery and choice flow (styling method, visual direction, token values, motion
   level). Do not improvise the design questions from memory; copy the outcome into
-  `DESIGN.md`.
+  `DESIGN.md`. The design is finished only when the **full token set** is recorded (every
+  color, status, type, space, shape, and motion row), the contrast check was run by the
+  script, and the client approved the palette once.
 - **Recommend skills from the map in
   [Skill Selection Guide](./references/skill-selection.md),** using only skills that
   exist in the installed library, ordered by build sequence.
@@ -140,7 +148,7 @@ never scaffolds code, installs dependencies, or changes infrastructure.
    [Agent Instructions Block](./references/agent-instructions-template.md) to
    `CLAUDE.md` (and `AGENTS.md` if it exists) without overwriting anything there.
 6. **Step 6: Execute Tests** — Re-read all the files and check: every field is filled or
-   marked `TBD`; every Must feature has an ID and an acceptance test; every feature maps
+   marked `TBD` with a reason and an owner; the `DESIGN.md` token tables have no empty row; every Must feature has an ID and an acceptance test; every feature maps
    to a component in `ARCHITECTURE.md` and to a task; every task has a skill and an
    acceptance criterion; every recommended skill exists in the library; and nothing in
    the files looks like a secret.
@@ -175,7 +183,10 @@ never scaffolds code, installs dependencies, or changes infrastructure.
 - [ ] `CLAUDE.md` carries the Eazworld project rules block (existing content untouched).
 - [ ] `tasks.md` follows the standard phases, trimmed to the project type, with a skill
       and an acceptance criterion on every task and stop points after phases 1, 3, 5.
-- [ ] Every field is filled or explicitly marked `TBD`; no invented values.
+- [ ] Every field is filled or explicitly marked `TBD` with a reason and an owner; no
+      invented values; the remaining `TBD`s are sorted into needed now, by Phase 2, and can wait.
+- [ ] `DESIGN.md` carries the full token set, the Contrast Check written by the script, and
+      the client's single approval of the palette.
 - [ ] No secrets or private client data in either file.
 - [ ] `eaz-frontend-design` was invoked, and styling method, visual direction, token
       values, and motion level were chosen by the user through its flow, or are marked

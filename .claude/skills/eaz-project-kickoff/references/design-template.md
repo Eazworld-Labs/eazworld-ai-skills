@@ -42,20 +42,51 @@ put secrets in this file.
 
 ## Tokens
 
+Every row below is **required** — none is left for the build phase to invent. Ask for the few
+choices only a person can make (brand color, feel, typefaces, light/dark), **generate the rest**,
+run the contrast check, show the whole set, and record the approved result here. Keep the token
+names exactly as written: `scripts/check-contrast.cjs` finds them by name. Hex values only.
+If there is no dark theme at launch, write `none` in every Dark cell.
+
+### Colors
+
+| Token | Light | Dark | Role |
+| :--- | :--- | :--- | :--- |
+| `bg-app` | | | Page background |
+| `surface` | | | Cards, sheets, dialogs |
+| `border` | | | Borders of inputs and controls (3:1 against the background) |
+| `text-primary` | | | Body text and headings |
+| `text-muted` | | | Secondary text (still 4.5:1) |
+| `action-primary` | | | Primary buttons and links |
+| `text-on-action` | | | Label on a primary button |
+| `accent` | | | Highlights, gauges, icons (never body text) |
+| `success` | | | Success text and icons |
+| `warning` | | | Warning icons and fills (never body text) |
+| `danger` | | | Error text, destructive actions |
+| `focus-ring` | | | Keyboard focus outline |
+
+### Type, space, and shape
+
 | Token | Value | Notes |
 | :--- | :--- | :--- |
-| Brand color | | |
-| Accent color | | |
-| Display typeface | | |
-| Body typeface | | |
-| Type scale | | <!-- ratio and base size, e.g. 1.250 on 1rem --> |
-| Spacing unit | | <!-- e.g. 8px grid with 4px half-steps --> |
-| Radius tiers | | |
-| Shadow tiers | | |
+| Display typeface | | Headings only; check license and load cost |
+| Body typeface | | Reading and interface text |
+| Type scale | | Ratio and base size, e.g. 1.250 on 1rem |
+| Weights | | e.g. 400 body, 600 emphasis, 700 display |
+| Spacing unit | | e.g. 8px grid with 4px half-steps |
+| Radius tiers | | e.g. 8 / 12 / 16 px |
+| Shadow tiers | | e.g. none / card / overlay |
+| Motion durations and easings | | `fast`, `base`, `slow`, and the three easing curves |
+| Theme modes | | light, dark, or both |
+
+**Palette approved by the client:** [?] yes — date: ____ *(one approval for the whole set)*
 
 Semantic names (`--color-bg-app`, `--color-text-primary`, `--color-action-primary`, ...)
 stay the same across projects; only the values above change.
 
 ## Contrast Check
 
-<!-- Record the text/surface pairings checked at 4.5:1 (3:1 for large text and borders). -->
+<!-- Generated: run `node scripts/check-contrast.cjs DESIGN.md --write` from the
+     eaz-frontend-design skill folder. Do not fill this in by hand or by estimate. -->
+
+TBD

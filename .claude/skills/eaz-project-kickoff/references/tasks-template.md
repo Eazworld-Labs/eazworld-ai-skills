@@ -36,8 +36,9 @@ Agents update statuses as work completes. Never put secrets in this file.
 - [ ] **1.1 Kickoff questions answered** — *skill: eaz-project-kickoff*
   - Done when: `PROJECT.md` written; every field filled or marked `TBD`.
 - [ ] **1.2 Design discovery and choices** — *skill: eaz-frontend-design*
-  - Done when: `DESIGN.md` has purpose, styling method, visual direction, tokens, a
-    Discovery section, and an Inspiration table (or "none given").
+  - Done when: `DESIGN.md` has purpose, styling method, visual direction, a Discovery
+    section, an Inspiration table (or "none given"), the **full token set** (no empty row),
+    a Contrast Check written by `check-contrast.cjs`, and the client's approval of the palette.
 - [ ] **1.3 Specification** — *skill: eaz-project-kickoff*
   - Done when: `SPEC.md` has goal and non-goals, roles, key journeys, features with IDs,
     and an acceptance test for every Must feature (or `TBD` flagged as a blocker).
@@ -68,7 +69,8 @@ Agents update statuses as work completes. Never put secrets in this file.
 - [ ] **2.1c Content inventory** *(content-heavy projects)* — *skill: eaz-project-kickoff*
   - Done when: `CONTENT.md` lists every page, its copy and media status, and who supplies it.
 - [ ] **2.2 Tokens and theme** — *skill: eaz-frontend-design*
-  - Done when: tokens defined once; contrast verified at 4.5:1; token check clean.
+  - Done when: the theme matches the `DESIGN.md` token table name for name and value, contrast
+    is verified by `check-contrast.cjs`, and the token check is clean.
 - [ ] **2.3 Base components** — *skill: eaz-frontend-design*
   - Done when: buttons, inputs, and layout primitives exist with focus states.
 
