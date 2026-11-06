@@ -16,9 +16,36 @@ result is written to the project's `tasks.md` (skeleton:
 | 5 | **Polish & quality** | Motion, accessibility pass, token check, performance, tests | `eaz-frontend-design`, `eaz-performance-optimization`, `eaz-software-testing`, `eaz-code-review` | **Yes** |
 | 6 | **Launch & handoff** | SEO, security review, deploy, monitoring, client handoff | `eaz-seo-engineering`, `eaz-security-audit`, `eaz-cloud-devops` | Final sign-off |
 
+Phase contents above are for **frontend-first**, the recommended default (see Build order).
 The hard stops are after phases 1, 3, and 5, because those are the points where a wrong
 decision gets expensive: before building, before filling in content, and before
 launch work.
+
+## Build order — ask, and recommend frontend-first
+
+The order of work is a **decision to ask the client**, one question with a recommendation, and to
+record in `PROJECT.md` ("Build order") and in `tasks.md`.
+
+| Order | What happens | Choose when |
+| :--- | :--- | :--- |
+| **Frontend-first** *(recommended default)* | Foundation, then every screen on typed **mock data** that follows the API contract, then the client approves the screens, then the backend is built and each screen is wired to it | Most client work: people can judge what they can see, look-and-feel changes are cheap before a backend exists, and the approved screens define exactly what the API must provide |
+| **Backend-first** | Data model, API, and auth first, then screens on the real API | The product is mostly an API or integration (payments, sync, webhooks), the data rules are the hard part, or the front end is a thin client |
+| **Vertical slices** | One feature at a time, screen and backend together | A small team, a very small scope, or an existing backend that already works |
+
+Why frontend-first is the default:
+- The client approves screens early — the cheapest moment to change them.
+- The approved screens show exactly which endpoints and fields are needed, so the backend is built
+  to a concrete contract and not to a guess.
+- Backend rework drops, because the UI no longer surprises the API.
+
+How to keep frontend-first honest:
+- **Contract first.** A draft `API.md` (or OpenAPI file) exists before the mocks, and the mocks
+  follow it — never the other way round.
+- **One mock module.** All mock data sits behind a single data-access module, so a screen switches
+  to the real API by changing that module only.
+- **Mocks are removed.** A task at the end of Phase 4 proves no screen still uses them, and contract
+  tests run against the real API.
+- **Mock data is labelled** in the UI during review so nobody mistakes it for real data.
 
 ## Trimming by project type
 
@@ -29,9 +56,9 @@ summary.
 | :--- | :--- |
 | Marketing / business site | Phase 4 is mostly content; skip backend and database tasks unless a form handler is needed |
 | E-commerce | Split phase 4 into catalog, cart and checkout, payments, and orders; add `eaz-security-audit` before phase 5 ends |
-| Web app / SaaS | Add a **data model & API** phase between 1 and 2; phase 4 becomes one phase per feature area |
+| Web app / SaaS | Phase 4 becomes **backend and wiring**, one group per feature area: data model, auth, then each feature (frontend-first). For backend-first, put the data model, API, and auth before the screens |
 | Mobile app | Replace layout tasks with navigation and screen scaffolds; add a **device testing & store release** task group to phase 6 |
-| School, church, POS, booking system | Add a **data model & roles** phase between 1 and 2; phase 4 follows the business skill's workflow |
+| School, church, POS, booking system | Phase 4 is **backend and wiring** (data model and roles first, then each feature following the business skill's workflow); for backend-first, do the data model and roles before the screens |
 | Automation / chatbot | Drop phases 2–3; phases become design the flow, build with error branches, test failure paths, launch with monitoring |
 
 ## Rules

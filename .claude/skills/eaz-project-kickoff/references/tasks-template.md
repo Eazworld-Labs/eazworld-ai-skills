@@ -54,19 +54,21 @@ Agents update statuses as work completes. Never put secrets in this file.
 
 ---
 
-## Phase 2 — Foundation
+## Phase 2 — Foundation (front end)
 
-**Goal:** a project that builds and carries the design system.
+**Build order:** <!-- frontend-first (default) | backend-first | vertical slices — as chosen in
+PROJECT.md. This template shows frontend-first. For backend-first, move 4.0, 4.0a, and the
+backend half of each 4.x task into this phase, and have Phase 3 screens call the real API. -->
+
+**Goal:** a project that builds and carries the design system, so the screens can be built and shown.
 
 - [ ] **2.1 Scaffold and CI** — *skill: eaz-cloud-devops*
   - Done when: install, lint, type-check, and build commands pass, the folder structure
     matches `ARCHITECTURE.md`, and `README.md` lists the real run, test, and build commands.
-- [ ] **2.1a Data model** *(if the project has a database)* — *skill: eaz-database-architecture*
-  - Done when: migrations run up, down, and up on a real engine, and `DATA-MODEL.md`
-    matches the schema.
-- [ ] **2.1b API contract** *(if the project exposes an API)* — *skill: eaz-api-development*
-  - Done when: `API.md` (or an OpenAPI file) lists the endpoints for the Must features.
-- [ ] **2.1c Content inventory** *(content-heavy projects)* — *skill: eaz-project-kickoff*
+- [ ] **2.1a API contract (draft)** *(if the project exposes an API)* — *skill: eaz-api-development*
+  - Done when: `API.md` (or an OpenAPI file) lists every endpoint and response shape the Must
+    screens need — the contract the mock data will follow.
+- [ ] **2.1b Content inventory** *(content-heavy projects)* — *skill: eaz-project-kickoff*
   - Done when: `CONTENT.md` lists every page, its copy and media status, and who supplies it.
 - [ ] **2.2 Tokens and theme** — *skill: eaz-frontend-design*
   - Done when: the theme matches the `DESIGN.md` token table name for name and value, contrast
@@ -76,25 +78,41 @@ Agents update statuses as work completes. Never put secrets in this file.
 
 ---
 
-## Phase 3 — Layout & structure  ⛔ stop for approval
+## Phase 3 — Screens with mock data  ⛔ stop for approval
 
-**Goal:** the skeleton of every page, with placeholder content.
+**Goal:** every launch screen exists, looks like the approved design, and can be clicked through —
+using typed mock data that follows the API contract — so the client approves what they will
+actually use before the backend is built.
 
-- [ ] **3.1 Page templates and navigation** — *skill: eaz-frontend-design*
-  - Done when: every launch page has a template, verified at 360 / 768 / 1440px.
-- [ ] **3.2 URL structure** — *skill: eaz-seo-engineering*
+- [ ] **3.1 Mock data layer** — *skill: eaz-frontend-design*
+  - Done when: typed mock responses for every endpoint in `API.md` exist behind one data-access
+    module, so a screen can switch from mock to real by changing that module only.
+- [ ] **3.2 Screens and navigation** — *skill: eaz-frontend-design*
+  - Done when: every launch screen works end to end on mock data, with loading, empty, error,
+    and (where relevant) offline states, verified at 360 / 768 / 1440px.
+- [ ] **3.3 URL structure** *(public sites)* — *skill: eaz-seo-engineering*
   - Done when: routes and slugs are agreed and listed.
 
-**Approval:** [?] Client approved Phase 3 — date: ____
+**Approval:** [?] Client approved Phase 3 (the screens) — date: ____
 
 ---
 
-## Phase 4 — Pages & features
+## Phase 4 — Backend and wiring
 
-**Goal:** real content and working features.
+**Goal:** real data and working features behind the approved screens.
 
-- [ ] **4.1 <page or feature>** — *skill: <skill>* — **Delivers: F#** (from `SPEC.md`)
-  - Done when: the acceptance test for F# passes, including loading, empty, and error states.
+- [ ] **4.0 Data model** *(if the project has a database)* — *skill: eaz-database-architecture*
+  - Done when: migrations run up, down, and up on a real engine, and `DATA-MODEL.md`
+    matches the schema.
+- [ ] **4.0a Auth and roles** *(if the project has accounts)* — *skill: eaz-backend-engineering*
+  - Done when: sign-in works, roles are enforced on the server with allow and deny tests, and
+    sessions can be ended.
+- [ ] **4.1 <feature>: backend and wiring** — *skill: <skill>* — **Delivers: F#** (from `SPEC.md`)
+  - Done when: the endpoint matches `API.md`, the screen is switched from mock to the real API
+    (the mock module is no longer used for it), and the acceptance test for F# passes,
+    including loading, empty, and error states.
+- [ ] **4.9 Mock data removed** — *skill: eaz-code-review*
+  - Done when: no screen imports the mock module, and the contract tests pass against the real API.
 
 ---
 

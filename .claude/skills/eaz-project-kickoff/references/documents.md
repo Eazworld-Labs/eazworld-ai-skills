@@ -24,8 +24,8 @@ The client approves this set at the phase 1 stop, before anything is built.
 
 | File | Needed when | Written by | Phase |
 | :--- | :--- | :--- | :--- |
-| `DATA-MODEL.md` | The project has a database | `eaz-database-architecture` | 2 |
-| `API.md` (or an OpenAPI file) | The project exposes an API | `eaz-api-development` | 2–4 |
+| `DATA-MODEL.md` | The project has a database | `eaz-database-architecture` | 4 (frontend-first) or 2 (backend-first) |
+| `API.md` (or an OpenAPI file) | The project exposes an API | `eaz-api-development` | 2 as a draft contract the mock data follows; kept current through 4 |
 | `CONTENT.md` | Content-heavy sites, stores, schools, churches | `eaz-project-kickoff` | 1 |
 
 Small projects fold testing notes into `SPEC.md` (Quality Requirements) rather than a

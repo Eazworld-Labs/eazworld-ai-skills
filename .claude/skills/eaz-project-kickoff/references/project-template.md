@@ -22,6 +22,7 @@ Delete any line that does not apply. Never put secrets or credentials in this fi
 - **Database:**
 - **Background jobs / integrations:** <!-- queues, scheduled jobs, webhooks, email/SMS, storage -->
 - **Hosting / deployment:**
+- **Build order:** <!-- frontend-first (recommended) | backend-first | vertical slices — and why -->
 - **Package manager and commands:** <!-- install, dev, lint, type-check, test, build -->
 
 ## Region & Business Context

@@ -14,6 +14,8 @@ every later session in the project follows the same rules without being reminded
   `ARCHITECTURE.md` sets out.
 - For any UI work, use the `eaz-frontend-design` skill. `tasks.md` names the skill that
   applies to each task — use it.
+- Follow the **Build order** in `PROJECT.md`. With frontend-first, build screens on typed mock
+  data that follows `API.md` and do not start backend work until the screens are approved.
 - Do not start building while a core field in `PROJECT.md` or `DESIGN.md` is `TBD`
   (the one job, one impression, primary action, front-end stack, region).
 - Pass a phase stop in `tasks.md` only on an explicit approval message from the client

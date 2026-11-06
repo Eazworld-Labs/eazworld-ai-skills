@@ -41,6 +41,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Build order is a decision, frontend-first by default (`eaz-project-kickoff` v1.6.0):** the
+  kickoff now asks whether to build **frontend-first** (recommended: every screen on typed mock
+  data that follows the API contract, client approval of the screens, then backend and wiring),
+  **backend-first**, or **vertical slices**, records it in `PROJECT.md`, and shapes the phases to
+  match. In the frontend-first plan, Phase 2 drafts the API contract, Phase 3 is the screens on
+  mock data behind one data-access module (a stop for approval), and Phase 4 builds the data
+  model, auth, and each feature and wires the screens to it, ending with a task that removes the
+  mocks. The `CLAUDE.md` rules block carries the build order.
+
 - **Complete design tokens — ask, generate, confirm, record (`eaz-frontend-design` v1.6.0,
   `eaz-project-kickoff` v1.5.0):** the design flow no longer leaves surfaces, text colors,
   borders, status colors, the focus ring, or dark values to be invented during the build. It

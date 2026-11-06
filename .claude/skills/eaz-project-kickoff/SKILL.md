@@ -10,7 +10,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.5.0"
+  version: "1.6.0"
 ---
 
 # Project Kickoff
@@ -111,6 +111,13 @@ never scaffolds code, installs dependencies, or changes infrastructure.
   small site), say so in one line before recording it, tell the user to check the
   library's current maintenance status, and write the note under "Decisions &
   Trade-offs" in `PROJECT.md`. The client's choice stands; never swap it silently.
+- **Ask the build order, and recommend frontend-first.** Ask it as one decision with its
+  trade-off — *frontend-first* (recommended: build every screen on typed mock data that follows
+  the API contract, get the screens approved, then build the backend and wire each screen to
+  it), *backend-first* (data model, API, and auth before the screens — for API-heavy or
+  integration-heavy products), or *vertical slices* (one feature at a time). Record the answer
+  as "Build order" in `PROJECT.md` and shape the phases to match, as described in
+  [Phases](./references/phases.md). Never default silently: if the user has not chosen, ask.
 - **Plan in phases.** Generate `tasks.md` from [Tasks Template](./references/tasks-template.md)
   using the six standard phases in [Phases](./references/phases.md), trimmed to the
   project type with every change stated to the user. Each task names its skill and an
@@ -181,6 +188,8 @@ never scaffolds code, installs dependencies, or changes infrastructure.
 - [ ] `eaz-software-architecture` was invoked after the stack was accepted, and the
       architecture was not improvised.
 - [ ] `CLAUDE.md` carries the Eazworld project rules block (existing content untouched).
+- [ ] The build order was asked, recorded in `PROJECT.md`, and reflected in `tasks.md`
+      (frontend-first: screens on mock data before backend work, with a task that removes the mocks).
 - [ ] `tasks.md` follows the standard phases, trimmed to the project type, with a skill
       and an acceptance criterion on every task and stop points after phases 1, 3, 5.
 - [ ] Every field is filled or explicitly marked `TBD` with a reason and an owner; no

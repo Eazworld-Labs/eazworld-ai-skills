@@ -333,7 +333,7 @@ module.exports = [
       'This covers everything, so please stop asking and write the planning files. The brand is ' +
         'Zuri Atelier with no logo yet. Customers are style-conscious Lagos shoppers on their phones; ' +
         'the shop sells directly with add to bag then pay online; launch in 8 weeks on a modest ' +
-        'budget. For the stack, payments, delivery, visual direction, styling method, motion, and ' +
+        'budget. For the build order, the stack, payments, delivery, visual direction, styling method, motion, and ' +
         'theme, accept ALL your recommendations. The owner\'s assistant will update products after ' +
         'launch. Pages: home, shop, product, cart, checkout, about, contact. Photos will be ' +
         'supplied later.',
@@ -368,6 +368,14 @@ module.exports = [
           const t = ctx.read('ARCHITECTURE.md') || '';
           const hits = ['stack', 'structure', 'component', 'deploy'].filter((w) => new RegExp(w, 'i').test(t));
           return hits.length >= 3 || `only mentions: ${hits.join(', ') || 'nothing'}`;
+        },
+      },
+      {
+        name: 'records a build order and plans screens on mock data before backend wiring',
+        test: (ctx) => {
+          const p = ctx.read('PROJECT.md') || '';
+          const t = ctx.read('tasks.md') || '';
+          return (/build order/i.test(p) && /mock/i.test(t)) || `build order recorded: ${/build order/i.test(p)}; mock data in tasks: ${/mock/i.test(t)}`;
         },
       },
       {
