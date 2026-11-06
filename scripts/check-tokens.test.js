@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Tests for .claude/skills/frontend-design/scripts/check-tokens.cjs.
+ * Tests for .claude/skills/eaz-frontend-design/scripts/check-tokens.cjs.
  * Builds throwaway projects in a temp directory and runs the script against them.
  *
  * Run: node --test scripts/
@@ -15,7 +15,7 @@ const fs = require('fs');
 const os = require('node:os');
 
 const SCRIPT = path.join(
-  __dirname, '..', '.claude', 'skills', 'frontend-design', 'scripts', 'check-tokens.cjs'
+  __dirname, '..', '.claude', 'skills', 'eaz-frontend-design', 'scripts', 'check-tokens.cjs'
 );
 
 function project(files, packageJson) {

@@ -43,9 +43,11 @@ Common causes, in order of frequency:
    `software-engineering/` folder) are not discovered.
 2. Re-run the validator — discovery requires valid frontmatter.
 3. Restart the agent session; skills are indexed at startup, not mid-session.
-4. Check for an ID collision: if a built-in skill shares the name (known case:
-   `frontend-design` in OpenCode), the built-in wins. Rename only if the collision
-   affects your workflow — the library keeps the name from `tasks.md`.
+4. Check for an ID collision: a personal skill (`~/.claude/skills/`) or built-in skill
+   with the same name can win over a project skill. Every library skill carries an
+   `eaz-` prefix to avoid this; if you still see a clash, rename your own skill.
+5. Upgraded from an older release? Skills used to install under plain names
+   (`frontend-design`). Delete those old folders — the installer prints which ones.
 
 ### A `references/` link does not load
 
@@ -65,11 +67,11 @@ Node 24). If the failure is the secret scanner, search your diff for realistic-l
 keys — even test fixtures must be assembled from fragments, never committed as whole
 strings.
 
-### The `frontend-design` skill loads different instructions than expected
+### A skill loads different instructions than expected
 
-Known issue, documented in `docs/COMPATIBILITY.md`: OpenCode ships a built-in skill
-with the same ID, so it shadows this library's file. The library's file still exists
-and passes validation; Claude Code loads it from `.claude/skills/` normally.
+Check the skill's folder name. Releases before the `eaz-` prefix used plain names such
+as `frontend-design`, which could be shadowed by a personal or built-in skill of the
+same name. Delete any leftover un-prefixed copy and use the `eaz-` version.
 
 ## FAQ
 

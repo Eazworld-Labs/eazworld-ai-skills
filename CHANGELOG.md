@@ -29,6 +29,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **All skills renamed with an `eaz-` prefix (breaking):** `frontend-design` is now
+  `eaz-frontend-design`, and likewise for all 33 skills. Agents give a user's personal
+  skills priority over project skills of the same name, so plain names such as
+  `frontend-design` and `security-audit` were silently shadowed on machines that already
+  had a skill with that name. The validator now requires the prefix (`skill-prefix`);
+  the shell installers accept short names (`--skill nigeria-payments`) and print any
+  leftover un-prefixed copies from older installs. Update any `--skill` flags and
+  prompts that use the old names.
+
 - **`frontend-design` v1.4.0 — modern design and motion:**
   - New references: `motion-and-animation` (motion levels none/subtle/expressive, motion
     tokens, CSS-first patterns with browser support checked on 2026-11-06, libraries per

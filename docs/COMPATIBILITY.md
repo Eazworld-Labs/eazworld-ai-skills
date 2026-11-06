@@ -20,18 +20,18 @@ Shared loader reading `.claude/skills/`.
 | Check | Status | Evidence |
 | --- | --- | --- |
 | Skill discovery from `.claude/skills/` | PASS | All 31 skills registered live as they were created; IDs present in the session's available skill list |
-| Activation on domain triggers | PASS | `api-development` loaded end to end through the skill tool — full SKILL.md content returned |
-| Relative `references/` link resolution | PASS | Static resolution 3/3 (api-development, software-architecture, database-architecture); the live load resolved `./references/openapi-checklist.md` to its file |
+| Activation on domain triggers | PASS | `eaz-api-development` loaded end to end through the skill tool — full SKILL.md content returned |
+| Relative `references/` link resolution | PASS | Static resolution 3/3 (eaz-api-development, eaz-software-architecture, eaz-database-architecture); the live load resolved `./references/openapi-checklist.md` to its file |
 | No duplicate skills under `.opencode/` | PASS | No `.opencode/` directory exists in the repository |
 
 ### Known observations (OpenCode)
 
-- `frontend-design` is shadowed by a built-in skill with the same ID. The file exists
-  and passes validation, but the built-in loads instead. The name is kept per
-  tasks.md; logged as a known issue (Phase 3 decision).
+- Earlier releases named this skill `frontend-design`, which was shadowed by a built-in
+  or personal skill with the same name. Resolved by the `eaz-` prefix on every skill
+  name — see Naming Standards in `docs/SKILL_AUTHORING_GUIDE.md`.
 - Transient registry churn was observed on a few skill IDs — briefly listed as
   unavailable, then re-registered without intervention. Self-resolved; monitor only.
-- Post-release addition: `nigeria-payments` (Phase 10, Nigeria-first fintech
+- Post-release addition: `eaz-nigeria-payments` (Phase 10, Nigeria-first fintech
   expansion) — registered live in OpenCode on creation, validating at 32 skills.
 
 ## Claude Code Verification
@@ -49,7 +49,7 @@ Native loader reading `.claude/skills/`.
 
 | # | Environment | Discrepancy | Resolution |
 | --- | --- | --- | --- |
-| 1 | OpenCode | `frontend-design` ID shadowed by a built-in skill | Keep name per tasks.md; documented as known issue |
+| 1 | OpenCode | `frontend-design` ID shadowed by a built-in skill | Resolved: all skills renamed with the `eaz-` prefix |
 | 2 | OpenCode | Transient availability churn on some skill IDs | Self-resolved; no action required |
 | 3 | Claude Code | Verification blocked by weekly quota | Re-run §7.1 checks when quota resets |
 

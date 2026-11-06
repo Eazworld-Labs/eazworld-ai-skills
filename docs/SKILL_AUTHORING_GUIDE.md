@@ -58,7 +58,7 @@ environment variables, drop production databases, or execute unverified shell sc
 ### 3.1 Single Responsibility Principle (SRP)
 
 Each skill must cover one clear domain. Never combine unrelated capabilities (e.g.,
-combining seo-strategy with database-architecture) into a single skill.
+combining eaz-seo-strategy with eaz-database-architecture) into a single skill.
 
 ### 3.2 High Portability & Reusability
 
@@ -116,15 +116,20 @@ Directory names and metadata `name` fields must strictly match and adhere to the
 rules:
 
 - **Format:** Lowercase kebab-case only (`[a-z0-9-]`).
+- **Prefix:** Every skill name starts with `eaz-` (`eaz-frontend-design`). Agents give a
+  user's personal skills priority over project skills of the same name, so an unprefixed
+  name can be silently shadowed by someone's own `frontend-design`. The validator
+  rejects names without the prefix.
 - **Conciseness:** Descriptive, specific, and clear.
 - **Prohibited Characters:** No uppercase letters, spaces, underscores, or special symbols.
 
 | Valid Skill Name | Invalid Skill Name | Reason for Invalidity |
 | :--- | :--- | :--- |
-| `frontend-design` | Frontend Design | Uppercase letters and spaces used |
-| `backend-engineering` | `backend_engineering` | Underscores used instead of hyphens |
-| `ghana-payments` | GhanaPayments | CamelCase used |
-| `n8n-automation` | N8N-Automation | Uppercase letters used |
+| `eaz-frontend-design` | Frontend Design | Uppercase letters and spaces used |
+| `eaz-backend-engineering` | `backend_engineering` | Underscores used instead of hyphens |
+| `eaz-ghana-payments` | GhanaPayments | CamelCase used |
+| `eaz-n8n-automation` | N8N-Automation | Uppercase letters used |
+| `eaz-code-review` | `code-review` | Missing the `eaz-` prefix |
 
 ---
 

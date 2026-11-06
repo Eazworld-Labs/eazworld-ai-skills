@@ -6,7 +6,7 @@
 #
 # When no target is given, the current directory is used. Repeat --skill to
 # install a selection of skills instead of all of them:
-#   bash install.sh --skill nigeria-payments --skill pos-inventory
+#   bash install.sh --skill eaz-nigeria-payments --skill eaz-pos-inventory
 # Use --skill '*' (the default) to install everything.
 #
 # Environment:
@@ -121,6 +121,10 @@ if [ "$SKILL_LIST" = '*' ]; then
 else
   for skill_name in $SKILL_LIST; do
     skill_src="$CACHE_DIR/.claude/skills/$skill_name"
+    # Skill names carry an eaz- prefix; accept the short form too.
+    if [ ! -f "$skill_src/SKILL.md" ] && [ -f "$CACHE_DIR/.claude/skills/eaz-$skill_name/SKILL.md" ]; then
+      skill_src="$CACHE_DIR/.claude/skills/eaz-$skill_name"
+    fi
     if [ ! -f "$skill_src/SKILL.md" ]; then
       print_err "skill not found in the library: $skill_name"
       available="$(find "$CACHE_DIR/.claude/skills" -mindepth 2 -maxdepth 2 -name 'SKILL.md' | while read -r f; do basename "$(dirname "$f")"; done | sort | tr '\n' ' ')"
@@ -128,9 +132,21 @@ else
       exit 1
     fi
     install_skill "$skill_src"
-    print_ok "installed skill: $skill_name"
+    print_ok "installed skill: $(basename "$skill_src")"
   done
 fi
+
+# Releases before the eaz- prefix installed skills under their plain names. Those old
+# copies sit next to the new ones and can shadow or duplicate them - point them out
+# instead of deleting anything.
+for installed in "$TARGET"/.claude/skills/eaz-*/; do
+  [ -f "${installed}SKILL.md" ] || continue
+  plain="$(basename "$installed")"; plain="${plain#eaz-}"
+  old="$TARGET/.claude/skills/$plain"
+  if [ -f "$old/SKILL.md" ] && grep -q "author: Eazworld" "$old/SKILL.md"; then
+    print_info "old copy found: .claude/skills/$plain - replaced by eaz-$plain, delete it when ready"
+  fi
+done
 
 # Older releases installed skills inside department folders, which agents cannot
 # discover. Point them out instead of deleting anything.

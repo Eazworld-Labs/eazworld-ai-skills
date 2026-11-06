@@ -20,14 +20,20 @@ npx skills add Eazworld-Labs/eazworld-ai-skills
 This copies all 33 skills into your project's `.claude/skills/`, ready for both
 Claude Code and OpenCode to discover automatically at startup.
 
+Every skill name starts with `eaz-` (for example `eaz-frontend-design`). That keeps the
+library from colliding with your own or built-in skills of the same name — a personal
+skill called `frontend-design` would otherwise win over a project skill and silently
+replace it. Upgrading from an earlier release? Delete the old un-prefixed folders; the
+shell installers print which ones.
+
 Only need some of them? Install a subset instead — same command, one flag:
 
 ```bash
-npx skills add Eazworld-Labs/eazworld-ai-skills --skill nigeria-payments --skill pos-inventory
+npx skills add Eazworld-Labs/eazworld-ai-skills --skill eaz-nigeria-payments --skill eaz-pos-inventory
 ```
 
 The shell installers support the same selection
-(`bash scripts/install.sh --skill nigeria-payments`). Full setup options (shell
+(`bash scripts/install.sh --skill eaz-nigeria-payments`). Full setup options (shell
 installers, submodules, updates) live in
 [User Installation & Setup](#user-installation--setup).
 (During the move to the `eazworld` org, `fekt2016/eazworld-ai-skills` also works.)
@@ -59,18 +65,19 @@ load on trigger, and deep reference assets load only on demand.
 | **4. Business Solutions** | 7 | School/Church ERPs, POS & inventory, booking engines, regional fintech (Paystack/MoMo) |
 | **Total** | **33** | **Comprehensive enterprise & open-source coverage** |
 
-- **Software Engineering (14):** `software-architecture`, `frontend-design`,
-  `backend-engineering`, `api-development`, `database-architecture`,
-  `ecommerce-development`, `mobile-app-development`, `software-testing`, `code-review`,
-  `security-audit`, `performance-optimization`, `seo-engineering`, `cloud-devops`,
-  `project-kickoff`
-- **Digital Marketing (7):** `seo-strategy`, `google-ads`, `meta-ads`,
-  `social-media-management`, `brand-identity`, `email-marketing`,
-  `conversion-optimization`
-- **AI & Automation (5):** `ai-agent-development`, `n8n-automation`,
-  `whatsapp-automation`, `chatbot-development`, `crm-automation`
-- **Business Solutions (7):** `school-management`, `church-management`, `pos-inventory`,
-  `restaurant-management`, `booking-systems`, `ghana-payments`, `nigeria-payments`
+- **Software Engineering (14):** `eaz-software-architecture`, `eaz-frontend-design`,
+  `eaz-backend-engineering`, `eaz-api-development`, `eaz-database-architecture`,
+  `eaz-ecommerce-development`, `eaz-mobile-app-development`, `eaz-software-testing`,
+  `eaz-code-review`, `eaz-security-audit`, `eaz-performance-optimization`,
+  `eaz-seo-engineering`, `eaz-cloud-devops`, `eaz-project-kickoff`
+- **Digital Marketing (7):** `eaz-seo-strategy`, `eaz-google-ads`, `eaz-meta-ads`,
+  `eaz-social-media-management`, `eaz-brand-identity`, `eaz-email-marketing`,
+  `eaz-conversion-optimization`
+- **AI & Automation (5):** `eaz-ai-agent-development`, `eaz-n8n-automation`,
+  `eaz-whatsapp-automation`, `eaz-chatbot-development`, `eaz-crm-automation`
+- **Business Solutions (7):** `eaz-school-management`, `eaz-church-management`,
+  `eaz-pos-inventory`, `eaz-restaurant-management`, `eaz-booking-systems`,
+  `eaz-ghana-payments`, `eaz-nigeria-payments`
 
 See the full release plan in [docs/ROADMAP.md](docs/ROADMAP.md).
 
@@ -82,8 +89,8 @@ See the full release plan in [docs/ROADMAP.md](docs/ROADMAP.md).
 eazworld-ai-skills/
 ├── .claude/
 │   └── skills/                  # SSOT: shared skill definitions
-│       ├── frontend-design/     # one folder per skill, directly under skills/
-│       ├── n8n-automation/      # (departments are a label in each skill's
+│       ├── eaz-frontend-design/     # one folder per skill, directly under skills/
+│       ├── eaz-n8n-automation/      # (departments are a label in each skill's
 │       └── ...                  #  metadata, not folders)
 ├── .github/
 │   └── workflows/               # CI validation pipelines (GitHub Actions)
@@ -194,7 +201,7 @@ npx skills add Eazworld-Labs/eazworld-ai-skills
 ```
 
 - Add `--skill <name>` to install one skill instead of all 33 — for example
-  `npx skills add Eazworld-Labs/eazworld-ai-skills --skill nigeria-payments`.
+  `npx skills add Eazworld-Labs/eazworld-ai-skills --skill eaz-nigeria-payments`.
 - Add `--agent claude-code` (or `--agent opencode`) to target one agent, `-g` to
   install globally for all projects, and run `npx skills update` any time to pull
   the latest versions.
@@ -236,8 +243,8 @@ updates use the same one command. To install only part of the library, name the
 skills you want — everything else is skipped:
 
 ```bash
-bash scripts/install.sh --skill nigeria-payments --skill pos-inventory
-# PowerShell: .\install.ps1 -Skill nigeria-payments,pos-inventory
+bash scripts/install.sh --skill eaz-nigeria-payments --skill eaz-pos-inventory
+# PowerShell: .\install.ps1 -Skill eaz-nigeria-payments,eaz-pos-inventory
 ```
 
 The clone source defaults to

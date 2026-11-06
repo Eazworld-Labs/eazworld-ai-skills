@@ -96,6 +96,11 @@ if ($Skill -contains '*') {
 } else {
     foreach ($name in $Skill) {
         $srcPath = Join-Path $SourceRoot $name
+        # Skill names carry an eaz- prefix; accept the short form too.
+        if (-not (Test-Path (Join-Path $srcPath "SKILL.md")) -and
+            (Test-Path (Join-Path $SourceRoot "eaz-$name\SKILL.md"))) {
+            $srcPath = Join-Path $SourceRoot "eaz-$name"
+        }
         $src = if (Test-Path (Join-Path $srcPath "SKILL.md")) { Get-Item $srcPath } else { $null }
         if (-not $src) {
             Write-Err "skill not found in the library: $name"
@@ -105,13 +110,22 @@ if ($Skill -contains '*') {
             exit 1
         }
         Install-OneSkill $src
-        Write-Ok "installed skill: $name"
+        Write-Ok "installed skill: $($src.Name)"
     }
 }
 foreach ($legacy in 'software-engineering','digital-marketing','ai-automation','business-solutions') {
     $old = Join-Path $SkillsDir $legacy
     if ((Test-Path $old) -and -not (Test-Path (Join-Path $old "SKILL.md"))) {
         Write-Info "old folder found: .claude\skills\$legacy - it is no longer used, delete it when ready"
+    }
+}
+# Releases before the eaz- prefix installed skills under plain names; those old copies
+# sit next to the new ones, so point them out instead of deleting anything.
+foreach ($installed in Get-ChildItem -Directory $SkillsDir -Filter "eaz-*") {
+    $plain = $installed.Name.Substring(4)
+    $oldSkill = Join-Path $SkillsDir "$plain\SKILL.md"
+    if ((Test-Path $oldSkill) -and (Select-String -Path $oldSkill -Pattern "author: Eazworld" -Quiet)) {
+        Write-Info "old copy found: .claude\skills\$plain - replaced by eaz-$plain, delete it when ready"
     }
 }
 $Count = (Get-ChildItem -Directory $SkillsDir | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") }).Count

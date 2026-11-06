@@ -73,9 +73,9 @@ eazworld-ai-skills/
 │
 ├── .claude/
 │   └── skills/                         # Authoritative shared skill definitions
-│       ├── software-architecture/      # one folder per skill, one level deep
+│       ├── eaz-software-architecture/      # one folder per skill, one level deep
 │       │   └── SKILL.md
-│       ├── frontend-design/
+│       ├── eaz-frontend-design/
 │       │   ├── SKILL.md
 │       │   └── references/
 │       └── ...                         # department = metadata.department, not a folder

@@ -12,7 +12,8 @@
  * Checks performed:
  *   1. Flat layout            — every skill is `.claude/skills/<name>/SKILL.md`; agents do
  *                               not discover skills nested deeper, so nesting is rejected.
- *   2. Kebab-case enforcement — skill directories must match /^[a-z0-9]+(-[a-z0-9]+)*$/
+ *   2. Kebab-case + prefix    — skill directories must match /^[a-z0-9]+(-[a-z0-9]+)*$/ and
+ *                               start with `eaz-` so names never collide with other skills.
  *   3. Frontmatter            — valid YAML, `name` matches parent dir, `description` present,
  *                               `metadata.department` is one of the 4 departments.
  *   4. Mandatory sections     — all 7 SKILL.md sections present.
@@ -45,6 +46,11 @@ const CORE_DEPARTMENTS = [
   'ai-automation',
   'business-solutions',
 ];
+
+// Every skill name starts with this prefix so the library never collides with a user's
+// own or a built-in skill of the same name (the more specific personal skill would win
+// and silently shadow ours).
+const SKILL_PREFIX = 'eaz-';
 
 // docs/SKILL_AUTHORING_GUIDE.md §5 — lowercase kebab-case only.
 const KEBAB_CASE_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -442,6 +448,15 @@ function validateSkill(relSkillDir, skillDir, reporter) {
       'skill-kebab',
       relSkillDir,
       `directory name "${skillName}" must be lowercase kebab-case (a-z, 0-9, hyphens)`
+    );
+  }
+
+  if (!skillName.startsWith(SKILL_PREFIX)) {
+    reporter.error(
+      'skill-prefix',
+      relSkillDir,
+      `directory name "${skillName}" must start with "${SKILL_PREFIX}" ` +
+        '(prevents name collisions with other skills)'
     );
   }
 

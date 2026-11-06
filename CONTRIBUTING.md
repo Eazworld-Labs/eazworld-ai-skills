@@ -59,11 +59,12 @@ git checkout -b feat/add-graphql-skill
 Follow the rules outlined in `docs/SKILL_AUTHORING_GUIDE.md`.
 
 **Step 3a — Create the directory.** Ensure your skill directory name uses lowercase
-kebab-case, directly under `.claude/skills/` (no department folder — agents only
-discover skills one level deep). Set `metadata.department` in the frontmatter:
+kebab-case with the `eaz-` prefix, directly under `.claude/skills/` (no department
+folder — agents only discover skills one level deep). Set `metadata.department` in the
+frontmatter:
 
 ```text
-.claude/skills/[skill-name]/
+.claude/skills/eaz-[skill-name]/
 ├── SKILL.md
 ├── references/
 └── assets/

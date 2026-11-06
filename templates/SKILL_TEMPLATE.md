@@ -1,5 +1,5 @@
 ---
-name: skill-name-in-kebab-case
+name: eaz-skill-name-in-kebab-case
 description: Third-person descriptive summary of what this skill does and the exact
   scenarios, user requests, or conditions that trigger its activation.
 license: MIT

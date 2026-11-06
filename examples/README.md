@@ -9,7 +9,7 @@ correctly.
 ```text
 examples/
 ├── valid-skills/     # Must pass validation with exit code 0
-│   └── sample-skill/                  # Fully compliant skill + internal link
+│   └── eaz-sample-skill/              # Fully compliant skill + internal link
 └── invalid-skills/   # Must fail validation with exit code 1
     ├── Bad_Skill_Name/                # Kebab-case violation
     ├── missing-entry/                 # No SKILL.md
@@ -19,6 +19,7 @@ examples/
     ├── force-push/                    # git push --force in a code fence
     ├── inline-mention/                # Prose mention (must NOT be flagged)
     ├── broken-links/                  # Relative link to missing file
+    ├── no-prefix/                     # Name does not start with eaz-
     ├── bad-department/                # metadata.department not a known department
     └── rogue-tools/rogue-skill/       # Skill nested too deep (undiscoverable)
 ```

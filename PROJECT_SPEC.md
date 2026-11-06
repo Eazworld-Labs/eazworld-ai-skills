@@ -47,9 +47,9 @@ Skills layout:
 eazworld-ai-skills/
 ├── .claude/
 │   └── skills/                # Local runtime link for Claude Code
-│       ├── frontend-design/       # one folder per skill; department is a
-│       ├── backend-engineering/   # `metadata.department` label, not a folder
-│       ├── ghana-payments/
+│       ├── eaz-frontend-design/       # one folder per skill; department is a
+│       ├── eaz-backend-engineering/   # `metadata.department` label, not a folder
+│       ├── eaz-ghana-payments/
 │       └── ...
 ├── templates/                 # Reusable code skeletons and assets
 ├── CONTRIBUTE.md              # Open-source submission guide

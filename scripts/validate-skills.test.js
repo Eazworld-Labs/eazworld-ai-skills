@@ -59,6 +59,7 @@ test('invalid fixtures fail with exit code 1 and descriptive messages', () => {
 
   // Structure & naming (task 2.1)
   assertError(res, 'skill-kebab', 'Bad_Skill_Name');
+  assertError(res, 'skill-prefix', 'no-prefix');
   assertError(res, 'missing-skill-md', 'missing-entry');
   assertError(res, 'nested-skill', 'rogue-tools');
   assertError(res, 'department-invalid', 'bad-department');
@@ -184,7 +185,7 @@ test('parseFrontmatter folds multi-line descriptions (SKILL_TEMPLATE compatible)
   );
   const result = parseFrontmatter(template);
   assert.strictEqual(result.ok, true, JSON.stringify(result));
-  assert.strictEqual(result.data.name, 'skill-name-in-kebab-case');
+  assert.strictEqual(result.data.name, 'eaz-skill-name-in-kebab-case');
   assert.ok(
     result.data.description.includes('trigger its activation'),
     `folded description lost content: "${result.data.description}"`
