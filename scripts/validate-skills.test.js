@@ -60,7 +60,8 @@ test('invalid fixtures fail with exit code 1 and descriptive messages', () => {
   // Structure & naming (task 2.1)
   assertError(res, 'skill-kebab', 'Bad_Skill_Name');
   assertError(res, 'missing-skill-md', 'missing-entry');
-  assertError(res, 'department-unknown', 'rogue-tools');
+  assertError(res, 'nested-skill', 'rogue-tools');
+  assertError(res, 'department-invalid', 'bad-department');
 
   // Frontmatter (task 2.1)
   assertError(res, 'description-missing', 'no-description');
@@ -83,16 +84,6 @@ test('invalid fixtures fail with exit code 1 and descriptive messages', () => {
   // credential detection is covered by the runtime-generated test below so that
   // no secret-shaped string is ever committed (GitHub Push Protection).
   assertError(res, 'dangerous:git-force-push', 'force-push');
-
-  // Duplicates (task 2.1)
-  const dupLine = outputLines(res).find(
-    (l) => l.includes('[duplicate-skill]') && l.includes('dup-skill')
-  );
-  assert.ok(dupLine, `expected [duplicate-skill] error\n${res.stdout}`);
-  assert.ok(
-    dupLine.includes('software-engineering') && dupLine.includes('digital-marketing'),
-    `duplicate error should list both departments:\n${dupLine}`
-  );
 
   // Summary must report a failing result.
   assert.ok(res.stdout.includes('Result         : FAIL'), res.stdout);
@@ -153,15 +144,7 @@ function buildLeakySkill() {
 test('secret scan detects runtime-generated credentials (task 2.2)', () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'eazworld-leaks-'));
   try {
-    for (const dept of [
-      'software-engineering',
-      'digital-marketing',
-      'ai-automation',
-      'business-solutions',
-    ]) {
-      fs.mkdirSync(path.join(tmp, dept), { recursive: true });
-    }
-    const skillDir = path.join(tmp, 'software-engineering', 'generated-leaks');
+    const skillDir = path.join(tmp, 'generated-leaks');
     fs.mkdirSync(skillDir, { recursive: true });
     fs.writeFileSync(path.join(skillDir, 'SKILL.md'), buildLeakySkill());
 

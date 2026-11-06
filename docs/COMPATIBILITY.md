@@ -11,7 +11,7 @@ test outcomes and runner versions for every compatibility check in tasks.md Phas
 | Claude Code CLI | 2.1.312 |
 | Node.js | v24.21.0 |
 | Library size | 33 skills — 14 software-engineering, 7 digital-marketing, 5 ai-automation, 7 business-solutions |
-| Skill source | `.claude/skills/<department>/<skill-name>/SKILL.md` |
+| Skill source | `.claude/skills/<skill-name>/SKILL.md` (one level deep — deeper nesting is not discovered) |
 
 ## OpenCode Verification
 

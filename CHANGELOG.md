@@ -20,6 +20,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Flat skill layout (breaking for manual copies):** skills now live at
+  `.claude/skills/<skill-name>/SKILL.md`. Agents only discover skills one level deep,
+  so the previous `<department>/<skill>` nesting meant a manual copy was never picked
+  up. The department is now `metadata.department` in each skill's frontmatter. The
+  validator requires that field and rejects nested skills (`nested-skill`); both
+  installers copy skill folders individually, never delete skills you added yourself,
+  and point out leftover department folders from older installs.
+
 - **`frontend-design` v1.1.0:** stack-agnostic core with stack detection; asks the user
   to choose styling method, visual direction, and token values before building. The
   visual system moved to a reference file and is now a default, not a mandate.

@@ -102,29 +102,45 @@ if [ ! -d "$CACHE_DIR/.claude/skills" ]; then
   exit 1
 fi
 
-# A name-style request ('*') refreshes the whole tree; a named selection copies
-# exactly the requested skills and never deletes anything else in the target.
+# A name-style request ('*') refreshes every library skill; a named selection copies
+# exactly the requested skills. Either way only the library's own skill folders are
+# touched - skills you added yourself are never deleted. Skills live one level deep
+# (.claude/skills/<skill-name>/SKILL.md): agents do not discover deeper nesting.
+install_skill() {
+  src="$1"
+  dest="$TARGET/.claude/skills/$(basename "$src")"
+  rm -rf "$dest"
+  cp -R "$src" "$dest"
+}
+
 if [ "$SKILL_LIST" = '*' ]; then
-  if command -v rsync >/dev/null 2>&1; then
-    rsync -a --delete "$CACHE_DIR/.claude/skills/" "$TARGET/.claude/skills/"
-  else
-    cp -R "$CACHE_DIR/.claude/skills/." "$TARGET/.claude/skills/"
-  fi
+  for skill_src in "$CACHE_DIR"/.claude/skills/*/; do
+    [ -f "${skill_src}SKILL.md" ] || continue
+    install_skill "${skill_src%/}"
+  done
 else
   for skill_name in $SKILL_LIST; do
-    skill_src="$(find "$CACHE_DIR/.claude/skills" -mindepth 2 -maxdepth 2 -type d -name "$skill_name" | head -1)"
-    if [ -z "$skill_src" ]; then
+    skill_src="$CACHE_DIR/.claude/skills/$skill_name"
+    if [ ! -f "$skill_src/SKILL.md" ]; then
       print_err "skill not found in the library: $skill_name"
-      available="$(find "$CACHE_DIR/.claude/skills" -name 'SKILL.md' | while read -r f; do basename "$(dirname "$f")"; done | sort | tr '\n' ' ')"
+      available="$(find "$CACHE_DIR/.claude/skills" -mindepth 2 -maxdepth 2 -name 'SKILL.md' | while read -r f; do basename "$(dirname "$f")"; done | sort | tr '\n' ' ')"
       print_info "available skills: $available"
       exit 1
     fi
-    cp -R "$skill_src" "$TARGET/.claude/skills/"
+    install_skill "$skill_src"
     print_ok "installed skill: $skill_name"
   done
 fi
 
-COUNT="$(find "$TARGET/.claude/skills" -name 'SKILL.md' | wc -l | tr -d ' ')"
+# Older releases installed skills inside department folders, which agents cannot
+# discover. Point them out instead of deleting anything.
+for legacy in software-engineering digital-marketing ai-automation business-solutions; do
+  if [ -d "$TARGET/.claude/skills/$legacy" ] && [ ! -f "$TARGET/.claude/skills/$legacy/SKILL.md" ]; then
+    print_info "old folder found: .claude/skills/$legacy - it is no longer used, delete it when ready"
+  fi
+done
+
+COUNT="$(find "$TARGET/.claude/skills" -mindepth 2 -maxdepth 2 -name 'SKILL.md' | wc -l | tr -d ' ')"
 if [ "$COUNT" -eq 0 ]; then
   print_err "no SKILL.md files were installed — aborting."
   exit 1

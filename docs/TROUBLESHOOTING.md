@@ -38,7 +38,9 @@ Common causes, in order of frequency:
 
 ### A skill does not appear in the agent's skill list
 
-1. Confirm the file exists at `.claude/skills/<department>/<skill-name>/SKILL.md`.
+1. Confirm the file exists at `.claude/skills/<skill-name>/SKILL.md` — exactly one
+   folder below `skills/`. Skills nested in a subfolder (such as an old
+   `software-engineering/` folder) are not discovered.
 2. Re-run the validator — discovery requires valid frontmatter.
 3. Restart the agent session; skills are indexed at startup, not mid-session.
 4. Check for an ID collision: if a built-in skill shares the name (known case:
@@ -50,7 +52,7 @@ Common causes, in order of frequency:
 Relative links resolve against the skill's own directory. Verify the target exists:
 
 ```bash
-ls .claude/skills/<department>/<skill-name>/references/
+ls .claude/skills/<skill-name>/references/
 ```
 
 All three current references are linked as `./references/<file>.md` from their
@@ -77,7 +79,7 @@ Clone the repository and open it as your workspace — see the Quickstart in
 natively; there is no separate install step.
 
 **Where do I add a new skill?**
-`.claude/skills/<department>/<skill-name>/SKILL.md`, following the step-by-step guide
+`.claude/skills/<skill-name>/SKILL.md`, following the step-by-step guide
 in [CONTRIBUTING.md](../CONTRIBUTING.md). One skill, one directory, one SKILL.md.
 
 **Why does one skill live in two departments' trigger lists?**

@@ -5,19 +5,20 @@
  * Eazworld AI Skills Library — Skill Validation Linter (Phase 2)
  *
  * Validates every skill under `.claude/skills/` against the standards defined in:
- *   - docs/ARCHITECTURE.md            (department layout)
+ *   - docs/ARCHITECTURE.md            (flat skill layout)
  *   - docs/SKILL_AUTHORING_GUIDE.md   (naming, frontmatter, 7 mandatory sections)
  *   - docs/SECURITY_POLICY.md         (secret & destructive-command scanning)
  *
  * Checks performed:
- *   1. Department structure   — 4 core departments must exist; unknown departments rejected.
+ *   1. Flat layout            — every skill is `.claude/skills/<name>/SKILL.md`; agents do
+ *                               not discover skills nested deeper, so nesting is rejected.
  *   2. Kebab-case enforcement — skill directories must match /^[a-z0-9]+(-[a-z0-9]+)*$/
- *   3. Frontmatter            — valid YAML, `name` matches parent dir, `description` present.
+ *   3. Frontmatter            — valid YAML, `name` matches parent dir, `description` present,
+ *                               `metadata.department` is one of the 4 departments.
  *   4. Mandatory sections     — all 7 SKILL.md sections present.
  *   5. Internal links         — relative `references/`, `assets/` targets must exist.
  *   6. Secret scan            — API keys, private tokens, DB URIs, hardcoded credentials.
  *   7. Dangerous commands     — `rm -rf /`, `git push --force` (fenced/runnable context).
- *   8. Duplicates             — skill names must be unique across departments.
  *
  * Usage:
  *   node scripts/validate-skills.js [--skills-dir <path>] [--no-color] [--help]
@@ -36,7 +37,8 @@ const DEFAULT_SKILLS_DIR = path.join('.claude', 'skills');
  * Standards (docs/ARCHITECTURE.md §7, docs/SKILL_AUTHORING_GUIDE.md) *
  * ------------------------------------------------------------------ */
 
-// The 4 core departments tracked by the v1.0.0 roadmap (31 skills).
+// The 4 departments a skill may belong to. A department is a label in the skill's
+// `metadata.department` field - not a folder - so grouping never affects discovery.
 const CORE_DEPARTMENTS = [
   'software-engineering',
   'digital-marketing',
@@ -446,11 +448,26 @@ function validateSkill(relSkillDir, skillDir, reporter) {
   // 2. SKILL.md entry file must exist
   const skillMdPath = path.join(skillDir, 'SKILL.md');
   if (!fs.existsSync(skillMdPath)) {
-    reporter.error(
-      'missing-skill-md',
-      relSkillDir,
-      'skill directory has no SKILL.md entry file'
-    );
+    const hasNestedSkill = fs
+      .readdirSync(skillDir, { withFileTypes: true })
+      .some(
+        (e) =>
+          e.isDirectory() && fs.existsSync(path.join(skillDir, e.name, 'SKILL.md'))
+      );
+    if (hasNestedSkill) {
+      reporter.error(
+        'nested-skill',
+        relSkillDir,
+        'contains skills nested one level too deep - agents only discover ' +
+          '.claude/skills/<skill-name>/SKILL.md, so move each skill up to the skills root'
+      );
+    } else {
+      reporter.error(
+        'missing-skill-md',
+        relSkillDir,
+        'skill directory has no SKILL.md entry file'
+      );
+    }
     return skillName;
   }
 
@@ -508,6 +525,22 @@ function validateSkill(relSkillDir, skillDir, reporter) {
 
     if (typeof license !== 'string' || !license.trim()) {
       reporter.warn('license-missing', relSkillMd, 'recommended field "license" is missing (defaults to MIT)');
+    }
+
+    const department = parsed.data.metadata && parsed.data.metadata.department;
+    if (typeof department !== 'string' || !department.trim()) {
+      reporter.error(
+        'department-missing',
+        relSkillMd,
+        `metadata.department is required - one of: ${CORE_DEPARTMENTS.join(', ')}`
+      );
+    } else if (!CORE_DEPARTMENTS.includes(department.trim())) {
+      reporter.error(
+        'department-invalid',
+        relSkillMd,
+        `department "${department}" is not one of: ${CORE_DEPARTMENTS.join(', ')} ` +
+          '(update CORE_DEPARTMENTS in scripts/validate-skills.js if intentional)'
+      );
     }
   }
 
@@ -610,31 +643,6 @@ function runScan(skillsDir, reporter) {
   }
 
   const entries = fs.readdirSync(absSkillsDir, { withFileTypes: true });
-  const dirNames = entries.filter((e) => e.isDirectory()).map((e) => e.name);
-  const knownDepartments = new Set(CORE_DEPARTMENTS);
-
-  // Core department folders must exist (ARCHITECTURE.md §6 / ROADMAP 4 departments).
-  for (const dept of CORE_DEPARTMENTS) {
-    if (!dirNames.includes(dept)) {
-      reporter.error(
-        'department-missing',
-        `${relRoot}/${dept}`,
-        'core department folder is missing'
-      );
-    }
-  }
-
-  // Any other top-level directory is off-spec.
-  for (const name of dirNames) {
-    if (!knownDepartments.has(name)) {
-      reporter.error(
-        'department-unknown',
-        `${relRoot}/${name}`,
-        `unknown department — expected one of: ${[...knownDepartments].join(', ')} ` +
-          `(update CORE_DEPARTMENTS in scripts/validate-skills.js if intentional)`
-      );
-    }
-  }
 
   // Unexpected files at the skills root (ignore dotfiles like .DS_Store).
   for (const e of entries) {
@@ -642,52 +650,28 @@ function runScan(skillsDir, reporter) {
       reporter.warn(
         'stray-file',
         `${relRoot}/${e.name}`,
-        'unexpected file at skills root — only department folders belong here'
+        'unexpected file at skills root - only skill folders belong here'
       );
     }
   }
 
-  // Validate every skill directory, recursively, inside every department found.
-  const seenNames = new Map(); // skillName -> [relDirs]
-  for (const name of dirNames) {
-    const deptDir = path.join(absSkillsDir, name);
-    const skillDirs = fs
-      .readdirSync(deptDir, { withFileTypes: true })
-      .filter((e) => e.isDirectory() && !e.name.startsWith('.'))
-      .map((e) => path.join(deptDir, e.name));
+  // Every directory at the skills root is a skill (flat layout).
+  const skillDirs = entries
+    .filter((e) => e.isDirectory() && !e.name.startsWith('.'))
+    .map((e) => path.join(absSkillsDir, e.name));
 
-    for (const skillDir of skillDirs) {
-      const relSkillDir = path.relative(process.cwd(), skillDir);
-      const skillName = validateSkill(relSkillDir, skillDir, reporter);
-      if (skillName) {
-        if (!seenNames.has(skillName)) seenNames.set(skillName, []);
-        seenNames.get(skillName).push(relSkillDir);
-      }
-    }
-
-    const count = skillDirs.length;
-    reporter.ok(
-      `${name} \u2014 ${count} skill${count === 1 ? '' : 's'} scanned`
-    );
+  for (const skillDir of skillDirs) {
+    validateSkill(path.relative(process.cwd(), skillDir), skillDir, reporter);
   }
 
-  // Duplicate skill names across departments (SKILL_AUTHORING_GUIDE §15).
-  for (const [skillName, dirs] of seenNames) {
-    if (dirs.length > 1) {
-      reporter.error(
-        'duplicate-skill',
-        skillName,
-        `skill name appears in ${dirs.length} locations: ${dirs.join(', ')} — ` +
-          'duplicates across departments are prohibited'
-      );
-    }
-  }
+  const count = skillDirs.length;
+  reporter.ok(`${count} skill${count === 1 ? '' : 's'} scanned`);
 
   if (reporter.skillsScanned === 0) {
     reporter.warn(
       'no-skills',
       relRoot,
-      'no skill directories found yet — departments are ready for Phase 3-6 authoring'
+      'no skill directories found yet'
     );
   }
 }

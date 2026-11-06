@@ -11,7 +11,7 @@ labels: bug
 
 ## Affected Skill or File
 
-<!-- e.g. .claude/skills/software-engineering/api-development/SKILL.md, or scripts/validate-skills.js -->
+<!-- e.g. .claude/skills/api-development/SKILL.md, or scripts/validate-skills.js -->
 
 ## Steps to Reproduce
 

@@ -135,11 +135,12 @@ for versions.
 
 ```yaml
 ---
-name: department-skill-name
+name: skill-name
 description: Explicit activation trigger. Use when the user requests building X, configuring Y, or modifying Z. Include natural language keywords.
 license: MIT
 metadata:
   author: Eazworld
+  department: software-engineering
   version: "1.0.0"
 ---
 ```
@@ -152,6 +153,7 @@ metadata:
 | `description` | Mandatory | Third-person narrative describing what the skill does and when it should be activated. |
 | `license` | Recommended | Defaults to MIT. |
 | `metadata.author` | Recommended | Eazworld. |
+| `metadata.department` | Mandatory | One of `software-engineering`, `digital-marketing`, `ai-automation`, `business-solutions`. A label for grouping — never a folder. |
 | `metadata.version` | Recommended | Semantic version string wrapped in quotes (e.g., `"1.0.0"`). |
 
 ### 6.2 Description Quality Standards

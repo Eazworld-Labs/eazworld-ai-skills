@@ -47,15 +47,10 @@ Skills layout:
 eazworld-ai-skills/
 ├── .claude/
 │   └── skills/                # Local runtime link for Claude Code
-├── skills/
-│   ├── software-engineering/   # Department 1: Core Tech & Cloud
-│   │   ├── frontend-design/
-│   │   ├── backend-engineering/
-│   │   ├── ghana-payments/
-│   │   └── ...
-│   ├── digital-marketing/     # Department 2: Marketing & SEO
-│   ├── ai-automation/         # Department 3: Workflows & Chatbots
-│   └── business-solutions/    # Department 4: Industry vertical suites
+│       ├── frontend-design/       # one folder per skill; department is a
+│       ├── backend-engineering/   # `metadata.department` label, not a folder
+│       ├── ghana-payments/
+│       └── ...
 ├── templates/                 # Reusable code skeletons and assets
 ├── CONTRIBUTE.md              # Open-source submission guide
 ├── LICENSE                    # MIT

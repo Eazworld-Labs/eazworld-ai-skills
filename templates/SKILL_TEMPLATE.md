@@ -5,6 +5,7 @@ description: Third-person descriptive summary of what this skill does and the ex
 license: MIT
 metadata:
   author: Eazworld
+  department: software-engineering  # software-engineering | digital-marketing | ai-automation | business-solutions
   version: "1.0.0"
 ---
 

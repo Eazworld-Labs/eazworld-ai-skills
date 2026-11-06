@@ -73,16 +73,12 @@ eazworld-ai-skills/
 │
 ├── .claude/
 │   └── skills/                         # Authoritative shared skill definitions
-│       ├── software-engineering/       # Department 1: Core tech, architecture & mobile
-│       │   ├── software-architecture/
-│       │   │   └── SKILL.md
-│       │   ├── frontend-design/
-│       │   │   └── SKILL.md
-│       │   └── ...
-│       ├── digital-marketing/          # Department 2: SEO, Ads & Brand
-│       ├── ai-automation/              # Department 3: n8n, Chatbots & APIs
-│       ├── business-solutions/         # Department 4: POS, ERP & Fintech
-│       └── device-services/            # Department 5: Technical workflows & repair
+│       ├── software-architecture/      # one folder per skill, one level deep
+│       │   └── SKILL.md
+│       ├── frontend-design/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       └── ...                         # department = metadata.department, not a folder
 │
 ├── docs/
 │   ├── ARCHITECTURE.md                 # This architecture specification
@@ -114,8 +110,9 @@ eazworld-ai-skills/
 
 ## 5. Skill Architecture & Directory Layout
 
-Every skill must reside in its own dedicated directory under its respective department,
-following the standardized Open Agent Skills structure:
+Every skill must reside in its own dedicated directory directly under `.claude/skills/`
+(agents discover skills exactly one level deep; the department is the skill's
+`metadata.department` label, never a folder), following the standardized Open Agent Skills structure:
 
 ```text
 skill-name/

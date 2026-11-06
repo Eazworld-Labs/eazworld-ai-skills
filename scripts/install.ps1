@@ -80,14 +80,23 @@ if (-not (Test-Path $SourceRoot)) {
     exit 1
 }
 
-# A named selection copies exactly the requested skills and never deletes
-# anything else in the target; '*' refreshes the whole tree.
+# Skills live one level deep (.claude\skills\<skill-name>\SKILL.md): agents do not
+# discover deeper nesting. A named selection copies exactly the requested skills;
+# '*' refreshes every library skill. Skills you added yourself are never deleted.
+function Install-OneSkill($SrcDir) {
+    $dest = Join-Path $SkillsDir $SrcDir.Name
+    if (Test-Path $dest) { Remove-Item -Recurse -Force $dest }
+    Copy-Item -Recurse -Force $SrcDir.FullName $dest
+}
+
 if ($Skill -contains '*') {
-    Copy-Item -Recurse -Force (Join-Path $SourceRoot "*") $SkillsDir
+    Get-ChildItem -Directory $SourceRoot |
+        Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") } |
+        ForEach-Object { Install-OneSkill $_ }
 } else {
     foreach ($name in $Skill) {
-        $src = Get-ChildItem -Directory -Recurse -Depth 2 -Filter $name $SourceRoot |
-            Select-Object -First 1
+        $srcPath = Join-Path $SourceRoot $name
+        $src = if (Test-Path (Join-Path $srcPath "SKILL.md")) { Get-Item $srcPath } else { $null }
         if (-not $src) {
             Write-Err "skill not found in the library: $name"
             $available = (Get-ChildItem -Recurse -Filter "SKILL.md" $SourceRoot |
@@ -95,11 +104,17 @@ if ($Skill -contains '*') {
             Write-Info "available skills: $available"
             exit 1
         }
-        Copy-Item -Recurse -Force $src.FullName $SkillsDir
+        Install-OneSkill $src
         Write-Ok "installed skill: $name"
     }
 }
-$Count = (Get-ChildItem -Recurse -Filter "SKILL.md" $SkillsDir).Count
+foreach ($legacy in 'software-engineering','digital-marketing','ai-automation','business-solutions') {
+    $old = Join-Path $SkillsDir $legacy
+    if ((Test-Path $old) -and -not (Test-Path (Join-Path $old "SKILL.md"))) {
+        Write-Info "old folder found: .claude\skills\$legacy - it is no longer used, delete it when ready"
+    }
+}
+$Count = (Get-ChildItem -Directory $SkillsDir | Where-Object { Test-Path (Join-Path $_.FullName "SKILL.md") }).Count
 if ($Count -eq 0) {
     Write-Err "no SKILL.md files were installed — aborting."
     exit 1

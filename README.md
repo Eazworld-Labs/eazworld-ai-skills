@@ -82,10 +82,9 @@ See the full release plan in [docs/ROADMAP.md](docs/ROADMAP.md).
 eazworld-ai-skills/
 ├── .claude/
 │   └── skills/                  # SSOT: shared skill definitions
-│       ├── software-engineering/
-│       ├── digital-marketing/
-│       ├── ai-automation/
-│       └── business-solutions/
+│       ├── frontend-design/     # one folder per skill, directly under skills/
+│       ├── n8n-automation/      # (departments are a label in each skill's
+│       └── ...                  #  metadata, not folders)
 ├── .github/
 │   └── workflows/               # CI validation pipelines (GitHub Actions)
 ├── docs/
@@ -199,10 +198,8 @@ npx skills add Eazworld-Labs/eazworld-ai-skills
 - Add `--agent claude-code` (or `--agent opencode`) to target one agent, `-g` to
   install globally for all projects, and run `npx skills update` any time to pull
   the latest versions.
-- Discovery is verified working against this library's nested
-  `.claude/skills/<department>/<skill>/` layout: the CLI parses every `SKILL.md`,
-  and each skill — including its `references/` — lands in
-  `.claude/skills/<skill-name>/` in your project.
+- Every skill lives at `.claude/skills/<skill-name>/SKILL.md` — one folder deep —
+  and lands at the same path in your project, `references/` included.
 
 (The clone source is `eazworld/eazworld-ai-skills`; while the live repository still
 sits at `fekt2016/eazworld-ai-skills`, substitute that owner in the command.)
@@ -267,8 +264,9 @@ ships with the skills.
 ### How discovery works
 
 - Both agents read
-  `<your-project>/.claude/skills/<department>/<skill-name>/SKILL.md` straight from
-  the workspace root at startup — that is the entire contract.
+  `<your-project>/.claude/skills/<skill-name>/SKILL.md` straight from the workspace
+  root at startup — that is the entire contract. Skills nested deeper (for example
+  inside a department folder) are **not** discovered.
 - Open a fresh session after installing (skills are indexed at startup, not
   mid-session), then ask the agent to list its skills to verify they registered.
 - The skills are plain Markdown: copy them, rename them, or edit them freely. If

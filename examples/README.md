@@ -9,22 +9,18 @@ correctly.
 ```text
 examples/
 ├── valid-skills/     # Must pass validation with exit code 0
-│   ├── software-engineering/sample-skill/   # Fully compliant skill + internal link
-│   ├── digital-marketing/                   # Empty core department (.gitkeep)
-│   ├── ai-automation/                      # Empty core department (.gitkeep)
-│   └── business-solutions/                 # Empty core department (.gitkeep)
+│   └── sample-skill/                  # Fully compliant skill + internal link
 └── invalid-skills/   # Must fail validation with exit code 1
-    ├── software-engineering/Bad_Skill_Name/       # Kebab-case violation
-    ├── software-engineering/missing-entry/        # No SKILL.md
-    ├── software-engineering/no-description/       # Missing description field
-    ├── software-engineering/wrong-name-field/     # name != parent directory
-    ├── software-engineering/few-sections/         # Missing mandatory sections
-    ├── software-engineering/force-push/           # git push --force in a code fence
-    ├── software-engineering/inline-mention/       # Prose mention (must NOT be flagged)
-    ├── software-engineering/broken-links/         # Relative link to missing file
-    ├── software-engineering/dup-skill/            # Duplicate name across departments
-    ├── digital-marketing/dup-skill/               # Duplicate name across departments
-    └── rogue-tools/                               # Unknown department
+    ├── Bad_Skill_Name/                # Kebab-case violation
+    ├── missing-entry/                 # No SKILL.md
+    ├── no-description/                # Missing description field
+    ├── wrong-name-field/              # name != parent directory
+    ├── few-sections/                  # Missing mandatory sections
+    ├── force-push/                    # git push --force in a code fence
+    ├── inline-mention/                # Prose mention (must NOT be flagged)
+    ├── broken-links/                  # Relative link to missing file
+    ├── bad-department/                # metadata.department not a known department
+    └── rogue-tools/rogue-skill/       # Skill nested too deep (undiscoverable)
 ```
 
 ## Run locally

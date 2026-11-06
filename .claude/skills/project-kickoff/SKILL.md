@@ -1,0 +1,121 @@
+---
+name: project-kickoff
+description: Run the kickoff for a new client project before any code is written.
+  Use when starting a new website, web app, mobile app, e-commerce store, or
+  automation project, onboarding a client, or setting up a repository that has no
+  PROJECT.md. Captures stack, region, and design choices, creates PROJECT.md and
+  DESIGN.md, and recommends which skills to apply in what order.
+license: MIT
+metadata:
+  author: Eazworld
+  department: software-engineering
+  version: "1.0.0"
+---
+
+# Project Kickoff
+
+## 1. Overview & Purpose
+
+Gives every new project the same start. The skill asks the kickoff questions once,
+records the answers in `PROJECT.md` and `DESIGN.md`, recommends which library skills
+fit the project and in what order, and stops for human approval before any building
+begins. Every later skill reads those two files first, so decisions are made once and
+stay consistent across the team and across projects. It plans and records; it never
+scaffolds code, installs dependencies, or changes infrastructure.
+
+## 2. Activation Conditions & Triggers
+
+- **Trigger 1:** When a user says they are starting, onboarding, or scoping a new
+  project, site, app, store, or automation.
+- **Trigger 2:** When a repository has no `PROJECT.md` and the task is a new build.
+- **Trigger 3:** When an existing project is being taken over and its stack, region, or
+  design decisions are undocumented.
+- **Anti-Trigger:** Do not activate for a bug fix, feature, or review inside a project
+  that already has a complete `PROJECT.md` — route to the relevant skill directly.
+  Visual and styling decisions themselves belong to frontend-design; this skill only
+  opens that conversation and records its outcome.
+
+## 3. Required Inputs & Project Audit
+
+- **Mandatory Inputs:**
+  1. What the project is for and who uses it (one sentence each).
+  2. Project type: marketing site, e-commerce, web app, mobile app, internal tool, or
+     automation.
+  3. Region and market, because payments, compliance, and language depend on it.
+- **Project Audit Checklist:**
+  1. Look for an existing `PROJECT.md`, `DESIGN.md`, `README`, and manifests
+     (`package.json`, `pubspec.yaml`, `composer.json`) and read them before asking.
+     Never re-ask what the repository already answers.
+  2. Look for a brief, Figma link, or brand guidelines the user already has.
+  3. Note anything already decided by the client or an earlier contract.
+
+## 4. Technical Standards & Rules
+
+- **Ask in one organized pass,** grouped as: project, stack, region and business,
+  design. Offer a recommendation with a one-line reason for each open decision instead
+  of an empty question; the stack is the client's choice, so never impose one.
+- **Fill the templates:** write `PROJECT.md` from
+  [Project Template](./references/project-template.md) and `DESIGN.md` from
+  [Design Template](./references/design-template.md). Leave unknown fields marked
+  `TBD` — never invent a value.
+- **Hand design choices to frontend-design:** styling method, visual direction, and
+  token values are settled by that skill's choice flow; copy its outcome into
+  `DESIGN.md`.
+- **Recommend skills from the map in
+  [Skill Selection Guide](./references/skill-selection.md),** using only skills that
+  exist in the installed library, ordered by build sequence.
+- **Never write secrets** — no API keys, passwords, tokens, or connection strings — in
+  `PROJECT.md` or `DESIGN.md`. Name environment variables instead.
+- **Do not overwrite** an existing `PROJECT.md` or `DESIGN.md`; show a diff of proposed
+  changes and wait for approval.
+
+## 5. Execution Workflow (Step-by-Step)
+
+1. **Step 1: Parse Task** — Restate what is being started and for whom. Confirm whether
+   this is a new build or a takeover.
+2. **Step 2: Inspect Context** — Execute the audit checklist; list what is already known
+   and what is missing.
+3. **Step 3: Formulate Plan** — Ask the grouped kickoff questions for the missing items
+   only, with a recommendation on each open decision. Open the frontend-design choice
+   flow for styling method, visual direction, and tokens.
+4. **Step 4: Verify Security** — Confirm no secrets or private client data are in the
+   answers about to be written; replace any with environment variable names.
+5. **Step 5: Apply Edits** — Create `PROJECT.md` and `DESIGN.md` at the repository root
+   from the templates, with `TBD` for unknowns.
+6. **Step 6: Execute Tests** — Re-read both files and check: every field is filled or
+   marked `TBD`, every recommended skill exists in the library, and nothing in the files
+   looks like a secret.
+7. **Step 7: Report Status** — Present a short kickoff summary: decisions recorded, open
+   `TBD` items, the recommended skill order with a one-line reason each, and the first
+   build steps. Stop and wait for the user's approval before any implementation.
+
+## 6. Security & Edge Case Guidelines
+
+- **Zero Hardcoding:** credentials and keys never enter project files; record the
+  variable name and where it is stored, not the value.
+- **Client Confidentiality:** record only what later work needs. Contracts, pricing,
+  and personal data about the client's customers stay out of `PROJECT.md`.
+- **Conflicting Answers:** when the user's answers conflict (a no-code budget with a
+  custom-backend feature list), name the conflict and ask which wins instead of
+  choosing silently.
+- **Unknown Stack or Region:** record `TBD` and flag it as a blocker for the skills that
+  depend on it (payments need a region; mobile needs a platform decision).
+- **Existing Files:** never overwrite or delete; propose changes and wait.
+
+## 7. Definition of Done & Quality Gates
+
+- [ ] `PROJECT.md` and `DESIGN.md` exist at the repository root.
+- [ ] Every field is filled or explicitly marked `TBD`; no invented values.
+- [ ] No secrets or private client data in either file.
+- [ ] Styling method, visual direction, and token values were chosen by the user
+      through the frontend-design flow, or are marked `TBD` with the reason.
+- [ ] Recommended skills all exist in the library and are listed in build order with a
+      one-line reason each.
+- [ ] The user approved the kickoff summary before any implementation started.
+
+## 8. Supporting References & Assets
+
+- [Project Template](./references/project-template.md) — the `PROJECT.md` skeleton.
+- [Design Template](./references/design-template.md) — the `DESIGN.md` skeleton.
+- [Skill Selection Guide](./references/skill-selection.md) — which library skills fit
+  which project type, and in what order.

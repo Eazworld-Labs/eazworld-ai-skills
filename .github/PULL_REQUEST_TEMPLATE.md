@@ -22,7 +22,7 @@
 - [ ] `node scripts/validate-skills.js` passes with 0 errors
 - [ ] Skill tested and verified in Claude Code
 - [ ] Skill tested and verified in OpenCode
-- [ ] No duplicate skill names across departments
+- [ ] Skill sits directly at `.claude/skills/<skill-name>/` with `metadata.department` set
 
 ## Security Checklist
 
