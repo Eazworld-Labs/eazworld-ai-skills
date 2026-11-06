@@ -90,7 +90,8 @@ never scaffolds code, installs dependencies, or changes infrastructure.
 - **Hand design choices to eaz-frontend-design — by invoking it.** Before asking any
   design question, invoke the `eaz-frontend-design` skill with the Skill tool and run
   its discovery and choice flow (styling method, visual direction, token values, motion
-  level). Do not improvise the design questions from memory; copy the outcome into
+  level, icon set — show the client the list of icon families and ask which icons the
+  project needs). Do not improvise the design questions from memory; copy the outcome into
   `DESIGN.md`. The design is finished only when the **full token set** is recorded (every
   color, status, type, space, shape, and motion row), the contrast check was run by the
   script, and the client approved the palette once.
@@ -142,7 +143,7 @@ never scaffolds code, installs dependencies, or changes infrastructure.
    and what is missing.
 3. **Step 3: Formulate Plan** — Ask the grouped kickoff questions for the missing items
    only, with a recommendation on each open decision. Invoke `eaz-frontend-design` with the Skill
-   tool first and run its choice flow for styling method, visual direction, tokens, and
+   tool first and run its choice flow for styling method, visual direction, tokens, icon set, and
    motion — never skip this step or improvise the design questions. When the stack has
    been accepted, invoke `eaz-software-architecture` for the architecture document.
 4. **Step 4: Verify Security** — Confirm no secrets or private client data are in the
@@ -198,7 +199,7 @@ never scaffolds code, installs dependencies, or changes infrastructure.
       the client's single approval of the palette.
 - [ ] No secrets or private client data in either file.
 - [ ] `eaz-frontend-design` was invoked, and styling method, visual direction, token
-      values, and motion level were chosen by the user through its flow, or are marked
+      values, motion level, and icon set (family, style, icons needed) were chosen by the user through its flow, or are marked
       `TBD` with the reason.
 - [ ] Recommended skills all exist in the library and are listed in build order with a
       one-line reason each.

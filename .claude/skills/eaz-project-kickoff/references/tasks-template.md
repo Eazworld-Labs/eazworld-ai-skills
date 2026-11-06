@@ -36,7 +36,8 @@ Agents update statuses as work completes. Never put secrets in this file.
 - [ ] **1.1 Kickoff questions answered** — *skill: eaz-project-kickoff*
   - Done when: `PROJECT.md` written; every field filled or marked `TBD`.
 - [ ] **1.2 Design discovery and choices** — *skill: eaz-frontend-design*
-  - Done when: `DESIGN.md` has purpose, styling method, visual direction, a Discovery
+  - Done when: `DESIGN.md` has purpose, styling method, visual direction, icon set (family,
+    style, and the list of icons needed, confirmed by the client), a Discovery
     section, an Inspiration table (or "none given"), the **full token set** (no empty row),
     a Contrast Check written by `check-contrast.cjs`, and the client's approval of the palette.
 - [ ] **1.3 Specification** — *skill: eaz-project-kickoff*

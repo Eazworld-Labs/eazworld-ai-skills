@@ -37,6 +37,9 @@ put secrets in this file.
 - **Styling method:** <!-- Tailwind | plain CSS | CSS Modules | SCSS | CSS-in-JS | library theming | native -->
 - **Visual direction:** <!-- clean & minimal | bold & vibrant | dark & premium | warm & friendly | editorial | dashboard -->
 - **Motion level:** <!-- none | subtle | expressive -->
+- **Icon set:** <!-- Lucide | Phosphor | Heroicons | Tabler | Material Symbols | SF Symbols | custom SVG -->
+- **Icon style, stroke, sizes:** <!-- e.g. outline, 2px, 16/20/24 -->
+- **Icons needed:** <!-- list, from SPEC.md features; add or remove with the client -->
 - **Signature element:** <!-- the one memorable detail, used in two places -->
 - **Theme modes:** <!-- light | dark | both -->
 

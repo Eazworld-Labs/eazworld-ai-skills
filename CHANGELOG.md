@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Icon set is now a design choice asked during setup:** `eaz-frontend-design` gains
+  `references/icon-sets.md` (families per stack, questions, starter icon lists, rules) and
+  a fifth design choice; `eaz-project-kickoff` hands it off, records it in `DESIGN.md`, and
+  requires it in the checklist and task 1.2. The `ui-task-asks-design-choices` eval now
+  checks that at least two icon families are offered.
 - **Behavior evals (`evals/`, `npm run eval`):** runs Claude Code headless against
   throwaway projects and checks that the skills change what the agent does — kickoff
   asks before building, UI work asks for design choices first, and the build gate holds

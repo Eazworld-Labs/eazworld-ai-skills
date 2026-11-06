@@ -89,7 +89,7 @@ Before writing any UI code, inspect the target repository:
   record it — see [Design Inspiration](./references/inspiration.md).
 - **Design Choices (ask, never assume):** unless `PROJECT.md`, `DESIGN.md`, or the
   existing code already settles them, get the user's decision on four things before
-  building — each with a recommendation and a one-line trade-off:
+  building — each with a recommendation and a one-line trade-off (five, counting icons):
   1. **Styling method** — see [Styling Methods](./references/styling-methods.md).
   2. **Visual direction** — see [Visual Directions](./references/visual-directions.md).
   3. **Token values — a complete set, not a partial one.** Ask only what needs a person
@@ -100,6 +100,12 @@ Before writing any UI code, inspect the target repository:
   4. **Motion level** — none, subtle (recommended default), or expressive, with the
      animation approach for the stack — see
      [Motion & Animation](./references/motion-and-animation.md).
+  5. **Icon set** — show the list of icon families for the stack (Lucide, Phosphor,
+     Heroicons, Tabler, Material Symbols, SF Symbols, custom SVG), then ask style,
+     stroke and sizes, and which icons the project needs — see
+     [Icon Sets](./references/icon-sets.md). Ask it in the same setup batch as the other
+     choices, with a recommendation, even when the first screen needs no icons: the set
+     is project-wide, and deferring it lets mixed families creep in later.
   Record the answers in `DESIGN.md` so later work does not re-ask.
 - **Codebase Audit Checklist:**
   1. Review the existing component library and reuse its primitives before adding new
@@ -253,6 +259,8 @@ export function Badge({ label, tone }: BadgeProps) {
   stack with text-based styles.
 - [Design Inspiration](./references/inspiration.md) — how to ask for reference pages and
   images, take in links and screenshots safely, extract principles, and avoid copying.
+- [Icon Sets](./references/icon-sets.md) — icon families per stack, what to ask, starter
+  icon lists by project type, and icon rules.
 - [Motion & Animation](./references/motion-and-animation.md) — motion levels, motion
   tokens, CSS-first patterns with verified browser support, libraries per stack, and
   motion QA.

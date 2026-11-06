@@ -207,6 +207,15 @@ module.exports = [
         test: (ctx) => askedAbout(ctx.turns[0].final, /motion|subtle|expressive|animation level/i),
       },
       {
+        name: 'asks which icon set to use, naming at least two families',
+        test: (ctx) => {
+          const t = ctx.turns[0].final;
+          const families = (t.match(/lucide|phosphor|heroicons|tabler|material symbols|sf symbols|custom svg/gi) || [])
+            .map((f) => f.toLowerCase());
+          return new Set(families).size >= 2 || 'reply does not offer a list of icon families';
+        },
+      },
+      {
         name: 'asks for inspiration and offers links or images',
         test: (ctx) => {
           const t = ctx.turns[0].final;
