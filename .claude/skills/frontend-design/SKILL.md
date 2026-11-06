@@ -9,7 +9,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Frontend Design
@@ -130,7 +130,8 @@ export function Badge({ label, tone }: BadgeProps) {
 1. **Step 1: Parse Task** — Restate the screen or component, its states (default, loading,
    empty, error), and its responsive requirements. Then write the one-line design
    purpose (Section 1A) — audience, one job, one impression, primary action — before
-   opening any file.
+   opening any file. If `DESIGN.md` leaves the one job, the impression, or the primary
+   action as `TBD`, ask for them now; do not build on guesses.
 2. **Step 2: Inspect Context** — Detect the stack (Section 3), load its reference file,
    execute the audit checklist, and identify which existing components and tokens can
    be reused.
@@ -141,7 +142,10 @@ export function Badge({ label, tone }: BadgeProps) {
 5. **Step 5: Apply Edits** — Implement the components with atomic, scoped changes to
    related files only.
 6. **Step 6: Execute Tests** — Run the project's type-check, lint, and test commands;
-   check the screen at all target viewports or devices.
+   check the screen at all target viewports or devices. Then run the token check
+   (`node scripts/check-tokens.js <source-dir>` from this skill's folder) and replace
+   every raw color or off-grid pixel value it reports with a token — or justify the
+   few that must stay (for example one-off SVG artwork) in the report.
 7. **Step 7: Report Status** — Summarize what shipped, the stack detected, verification
    results, and any visual or accessibility caveats.
 
@@ -176,11 +180,16 @@ export function Badge({ label, tone }: BadgeProps) {
       and shadows are referenced strictly via tokens (CSS variables, framework theme,
       or the platform's theme object) — zero raw hex or arbitrary pixel values in
       component files.
+- [ ] **Token check run:** `scripts/check-tokens.js` reports no raw colors or off-grid
+      px values in component files, or each remaining hit is justified in the report.
 - [ ] **Type Scale Compliance:** All heading and body text sizing follows the project's
       type scale with no arbitrary font-size overrides.
 
 ## 8. Supporting References & Assets
 
+- [Token Check Script](./scripts/check-tokens.js) — zero-dependency scan for raw
+  colors and off-grid pixel values outside token files; run it from Step 6 on any
+  stack with text-based styles.
 - [Styling Methods](./references/styling-methods.md) — Tailwind, plain CSS, CSS
   Modules, SCSS, CSS-in-JS, library theming: how to choose and where tokens live.
 - [Visual Directions](./references/visual-directions.md) — design directions to offer

@@ -9,7 +9,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Project Kickoff
@@ -64,6 +64,19 @@ scaffolds code, installs dependencies, or changes infrastructure.
 - **Recommend skills from the map in
   [Skill Selection Guide](./references/skill-selection.md),** using only skills that
   exist in the installed library, ordered by build sequence.
+- **Build gate — core fields must be filled before any build starts.** The core fields
+  are: the one job, the one impression, the primary action, the front-end stack, and
+  the region. While any is `TBD`, the kickoff is not complete: list them as blockers,
+  ask for them, and do not recommend moving to implementation. An approval given while
+  core fields are still `TBD` does not open the gate — show exactly which fields are
+  open and get an explicit "build anyway" for those named fields, then record it as
+  "approved with open items" in `PROJECT.md`.
+- **State known trade-offs, then follow the client.** When the chosen stack, styling
+  method, or library has a known cost (client-side runtime in a server-rendering
+  framework, a library with an uncertain maintenance status, a heavy dependency for a
+  small site), say so in one line before recording it, tell the user to check the
+  library's current maintenance status, and write the note under "Decisions &
+  Trade-offs" in `PROJECT.md`. The client's choice stands; never swap it silently.
 - **Never write secrets** — no API keys, passwords, tokens, or connection strings — in
   `PROJECT.md` or `DESIGN.md`. Name environment variables instead.
 - **Do not overwrite** an existing `PROJECT.md` or `DESIGN.md`; show a diff of proposed
@@ -86,8 +99,10 @@ scaffolds code, installs dependencies, or changes infrastructure.
    marked `TBD`, every recommended skill exists in the library, and nothing in the files
    looks like a secret.
 7. **Step 7: Report Status** — Present a short kickoff summary: decisions recorded, open
-   `TBD` items, the recommended skill order with a one-line reason each, and the first
-   build steps. Stop and wait for the user's approval before any implementation.
+   `TBD` items with the core-field blockers called out first, trade-offs noted, the
+   recommended skill order with a one-line reason each, and the first build steps. Stop
+   and wait for the user's approval before any implementation; apply the build gate
+   (Section 4) before treating an approval as final.
 
 ## 6. Security & Edge Case Guidelines
 
@@ -111,6 +126,10 @@ scaffolds code, installs dependencies, or changes infrastructure.
       through the frontend-design flow, or are marked `TBD` with the reason.
 - [ ] Recommended skills all exist in the library and are listed in build order with a
       one-line reason each.
+- [ ] Core fields (one job, one impression, primary action, front-end stack, region) are
+      filled, or the user explicitly approved building with those named fields open.
+- [ ] Known trade-offs of the chosen stack and libraries are recorded under "Decisions &
+      Trade-offs".
 - [ ] The user approved the kickoff summary before any implementation started.
 
 ## 8. Supporting References & Assets

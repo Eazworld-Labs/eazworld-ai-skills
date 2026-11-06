@@ -33,6 +33,13 @@ Delete any line that does not apply. Never put secrets or credentials in this fi
 - **Design source:** <!-- Figma link, DESIGN.md, brand guidelines, or "none yet" -->
 - **See also:** `DESIGN.md` for visual direction and token values.
 
+## Decisions & Trade-offs
+
+<!-- One line per decision with a known cost, e.g. "styled-components: needs a client
+     registry under the Next.js App Router; check the library's maintenance status
+     before launch." Also record "approved with open items: <fields>" here if the
+     client approved building before core fields were settled. -->
+
 ## Team Conventions
 
 - **Branching / commit style:**

@@ -20,6 +20,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`project-kickoff` v1.1.0:** adds a build gate (the one job, impression, primary
+  action, stack, and region must be filled before building; an approval with core fields
+  still `TBD` must name them and be confirmed) and records known trade-offs of the
+  chosen stack under a new "Decisions & Trade-offs" section of `PROJECT.md`.
+- **`frontend-design` v1.2.0:** adds `scripts/check-tokens.js`, a zero-dependency scan
+  for raw colors and off-grid pixel values outside token files, wired into the
+  execution workflow and Definition of Done; asks for missing purpose fields instead of
+  building on guesses.
+
 - **Flat skill layout (breaking for manual copies):** skills now live at
   `.claude/skills/<skill-name>/SKILL.md`. Agents only discover skills one level deep,
   so the previous `<department>/<skill>` nesting meant a manual copy was never picked
