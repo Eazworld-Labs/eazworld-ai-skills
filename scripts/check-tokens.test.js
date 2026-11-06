@@ -98,3 +98,24 @@ test('--ignore skips matching files and a bad option exits with code 2', () => {
     fs.rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test('flags the global 0.01ms reduced-motion reset even in theme and global-style files', () => {
+  const dir = project({
+    'src/theme/GlobalStyle.ts': [
+      'export const g = `',
+      '  @media (prefers-reduced-motion: reduce) {',
+      '    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }',
+      '  }',
+      '`;',
+    ].join('\n'),
+    'src/theme/tokens.ts': 'export const duration = { fast: "150ms" }; export const c = "#123456";',
+  });
+  try {
+    const res = run(dir);
+    assert.strictEqual(res.status, 1, res.stdout);
+    assert.match(res.stdout, /GlobalStyle\.ts:3\s+global reduced-motion reset/);
+    assert.doesNotMatch(res.stdout, /tokens\.ts/, 'token files are still exempt from the colour and px checks');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});

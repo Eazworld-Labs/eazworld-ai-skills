@@ -144,7 +144,9 @@ Before writing any UI code, inspect the target repository:
   are not Baseline widely available need a fallback or are progressive enhancement only.
 - **Motion has a purpose, tokens, and a reduced-motion path.** Durations and easings are
   tokens; animate `transform` and `opacity`; every animation respects
-  `prefers-reduced-motion`; anything that loops can be paused.
+  `prefers-reduced-motion`; anything that loops can be paused. Handle reduced motion **per
+  effect** — never with a global `animation-duration: 0.01ms` reset, which can make some
+  animations more jarring; `scripts/check-tokens.cjs` flags it in every file.
 
 Example of a typed, single-purpose component (React/TypeScript shown; the same shape
 applies in any stack):

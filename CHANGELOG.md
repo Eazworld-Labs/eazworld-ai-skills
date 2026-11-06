@@ -41,6 +41,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`check-tokens.cjs` flags the global reduced-motion reset:** a blanket
+  `animation-duration: 0.01ms` / `transition-duration: 0.01ms` rule can make some animations more
+  jarring and is now reported in every file, including theme and global-style files that the
+  colour and pixel checks skip. `eaz-frontend-design` states the rule: handle reduced motion per
+  effect. Found in two test projects that ignored the motion reference.
+
 - **Build order is a decision, frontend-first by default (`eaz-project-kickoff` v1.6.0):** the
   kickoff now asks whether to build **frontend-first** (recommended: every screen on typed mock
   data that follows the API contract, client approval of the screens, then backend and wiring),

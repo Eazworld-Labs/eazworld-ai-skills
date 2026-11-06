@@ -8,6 +8,8 @@
  *   - hex colors (#rgb, #rrggbb, #rrggbbaa) and rgb()/rgba()/hsl()/hsla() colors
  *   - px values that are not on the 4px grid (0, 1px and 2px are allowed for borders)
  *   - raw animation durations (e.g. 300ms, 0.3s) on transition/animation/delay lines
+ *   - a global reduced-motion reset (`animation-duration: 0.01ms`) — checked in EVERY file,
+ *     including theme and global-style files, because that is where it usually hides
  *
  * Token files (theme, tokens, variables, global styles, Tailwind config) are skipped,
  * and so are custom-property declarations (`--color-x: #123456`) and media/container
@@ -36,6 +38,9 @@ const HEX_RE = /#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})\b/;
 const FUNC_COLOR_RE = /\b(?:rgba?|hsla?)\(/i;
 const PX_RE = /(?<![\w.#-])(\d+(?:\.\d+)?)px\b/g;
 const CUSTOM_PROP_RE = /^\s*--[\w-]+\s*:/;
+// Checked in every file, token and global-style files included: the blanket 0.01ms reset can make
+// some animations more jarring; reduced motion should be handled per effect.
+const RESET_RE = /(animation|transition)-duration\s*:\s*0?\.01ms/i;
 const MOTION_LINE_RE = /transition|animation|duration|delay/i;
 const DURATION_RE = /(?<![\w.#-])(\d+(?:\.\d+)?)(ms|s)\b/g;
 const BREAKPOINT_RE = /@media|@container|min-width|max-width|min-height|max-height|breakpoint/i;
@@ -108,12 +113,14 @@ function main() {
     if (!fs.existsSync(dir)) usage(`path does not exist: ${dir}`);
     const files = fs.statSync(dir).isDirectory() ? [...walk(dir)] : [dir];
     for (const file of files) {
-      if (DEFAULT_TOKEN_FILE_RE.test(file)) continue;
       if (opts.ignore && opts.ignore.test(file)) continue;
+      const tokenFile = DEFAULT_TOKEN_FILE_RE.test(file);
       scanned += 1;
       const lines = fs.readFileSync(file, 'utf8').split(/\r?\n/);
       lines.forEach((line, i) => {
-        for (const [kind, value] of checkLine(line)) {
+        const hits = tokenFile ? [] : checkLine(line);
+        if (RESET_RE.test(line)) hits.push(['global reduced-motion reset', '0.01ms - handle reduced motion per effect']);
+        for (const [kind, value] of hits) {
           findings.push({ file: path.relative(process.cwd(), file), line: i + 1, kind, value });
         }
       });
