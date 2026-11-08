@@ -87,12 +87,16 @@ never scaffolds code, installs dependencies, or changes infrastructure.
   value can be derived — a full color palette, neutrals, status colors, sensible defaults —
   propose it, show it, and ask the client to confirm once, instead of leaving it blank or
   asking about each piece. Every `TBD` that remains gets a reason and an owner.
+- **Short prompt, quick design.** When the client describes the project in a line or two
+  and gives no design details, tell `eaz-frontend-design` to use its quick mode: one
+  proposal, one approval, no questionnaire.
 - **Hand design choices to eaz-frontend-design — by invoking it.** Before asking any
   design question, invoke the `eaz-frontend-design` skill with the Skill tool and run
   its discovery and choice flow (styling method, visual direction, token values, motion
   level, icon set — show the client the list of icon families and ask which icons the
-  project needs — and the style, variation, and component choices, where the client may accept
-  suggested component defaults or choose to answer more questions). Do not improvise the design questions from memory; copy the outcome into
+  project needs — the style, variation, and component choices, and the system foundations (layout, brand
+  assets, voice, page templates, responsive rules, and more) — for components and foundations the
+  client may accept suggested defaults or choose to answer more questions). Do not improvise the design questions from memory; copy the outcome into
   `DESIGN.md`. The design is finished only when the **full token set** is recorded (every
   color, status, type, space, shape, and motion row), the contrast check was run by the
   script, and the client approved the palette once.

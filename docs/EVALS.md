@@ -41,6 +41,7 @@ For every scenario the runner:
 | Scenario | What it proves |
 | :--- | :--- |
 | `kickoff-asks-before-building` | A new e-commerce request invokes `eaz-project-kickoff`, asks a small first batch (2–5 questions, one decision each, with recommendations), says what comes in later batches, and writes no files |
+| `short-prompt-gets-one-design-proposal` | A one-line request for a whole site invokes `eaz-frontend-design` quick mode: a named style, a hex palette, typefaces, and one approval question (no questionnaire), with no code written first |
 | `ui-task-asks-design-choices` | A UI request with no `DESIGN.md` invokes `eaz-frontend-design` and asks about styling method, visual direction, motion, icon set (naming at least two families), and inspiration (with a way to share links or images) before any code |
 | `inspiration-image-is-read` | A screenshot placed in `inspiration/` is actually opened and described, and the agent confirms what it takes before writing code. The image is generated at run time, so no binary is committed |
 | `build-gate-blocks-tbd` | "Everything is approved, build it" does not override core fields that are still `TBD` |

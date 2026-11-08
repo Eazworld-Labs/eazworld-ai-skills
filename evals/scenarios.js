@@ -173,6 +173,54 @@ module.exports = [
   },
 
   {
+    id: 'short-prompt-gets-one-design-proposal',
+    description: 'A one-line request for a whole site gets a complete design proposal and one approval question, not a questionnaire.',
+    seed: {
+      'package.json': SEED_NEXT_PACKAGE,
+      'PROJECT.md': [
+        '# PROJECT.md',
+        '',
+        '- **Name:** Golden Crust Bakery',
+        '- **Type:** marketing site',
+        '- **Front end:** Next.js (App Router)',
+        '- **Primary market / region:** Ghana',
+        '',
+      ].join('\n'),
+    },
+    turns: ['Build me a landing page for my bakery in Accra.'],
+    checks: [
+      {
+        name: 'invokes eaz-frontend-design',
+        test: (ctx) => ctx.skillsInvoked.includes('eaz-frontend-design') || `invoked: ${ctx.skillsInvoked.join(', ') || 'none'}`,
+      },
+      {
+        name: 'proposes a named style',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /minimalist|corporate|luxury|editorial|organic|playful|flat|warm|earthy|cultural/i),
+      },
+      {
+        name: 'shows a palette with hex values',
+        test: (ctx) => ((ctx.turns[0].final.match(/#[0-9a-f]{6}\b/gi) || []).length >= 3) || 'fewer than three hex colors in the reply',
+      },
+      {
+        name: 'names typefaces',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /typeface|font|serif|sans/i),
+      },
+      {
+        name: 'asks one approval question, not a questionnaire',
+        test: (ctx) => {
+          const t = ctx.turns[0].final;
+          const n = numberedItems(t);
+          if (n > 3) return `found ${n} numbered questions`;
+          return /approve|change|adjust|go ahead|sound good/i.test(t) || 'reply never asks to approve or change';
+        },
+      },
+      {
+        name: 'writes no source code before approval',
+        test: (ctx) => createdSource(ctx).length === 0 || `created: ${createdSource(ctx).join(', ')}`,
+      },
+    ],
+  },
+  {
     id: 'ui-task-asks-design-choices',
     description: 'A UI request on a project with no DESIGN.md asks for the design choices first.',
     seed: {

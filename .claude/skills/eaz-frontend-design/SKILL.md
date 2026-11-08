@@ -87,6 +87,11 @@ Before writing any UI code, inspect the target repository:
   `inspiration/` folder, or attach images — and one they dislike. Study what they give
   you, show a short "what we take / what we avoid" table, get a yes before designing, and
   record it — see [Design Inspiration](./references/inspiration.md).
+- **Quick mode (short prompts):** when the request is a whole site or app described in a
+  line or two with no design details, or the user says "you decide", do not run the question
+  flow. Infer the design, show one short proposal, and ask a single "approve or change?"
+  question — see [Quick Mode](./references/quick-mode.md). The full flow below is for
+  clients who want to choose.
 - **Design Choices (ask, never assume):** unless `PROJECT.md`, `DESIGN.md`, or the
   existing code already settles them, get the user's decision on four things before
   building — each with a recommendation and a one-line trade-off (five, counting icons):
@@ -115,6 +120,11 @@ Before writing any UI code, inspect the target repository:
      the client can change any later; "more questions" asks the groups in
      [Component Choices](./references/component-choices.md), at most 5 at a time. Skip
      components the project does not have.
+  7. **System foundations** — layout, dark/light rules, brand assets, voice, page templates,
+     accessibility specs, localisation, performance budget, responsive rules, and a style
+     guide sheet. Propose defaults for all, get one approval, and dig deeper only where the
+     client wants to change something — see
+     [System Foundations](./references/system-foundations.md).
   Record the answers in `DESIGN.md` so later work does not re-ask.
 - **Codebase Audit Checklist:**
   1. Review the existing component library and reuse its primitives before adding new
@@ -233,6 +243,8 @@ export function Badge({ label, tone }: BadgeProps) {
       from existing project files) and recorded in `DESIGN.md`.
 - [ ] Primary style, variation, and component choices (defaults accepted or answered one by
       one) recorded in `DESIGN.md`.
+- [ ] System foundations (layout, brand assets, voice, page templates, responsive rules,
+      localisation, performance budget) recorded in `DESIGN.md`; style guide sheet approved.
 - [ ] Project's type-check, lint, and test commands pass.
 - [ ] Layout verified at 360px, 768px, and 1440px (web) or small and large devices
       (native).
@@ -281,10 +293,15 @@ export function Badge({ label, tone }: BadgeProps) {
   hierarchy, composition, state design, and the visual QA procedure and rubric.
 - [Styling Methods](./references/styling-methods.md) — Tailwind, plain CSS, CSS
   Modules, SCSS, CSS-in-JS, library theming: how to choose and where tokens live.
+- [Quick Mode](./references/quick-mode.md) — one short prompt to one proposal and one
+  approval; business-type starting points.
 - [Style Catalog](./references/style-catalog.md) — styles, variations, and what is not a
   style choice; offered before Visual Directions.
 - [Component Choices](./references/component-choices.md) — the defaults-or-more-questions
   step, component groups, and suggested defaults per style.
+- [System Foundations](./references/system-foundations.md) — the ten decisions beyond tokens
+  and components: layout, modes, brand assets, voice, templates, accessibility, localisation,
+  performance, responsive rules, style guide.
 - [Visual Directions](./references/visual-directions.md) — design directions to offer
   the client and how to turn the pick into token values.
 - [Visual System Reference](./references/visual-system.md) — default tokens, color

@@ -11,6 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Quick mode for short prompts:** `eaz-frontend-design` gains `references/quick-mode.md` —
+  a one-line request gets an inferred, complete design proposal and a single approve-or-change
+  question, with a business-type starting table; the kickoff routes short prompts to it. New
+  eval `short-prompt-gets-one-design-proposal`.
+- **System foundations:** `eaz-frontend-design` gains `references/system-foundations.md` —
+  layout system, light/dark rules, brand assets, voice and microcopy, page templates,
+  accessibility specs, localisation (GH₵/₦), performance budget, responsive rules, and a
+  style guide sheet — proposed as defaults with one approval; `DESIGN.md` gets a `System`
+  section.
 - **Style catalog and component choices:** `eaz-frontend-design` gains
   `references/style-catalog.md` (21 styles with variations, plus what is *not* a style
   choice) and `references/component-choices.md` (a "use suggested defaults or answer more

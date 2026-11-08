@@ -51,6 +51,22 @@ put secrets in this file.
 - **Signature element:** <!-- the one memorable detail, used in two places -->
 - **Theme modes:** <!-- light | dark | both -->
 
+## System
+
+<!-- One line per item; write `default: <value>` when the proposal was accepted, or TBD with
+     a reason and an owner. See System Foundations in eaz-frontend-design. -->
+
+- **Layout:** <!-- container widths, grid columns, breakpoints, section spacing, z-index layers -->
+- **Light / dark rules:** <!-- images, shadows, glass in each mode; or n/a -->
+- **Brand assets:** <!-- logo versions + clear space + min size; favicon; share image; photo treatment -->
+- **Voice and microcopy:** <!-- tone in three words; button/error/empty-state rules; approved sample strings -->
+- **Page templates:** <!-- page -> section order, for every page in SPEC.md -->
+- **Accessibility specs:** <!-- focus ring, touch targets, min text size, alt-text rule, reduced motion -->
+- **Localisation:** <!-- currency, phone format, date format, language -->
+- **Performance budget:** <!-- fonts/weights, image formats and sizes, LCP/CLS/INP targets -->
+- **Responsive rules:** <!-- what changes at 360 / 768 / 1440: nav, grids, tables, hero, type -->
+- **Style guide sheet:** <!-- route or doc path; approved: yes / date -->
+
 ## Tokens
 
 Every row below is **required** — none is left for the build phase to invent. Ask for the few
