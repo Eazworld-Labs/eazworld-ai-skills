@@ -12,8 +12,12 @@ every later session in the project follows the same rules without being reminded
 - Read `PROJECT.md`, `SPEC.md`, `ARCHITECTURE.md`, `DESIGN.md`, and `tasks.md` before
   starting any task, and build only what `SPEC.md` describes in the structure
   `ARCHITECTURE.md` sets out.
-- For any UI work, use the `eaz-frontend-design` skill. `tasks.md` names the skill that
-  applies to each task — use it.
+- **Before you start any task in `tasks.md`, invoke every skill named on that task** with the
+  Skill tool and follow it — do not work from memory of what the skill says. If a named skill
+  is not available, stop and say so; do not improvise. For any UI work, `eaz-frontend-design`
+  is always one of them.
+- When you finish a task, add a `Skills used:` line under it listing the skills you invoked.
+  If a named skill was not invoked, say why and mark the task `[?]`, not `[x]`.
 - Follow the **Build order** in `PROJECT.md`. With frontend-first, build screens on typed mock
   data that follows `API.md` and do not start backend work until the screens are approved.
 - Do not start building while a core field in `PROJECT.md` or `DESIGN.md` is `TBD`

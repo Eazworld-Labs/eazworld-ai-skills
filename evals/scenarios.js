@@ -207,6 +207,18 @@ module.exports = [
         test: (ctx) => askedAbout(ctx.turns[0].final, /motion|subtle|expressive|animation level/i),
       },
       {
+        name: 'offers style choices and component defaults versus more questions',
+        test: (ctx) => {
+          const t = ctx.turns[0].final;
+          const styles = (t.match(/minimalist|corporate|luxury|brutalist|editorial|glassmorphism|bento|swiss|playful|organic|dark/gi) || [])
+            .map((f) => f.toLowerCase());
+          if (new Set(styles).size < 2) return 'reply does not offer at least two named styles';
+          return /default/i.test(t) && /component|button|card|navigation/i.test(t)
+            ? true
+            : 'reply does not offer component defaults or more component questions';
+        },
+      },
+      {
         name: 'asks which icon set to use, naming at least two families',
         test: (ctx) => {
           const t = ctx.turns[0].final;
@@ -578,6 +590,60 @@ module.exports = [
       {
         name: 'writes no app code before the answers arrive',
         test: (ctx) => createdSource(ctx).length === 0 || `created: ${createdSource(ctx).join(', ')}`,
+      },
+    ],
+  },
+
+  {
+    id: 'coding-task-invokes-named-skill',
+    description: 'Given a coding task that names a skill, the agent invokes that skill before writing any file.',
+    slow: true,
+    seed: {
+      'CLAUDE.md': rulesBlock(),
+      'PROJECT.md': [
+        '# PROJECT.md',
+        '',
+        '- **Name:** Bright Future School',
+        '- **Type:** marketing site',
+        '- **Front end:** Next.js (App Router)',
+        '- **Build order:** frontend-first',
+        '- **Primary market / region:** Ghana',
+        '',
+      ].join('\n'),
+      'tasks.md': [
+        '# tasks.md',
+        '',
+        '## Phase 1 - Discovery',
+        '',
+        '- [x] **1.1 Kickoff questions answered** - *skill: eaz-project-kickoff*',
+        '',
+        '**Approval:** [x] Client approved Phase 1 - date: 2026-11-06',
+        '',
+        '## Phase 2 - Foundation (front end)',
+        '',
+        '- [ ] **2.1 Scaffold and CI** - *skill: eaz-cloud-devops*',
+        '  - Done when: install, lint, type-check and build pass, and a CI workflow runs them on every pull request.',
+        '',
+      ].join('\n'),
+    },
+    turns: ['Please do task 2.1 from tasks.md.'],
+    checks: [
+      {
+        name: 'invokes eaz-cloud-devops',
+        test: (ctx) => ctx.skillsInvoked.includes('eaz-cloud-devops') || `invoked: ${ctx.skillsInvoked.join(', ') || 'none'}`,
+      },
+      {
+        name: 'invokes the skill before the first file is written',
+        test: (ctx) => {
+          const calls = ctx.turns.flatMap((t) => t.toolUses);
+          const skillAt = calls.findIndex((u) => u.name === 'Skill' && u.input.skill === 'eaz-cloud-devops');
+          const writeAt = calls.findIndex((u) => ['Write', 'Edit'].includes(u.name));
+          return skillAt !== -1 && (writeAt === -1 || skillAt < writeAt) || `skill at ${skillAt}, first write at ${writeAt}`;
+        },
+      },
+      {
+        name: 'records the skills used in tasks.md',
+        test: (ctx) => /skills used:/i.test(ctx.read('tasks.md') || '') || 'tasks.md has no "Skills used:" line',
       },
     ],
   },

@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Style catalog and component choices:** `eaz-frontend-design` gains
+  `references/style-catalog.md` (21 styles with variations, plus what is *not* a style
+  choice) and `references/component-choices.md` (a "use suggested defaults or answer more
+  questions" step, 12 component groups, defaults per style). `DESIGN.md` records primary
+  style, variation, and component choices; `eaz-project-kickoff` hands them off.
 - **Icon set is now a design choice asked during setup:** `eaz-frontend-design` gains
   `references/icon-sets.md` (families per stack, questions, starter icon lists, rules) and
   a fifth design choice; `eaz-project-kickoff` hands it off, records it in `DESIGN.md`, and
@@ -45,6 +50,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   so it runs in projects whose `package.json` sets `"type": "module"`.
 
 ### Changed
+
+- **Named skills must be invoked, not just named (`eaz-project-kickoff` v1.7.0):** in three test
+  projects the agent used the skills for planning and then stopped invoking them once it started
+  coding — the devops, backend, and API work was done without the skills built for it. The
+  `CLAUDE.md` rules block and the `tasks.md` rules now require the agent to invoke every skill
+  named on a task before starting it (and to stop if one is unavailable), to add a `Skills used:`
+  line under each finished task, and to mark a task `[?]`, never `[x]`, if a named skill was not
+  invoked. The record also makes the rule checkable.
 
 - **`check-tokens.cjs` flags the global reduced-motion reset:** a blanket
   `animation-duration: 0.01ms` / `transition-duration: 0.01ms` rule can make some animations more

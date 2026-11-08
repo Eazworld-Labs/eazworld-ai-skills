@@ -35,7 +35,15 @@ put secrets in this file.
 ## Choices
 
 - **Styling method:** <!-- Tailwind | plain CSS | CSS Modules | SCSS | CSS-in-JS | library theming | native -->
+- **Primary style:** <!-- from the Style Catalog: Minimalist | Corporate | Luxury | Dark | Editorial | Bento | ... -->
+- **Variation:** <!-- e.g. Dark Luxury, Neo-Brutalism, Scandinavian minimalist -->
+- **Combined with:** <!-- optional second style, or none -->
 - **Visual direction:** <!-- clean & minimal | bold & vibrant | dark & premium | warm & friendly | editorial | dashboard -->
+- **Component choices:** <!-- defaults accepted | answered one by one -->
+- **Buttons / forms / cards:** <!-- shape, fill, hover; label and error style; card style -->
+- **Navigation / hero / footer:** <!-- desktop + mobile pattern; hero type; footer size -->
+- **Overlays / tables / feedback:** <!-- modal pattern; table style; toast vs banner; loading style -->
+- **Imagery + interaction:** <!-- image style; hover and scroll effects within the motion level -->
 - **Motion level:** <!-- none | subtle | expressive -->
 - **Icon set:** <!-- Lucide | Phosphor | Heroicons | Tabler | Material Symbols | SF Symbols | custom SVG -->
 - **Icon style, stroke, sizes:** <!-- e.g. outline, 2px, 16/20/24 -->

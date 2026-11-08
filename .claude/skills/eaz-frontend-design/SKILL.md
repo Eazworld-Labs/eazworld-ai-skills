@@ -91,7 +91,11 @@ Before writing any UI code, inspect the target repository:
   existing code already settles them, get the user's decision on four things before
   building — each with a recommendation and a one-line trade-off (five, counting icons):
   1. **Styling method** — see [Styling Methods](./references/styling-methods.md).
-  2. **Visual direction** — see [Visual Directions](./references/visual-directions.md).
+  2. **Visual style** — three levels: primary style, variation, then preferences. Offer 2–3
+     fitting styles from the [Style Catalog](./references/style-catalog.md) with a
+     recommendation, then that style's variations; turn the pick into tokens with
+     [Visual Directions](./references/visual-directions.md). Never offer responsive,
+     mobile-first, or accessibility as choices — they are defaults.
   3. **Token values — a complete set, not a partial one.** Ask only what needs a person
      (brand color, feel, typefaces, light/dark), then **generate every other token**
      (surfaces, text, borders, status colors, focus ring, dark values), verify contrast by
@@ -106,6 +110,11 @@ Before writing any UI code, inspect the target repository:
      [Icon Sets](./references/icon-sets.md). Ask it in the same setup batch as the other
      choices, with a recommendation, even when the first screen needs no icons: the set
      is project-wide, and deferring it lets mixed families creep in later.
+  6. **Components** — once the style is set, show the suggested component defaults and ask:
+     use these defaults, or go through the component questions? Defaults are recorded and
+     the client can change any later; "more questions" asks the groups in
+     [Component Choices](./references/component-choices.md), at most 5 at a time. Skip
+     components the project does not have.
   Record the answers in `DESIGN.md` so later work does not re-ask.
 - **Codebase Audit Checklist:**
   1. Review the existing component library and reuse its primitives before adding new
@@ -222,6 +231,8 @@ export function Badge({ label, tone }: BadgeProps) {
       given" recorded.
 - [ ] Styling method, visual direction, and token values chosen by the user (or taken
       from existing project files) and recorded in `DESIGN.md`.
+- [ ] Primary style, variation, and component choices (defaults accepted or answered one by
+      one) recorded in `DESIGN.md`.
 - [ ] Project's type-check, lint, and test commands pass.
 - [ ] Layout verified at 360px, 768px, and 1440px (web) or small and large devices
       (native).
@@ -270,6 +281,10 @@ export function Badge({ label, tone }: BadgeProps) {
   hierarchy, composition, state design, and the visual QA procedure and rubric.
 - [Styling Methods](./references/styling-methods.md) — Tailwind, plain CSS, CSS
   Modules, SCSS, CSS-in-JS, library theming: how to choose and where tokens live.
+- [Style Catalog](./references/style-catalog.md) — styles, variations, and what is not a
+  style choice; offered before Visual Directions.
+- [Component Choices](./references/component-choices.md) — the defaults-or-more-questions
+  step, component groups, and suggested defaults per style.
 - [Visual Directions](./references/visual-directions.md) — design directions to offer
   the client and how to turn the pick into token values.
 - [Visual System Reference](./references/visual-system.md) — default tokens, color

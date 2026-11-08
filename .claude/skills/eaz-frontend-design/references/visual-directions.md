@@ -3,6 +3,11 @@
 Companion to the `eaz-frontend-design` skill. The look of a project is a **choice** made
 with the client, not a default of this skill.
 
+> The client first picks a **style and variation** from the [Style Catalog](./style-catalog.md).
+> This file turns that pick into a direction recipe and token values. Map the style to the
+> closest direction below (e.g. Luxury → Dark & premium or Editorial; Corporate → Clean &
+> minimal; Playful → Warm & friendly; Brutalist/Creative → Bold & vibrant).
+
 ## How to offer a direction
 
 1. Skip this step if `DESIGN.md`, a Figma file, or brand guidelines already define the

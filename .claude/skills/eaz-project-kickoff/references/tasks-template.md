@@ -18,7 +18,11 @@ Agents update statuses as work completes. Never put secrets in this file.
    stop point.
 2. Mark a task `[x]` only after its acceptance criterion passes.
 3. Update this file in the same step as the work.
-4. New scope becomes a new task with its own criterion.
+4. **Before starting a task, invoke every skill named on it** (Skill tool) and follow it; if a
+   named skill is unavailable, stop and say so.
+5. Under each finished task add a `Skills used:` line. A task whose named skill was not invoked is
+   `[?]` with the reason, never `[x]`.
+6. New scope becomes a new task with its own criterion.
 
 ## Project
 

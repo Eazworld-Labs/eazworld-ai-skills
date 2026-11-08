@@ -66,6 +66,9 @@ summary.
 - **Requirements come from `SPEC.md`.** A task that delivers a feature names its feature ID
   (`Delivers: F4`) and is done when that feature's acceptance test passes. Scope added later
   becomes a new feature ID in `SPEC.md` with a change-log line, then a new task.
+- **Skills are part of the task.** Every task names its skill so the standards load when the work
+  starts. The agent invokes the named skill before the task and records `Skills used:` under it;
+  a task finished without its skill is `[?]`, not `[x]`.
 - **Documents are tasks.** Each document in [Documents](./documents.md) is created by a
   task in the phase that table names — not all at the start — so none is forgotten and none
   is written before the thing it describes exists.

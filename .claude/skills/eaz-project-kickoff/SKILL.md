@@ -10,7 +10,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.6.0"
+  version: "1.7.0"
 ---
 
 # Project Kickoff
@@ -91,7 +91,8 @@ never scaffolds code, installs dependencies, or changes infrastructure.
   design question, invoke the `eaz-frontend-design` skill with the Skill tool and run
   its discovery and choice flow (styling method, visual direction, token values, motion
   level, icon set — show the client the list of icon families and ask which icons the
-  project needs). Do not improvise the design questions from memory; copy the outcome into
+  project needs — and the style, variation, and component choices, where the client may accept
+  suggested component defaults or choose to answer more questions). Do not improvise the design questions from memory; copy the outcome into
   `DESIGN.md`. The design is finished only when the **full token set** is recorded (every
   color, status, type, space, shape, and motion row), the contrast check was run by the
   script, and the client approved the palette once.
@@ -127,6 +128,10 @@ never scaffolds code, installs dependencies, or changes infrastructure.
 - **Approvals are explicit.** Record a phase as approved only on a clear approval
   message, with its date; answering later questions or continuing to talk does not
   count. A criterion verified only in part is `[?]` with the gap named, not `[x]`.
+- **Make the skills run, not just be named.** Every task names its skill, and the rules block in
+  `CLAUDE.md` and in `tasks.md` require the agent to invoke it before the task and record
+  `Skills used:` after. Say so in the kickoff summary. Planning tasks are not the only ones:
+  scaffolding, CI, authentication, and API work have named skills too.
 - **Keep `tasks.md` true.** Mark a task done only after its acceptance criterion
   passes, update its status in the same step as the work, and add new scope as a new
   task — never inside a finished phase.
@@ -188,7 +193,8 @@ never scaffolds code, installs dependencies, or changes infrastructure.
       to a component in `ARCHITECTURE.md` and to a task.
 - [ ] `eaz-software-architecture` was invoked after the stack was accepted, and the
       architecture was not improvised.
-- [ ] `CLAUDE.md` carries the Eazworld project rules block (existing content untouched).
+- [ ] `CLAUDE.md` carries the Eazworld project rules block (existing content untouched),
+      including the rule to invoke each task's named skill and record `Skills used:`.
 - [ ] The build order was asked, recorded in `PROJECT.md`, and reflected in `tasks.md`
       (frontend-first: screens on mock data before backend work, with a task that removes the mocks).
 - [ ] `tasks.md` follows the standard phases, trimmed to the project type, with a skill
