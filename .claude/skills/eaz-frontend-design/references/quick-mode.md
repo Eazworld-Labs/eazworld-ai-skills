@@ -6,10 +6,12 @@ mode replaces the question flow with **one proposal and one approval**.
 
 ## When it applies
 
-- The request is for a whole site, app, or landing page and gives only a business or idea,
-  with no design details; or the user says "you decide", "surprise me", or "quick".
-- It does **not** apply when the user asks for a single component or section on a project
-  that already has design choices, or when `DESIGN.md` is already filled — use that file.
+- The request is for a **whole site, app, or landing page** and gives only a business or
+  idea, with no design details; or the user says "you decide", "surprise me", or "quick".
+- It does **not** apply to a single component, section (a hero, a navbar, a pricing table),
+  or one page of an existing project, even when `DESIGN.md` is missing — those run the full
+  choice flow in `SKILL.md`. It also does not apply when `DESIGN.md` is already filled; use
+  that file.
 - The user can leave quick mode at any time ("let me choose"): switch to the full flow.
 
 ## Steps
@@ -30,7 +32,32 @@ mode replaces the question flow with **one proposal and one approval**.
 6. On approval, write everything to `DESIGN.md` (mark accepted defaults `default: ...`),
    run the contrast check, and build. On "change X", change only X and re-show that line.
 
-## Business type to starting proposal
+## Never generic
+
+A fast design must still look like it belongs to this client and no one else. Before
+showing the proposal, run [Design Quality](./design-quality.md) section 1 against it, and
+require all of these:
+
+1. **Signature element.** Name one memorable detail and the two places it appears. It comes
+   from something real about the client — their place, product, craft, name, history, or
+   audience — not a decorative flourish. Example: a bakery's "oven-stamp" mark from the
+   street it sits on, not a generic wheat icon.
+2. **"Why this is theirs" line.** One sentence tying the palette, type, and signature to a
+   specific fact about the client. If the sentence would fit any competitor, redo it.
+3. **Palette from the client's world,** not from the business-type table: sample the
+   product, the building, the street, the flag, the fabric. The table is only a place to
+   start; push at least one choice away from the most obvious answer for the category.
+4. **Typographic contrast with character.** Do not default to Inter, Roboto, Arial, or the
+   system font as the display face, and avoid the same pairing for every project (for
+   example Fraunces + Inter). Pick a display face with a point of view and a quiet text face.
+5. **Break one template habit on purpose,** such as an off-centre hero, one oversized
+   element, an unusual section order, or a dense section next to an airy one.
+6. **No tells:** purple-to-blue gradients, three identical feature cards, icon-in-a-circle
+   bullets, emoji as icons, stock "diverse team" photos, invented testimonials.
+
+If the client dislikes it, give a **different direction**, not a tweak of the same one.
+
+## Business type to starting point (not the answer)
 
 | Business | Style and variation | Palette feel | Type feel | Hero |
 | :--- | :--- | :--- | :--- | :--- |

@@ -87,10 +87,11 @@ Before writing any UI code, inspect the target repository:
   `inspiration/` folder, or attach images — and one they dislike. Study what they give
   you, show a short "what we take / what we avoid" table, get a yes before designing, and
   record it — see [Design Inspiration](./references/inspiration.md).
-- **Quick mode (short prompts):** when the request is a whole site or app described in a
-  line or two with no design details, or the user says "you decide", do not run the question
-  flow. Infer the design, show one short proposal, and ask a single "approve or change?"
-  question — see [Quick Mode](./references/quick-mode.md). The full flow below is for
+- **Quick mode (short prompts):** only when the request is for a **whole site, app, or
+  landing page** described in a line or two with no design details, or the user says "you
+  decide". A single section, component, or page on a project with no `DESIGN.md` is **not**
+  quick mode — run the full choice flow below. In quick mode, do not run the question flow. Infer the design, show one short proposal, and ask a single "approve or change?"
+  question — see [Quick Mode](./references/quick-mode.md). Quick mode must still pass its "Never generic" rules: a signature element and a "why this is theirs" line. The full flow below is for
   clients who want to choose.
 - **Design Choices (ask, never assume):** unless `PROJECT.md`, `DESIGN.md`, or the
   existing code already settles them, get the user's decision on four things before
@@ -109,13 +110,13 @@ Before writing any UI code, inspect the target repository:
   4. **Motion level** — none, subtle (recommended default), or expressive, with the
      animation approach for the stack — see
      [Motion & Animation](./references/motion-and-animation.md).
-  5. **Icon set** — show the list of icon families for the stack (Lucide, Phosphor,
+  5. **Icon set** — always name at least three icon families in the question, never just a recommendation versus "inline SVG" (Lucide, Phosphor,
      Heroicons, Tabler, Material Symbols, SF Symbols, custom SVG), then ask style,
      stroke and sizes, and which icons the project needs — see
      [Icon Sets](./references/icon-sets.md). Ask it in the same setup batch as the other
      choices, with a recommendation, even when the first screen needs no icons: the set
      is project-wide, and deferring it lets mixed families creep in later.
-  6. **Components** — once the style is set, show the suggested component defaults and ask:
+  6. **Components** — ask in the same first batch as the others, even for a single section: show the suggested component defaults (buttons, cards, navigation, forms — whichever the work uses) and ask:
      use these defaults, or go through the component questions? Defaults are recorded and
      the client can change any later; "more questions" asks the groups in
      [Component Choices](./references/component-choices.md), at most 5 at a time. Skip

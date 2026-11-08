@@ -206,11 +206,15 @@ module.exports = [
         test: (ctx) => askedAbout(ctx.turns[0].final, /typeface|font|serif|sans/i),
       },
       {
+        name: 'names a signature element specific to the client',
+        test: (ctx) => askedAbout(ctx.turns[0].final, /signature/i),
+      },
+      {
         name: 'asks one approval question, not a questionnaire',
         test: (ctx) => {
           const t = ctx.turns[0].final;
-          const n = numberedItems(t);
-          if (n > 3) return `found ${n} numbered questions`;
+          const q = (t.match(/\?/g) || []).length;
+          if (q > 4) return `found ${q} question marks`;
           return /approve|change|adjust|go ahead|sound good/i.test(t) || 'reply never asks to approve or change';
         },
       },
