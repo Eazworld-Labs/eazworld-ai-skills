@@ -4,6 +4,11 @@ Companion to the `eaz-frontend-design` skill. Create consistent, maintainable an
 flexible theme systems — light, dark, system-preference, and multiple brand themes —
 using design tokens, CSS custom properties, and Tailwind CSS theming.
 
+**Color and theme choices are asked, never auto-picked.** The user decides brand color,
+light/dark/system preference, and any color constraints before any token values are
+generated. The examples below show structure only — never use their hardcoded colors in
+a project without the user's explicit choice.
+
 ## Theme architecture
 
 - **Light themes:** default surface, text, and accent colours for light mode.

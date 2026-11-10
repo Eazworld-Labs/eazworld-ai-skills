@@ -102,10 +102,13 @@ Before writing any UI code, inspect the target repository:
      recommendation, then that style's variations; turn the pick into tokens with
      [Visual Directions](./references/visual-directions.md). Never offer responsive,
      mobile-first, or accessibility as choices — they are defaults.
-  3. **Token values — a complete set, not a partial one.** Ask only what needs a person
-     (brand color, feel, typefaces, light/dark), then **generate every other token**
-     (surfaces, text, borders, status colors, focus ring, dark values), verify contrast by
-     calculation, and get **one** approval of the whole set — see
+  3. **Token values — every color and theme choice is asked, never auto-picked.** Ask the
+     user for brand color, light/dark theme preference, and any color or theme
+     constraints before generating any other token. Do not propose a palette and ask for
+     approval — present the question and wait for the answer. Only after the user's color
+     and theme decisions are recorded, generate the remaining derived tokens (surfaces,
+     text, borders, status colors, focus ring, dark values), verify contrast by
+     calculation, and get one approval of the whole set — see
      [Token Completeness](./references/token-completeness.md).
   4. **Motion level** — none, subtle (recommended default), or expressive, with the
      animation approach for the stack — see
@@ -123,8 +126,9 @@ Before writing any UI code, inspect the target repository:
      components the project does not have.
   7. **System foundations** — layout, dark/light rules, brand assets, voice, page templates,
      accessibility specs, localisation, performance budget, responsive rules, and a style
-     guide sheet. Propose defaults for all, get one approval, and dig deeper only where the
-     client wants to change something — see
+     guide sheet. Ask the user about dark/light rules and theme preference before
+     proposing defaults; do not auto-select a theme or color scheme. Record decisions in
+     `DESIGN.md`, then propose defaults for the remaining items and get one approval — see
      [System Foundations](./references/system-foundations.md).
   Record the answers in `DESIGN.md` so later work does not re-ask.
 - **Codebase Audit Checklist:**
@@ -143,6 +147,9 @@ Before writing any UI code, inspect the target repository:
   small and large device sizes for native apps.
 - Semantic structure first (HTML elements, native platform controls); ARIA or
   accessibility labels only where native semantics cannot express the pattern.
+- **Every page includes a footer.** All website pages — home, about, services, blog,
+  contact, and any other view — must render a footer with navigation, contact, brand,
+  or legal information as appropriate. No page is left without a footer.
 - Full keyboard and assistive-technology support: every interactive element reachable
   and operable without a mouse, with a visible focus state; touch targets at least
   44×44 px (48dp on Android).
@@ -249,6 +256,7 @@ export function Badge({ label, tone }: BadgeProps) {
 - [ ] Project's type-check, lint, and test commands pass.
 - [ ] Layout verified at 360px, 768px, and 1440px (web) or small and large devices
       (native).
+- [ ] Every page renders a footer — no page is shipped without one.
 - [ ] Keyboard and screen-reader path works end to end with visible focus states.
 - [ ] Text contrast meets WCAG AA (4.5:1).
 - [ ] No secrets or private data present in the client bundle or app binary.
