@@ -32,7 +32,7 @@ owning skill is named so the reviewer can check the full standard.
 - Constraints enforce what the code assumes (unique, not null, foreign keys).
 - Destructive changes (drop, truncate) need explicit human approval and a backup plan.
 
-## Payments and webhooks (`eaz-ghana-payments`, `eaz-nigeria-payments`)
+## Payments and webhooks (`eaz-payments`)
 - Amounts are computed server-side, in the smallest currency unit, never trusted from the
   client.
 - Pending states and reconciliation exist (mobile money and transfers confirm later).

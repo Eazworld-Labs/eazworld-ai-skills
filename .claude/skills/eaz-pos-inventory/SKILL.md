@@ -34,7 +34,7 @@ it fails — offline-first is the default, not a fallback.
   overselling stock.
 - **Anti-Trigger:** Do not activate for restaurant-specific kitchen and table
   workflows (route to eaz-restaurant-management), payment rail details (route to
-  eaz-ghana-payments), or the storefront's e-commerce checkout (route to
+  eaz-payments), or the storefront's e-commerce checkout (route to
   eaz-ecommerce-development).
 
 ## 3. Required Inputs & Project Audit

@@ -35,8 +35,7 @@ not secrets, not internal structure.
   duplicate processing, or unhandled errors.
 - **Anti-Trigger:** Do not activate for designing the API contract itself (route to
   eaz-api-development), designing schemas and indexes (route to
-  eaz-database-architecture), payment-rail specifics (route to eaz-ghana-payments or
-  eaz-nigeria-payments), or UI work (route to eaz-frontend-design).
+  eaz-database-architecture), payment-rail specifics (route to eaz-payments), or UI work (route to eaz-frontend-design).
 
 ## 3. Required Inputs & Project Audit
 

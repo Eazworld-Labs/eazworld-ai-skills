@@ -33,7 +33,7 @@ losing or duplicating a ticket.
   including Mobile Money callbacks.
 - **Trigger 4:** When order flow must keep working through network drops.
 - **Anti-Trigger:** Do not activate for generic retail checkout and stock ledgers
-  (route to eaz-pos-inventory), payment rail specifics (route to eaz-ghana-payments), or the
+  (route to eaz-pos-inventory), payment rail specifics (route to eaz-payments), or the
   customer-facing marketing site (route to eaz-frontend-design).
 
 ## 3. Required Inputs & Project Audit

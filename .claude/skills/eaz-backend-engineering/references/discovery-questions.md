@@ -39,8 +39,7 @@ new subsystem, so the architecture rests on real requirements instead of habit.
 - Are there reporting or analytics needs beyond the operational screens?
 
 ### Integrations
-- Which payment providers are needed? *(route to `eaz-ghana-payments` or
-  `eaz-nigeria-payments` by region)*
+- Which payment providers are needed? *(route to `eaz-payments` by region)*
 - Which email, SMS, or WhatsApp provider sends messages? *(route to
   `eaz-whatsapp-automation` for WhatsApp)*
 - Where do uploaded files and images live? *(recommend: object storage, not the app

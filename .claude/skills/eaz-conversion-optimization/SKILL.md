@@ -32,7 +32,8 @@ skill decides what is worth building and proves whether it worked.
   friction.
 - **Anti-Trigger:** Do not activate for implementing the UI change itself (route to
   eaz-frontend-design), buying more traffic (route to eaz-google-ads or eaz-meta-ads), or
-  general performance work with no conversion angle (route to eaz-performance-optimization).
+  general performance work with no conversion angle (route to
+  eaz-frontend-design/references/performance-optimization.md).
 
 ## 3. Required Inputs & Project Audit
 

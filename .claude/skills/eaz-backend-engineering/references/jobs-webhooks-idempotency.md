@@ -44,7 +44,7 @@ Providers redeliver, reorder, and sometimes forge events. For every webhook endp
 5. **Log** the event id and outcome, never secrets or full card data.
 
 Payment-specific rules — pending states, reconciliation, refunds — live in
-`eaz-ghana-payments` and `eaz-nigeria-payments`.
+`eaz-payments`.
 
 ## 4. Idempotency keys for your own API
 

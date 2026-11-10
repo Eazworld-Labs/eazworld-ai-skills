@@ -9,7 +9,7 @@ license: MIT
 metadata:
   author: Eazworld
   department: software-engineering
-  version: "1.6.0"
+  version: "1.7.0"
 ---
 
 # Frontend Design
@@ -316,3 +316,89 @@ export function Badge({ label, tone }: BadgeProps) {
   Expo, or Flutter.
 - [Server-Rendered & CMS Notes](./references/server-rendered.md) — load for Laravel
   Blade, WordPress themes, Django/Rails templates, or plain HTML/CSS sites.
+- [Layout Systems](./references/layout-systems.md) — Block, Inline, Inline-Block, Flexbox,
+  CSS Grid, Multi-Column, Position-based layout: when to use each + CSS examples.
+- [Composition Patterns](./references/composition-patterns.md) — Single-, Two-, Three-Column,
+  Split-Screen, Asymmetrical, Bento Grid, Masonry, Full-Width, Centered Container, Dashboard:
+  structure, use cases, pros/cons, implementation.
+- [Responsive Layouts](./references/responsive-layouts.md) — Mobile-First, Desktop-First,
+  Fluid, Fixed, Adaptive, Responsive: breakpoints, flexible dimensions, typography,
+  spacing, component behaviour.
+- [Layout Implementation](./references/layout-implementation.md) — HTML/CSS, Grid, Flexbox,
+  Tailwind CSS, React & Next.js examples.
+- [Accessibility Engineering](./references/accessibility-engineering.md) — WCAG 2.2
+  conformance, keyboard navigation, screen readers, accessible components, and
+  accessibility testing. Load when a task focuses on inclusive UI.
+- [Forms & Input](./references/forms-input.md) — reliable, accessible, user-friendly
+  forms: validation, input types, security, localisation. Load when a task focuses on
+  form UI.
+- [Dark Mode & Theming](./references/dark-mode-theming.md) — light/dark/system themes,
+  design tokens, CSS custom properties, Next.js theming. Load when a task focuses on
+  theming.
+- [Component Architecture](./references/component-architecture.md) — reusable,
+  maintainable component systems: composition patterns, React/Next.js architecture,
+  design system integration. Load when a task focuses on component structure.
+- [Localisation](./references/localisation.md) — country-specific formatting and
+  regional behaviour: currency (GHS/GH₵, NGN/₦), phone numbers (E.164 +233/+234),
+  dates (DD/MM/YYYY, Africa/Accra & Africa/Lagos), addresses, taxes, shipping, and
+  translations. Load when a task focuses on regional formatting.
+- [Performance Optimization](./references/performance-optimization.md) — Core Web
+  Vitals (LCP, CLS, INP), performance budgets, font optimization, image optimization,
+  and bundle size. Load when a task focuses on web performance.
+
+## 9. Layout Systems & Composition Patterns
+
+Layout is chosen from the website's purpose and content — never from a generic template.
+Pick one layout system intentionally, combine CSS Grid and Flexbox appropriately, avoid
+unnecessary nesting, and build every layout responsive, semantic, and accessible from
+existing tokens and components.
+
+### Layout selection guidelines
+
+Select layouts based on the website's purpose and content:
+
+- **Content first:** the amount, shape, and relationship of content decides the layout. A
+  long article calls for a centered single-column; a product catalog calls for a grid; an
+  analytics tool calls for a dashboard.
+- **One grid per breakpoint:** define columns at each breakpoint; break the grid only on
+  purpose, never by accident.
+- **Combine CSS Grid and Flexbox appropriately:** Grid for two-dimensional page and section
+  structure (columns and rows together); Flexbox for one-dimensional alignment inside a
+  component (a nav bar, a card's action row, centering). Do not use Grid where Flexbox
+  suffices, and do not force Flexbox to do two-dimensional page layout.
+- **Avoid one-layout-fits-all:** never apply the same layout to every website. A landing
+  page, a dashboard, and a blog post need different structures.
+- **Consider visual hierarchy, alignment, spacing, and content density:** one primary action
+  per view; edges align; gaps come from the spacing scale; alternate dense and airy sections.
+- **Design mobile, tablet, and desktop:** verify at 360px, 768px, and 1440px at minimum;
+  use content-driven breakpoints where a layout breaks earlier.
+- **Avoid unnecessary nesting and overly complicated CSS:** flat specificity, minimal wrapper
+  divs, prefer `minmax()`/`auto-fit` over stacks of media queries.
+- **Maintain accessibility and usability:** semantic HTML, visible focus states, touch targets
+  ≥ 44×44px, no information by colour alone, keyboard-reachable.
+- **Reuse existing layout components and design tokens:** inspect the component library
+  first; consume semantic tokens, never raw values; do not create duplicate components or
+  design systems.
+
+### Important rules
+
+- Inspect the existing project architecture before implementing layouts; preserve existing
+  functionality and the established design system.
+- Use semantic HTML.
+- Make all layouts responsive.
+- Prioritise usability, accessibility, and performance.
+- Choose a layout intentionally rather than relying on generic templates.
+- Components reference token names, never raw hex or arbitrary pixel values.
+
+### Load on demand
+
+- [Layout Systems](./references/layout-systems.md) — Block, Inline, Inline-Block, Flexbox,
+  CSS Grid, Multi-Column, Position-based layout: when to use each + CSS examples.
+- [Composition Patterns](./references/composition-patterns.md) — Single-, Two-, Three-Column,
+  Split-Screen, Asymmetrical, Bento Grid, Masonry, Full-Width, Centered Container, Dashboard:
+  structure, use cases, pros/cons, implementation.
+- [Responsive Layouts](./references/responsive-layouts.md) — Mobile-First, Desktop-First,
+  Fluid, Fixed, Adaptive, Responsive: breakpoints, flexible dimensions, typography,
+  spacing, component behaviour.
+- [Layout Implementation](./references/layout-implementation.md) — HTML/CSS, Grid, Flexbox,
+  Tailwind CSS, React & Next.js examples.

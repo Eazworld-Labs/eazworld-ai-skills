@@ -31,7 +31,7 @@ can actually be found and correctly displayed in results.
 - **Trigger 4:** When primary content is client-rendered and must become crawlable.
 - **Anti-Trigger:** Do not activate for writing marketing copy or keyword research
   (digital-marketing department) or for general page speed without an SEO angle (route to
-  eaz-performance-optimization).
+  eaz-frontend-design/references/performance-optimization.md).
 
 ## 3. Required Inputs & Project Audit
 

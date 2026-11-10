@@ -39,7 +39,7 @@ on the simulator where they were written.
 - **Anti-Trigger:** Do not activate for web interfaces (route to eaz-frontend-design — it
   still governs the visual design inside an app), server APIs the app calls (route to
   eaz-backend-engineering and eaz-api-development), or payment-rail specifics (route to
-  eaz-ghana-payments or eaz-nigeria-payments).
+  eaz-payments).
 
 ## 3. Required Inputs & Project Audit
 

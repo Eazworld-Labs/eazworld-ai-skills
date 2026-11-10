@@ -32,7 +32,7 @@ failure this design exists to prevent.
 - **Trigger 3:** When sending reminders or enforcing no-show and late policies.
 - **Trigger 4:** When double bookings, deposit conflicts, or reminder failures occur.
 - **Anti-Trigger:** Do not activate for internal staff meeting scheduling (routine
-  calendars), payment rail specifics (route to eaz-ghana-payments), or CRM follow-up
+  calendars), payment rail specifics (route to eaz-payments), or CRM follow-up
   automation (route to eaz-crm-automation).
 
 ## 3. Required Inputs & Project Audit

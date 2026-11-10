@@ -9,13 +9,13 @@ with the user, and drop any skill that is not installed.
 1. `eaz-software-architecture` — before building anything non-trivial.
 2. `eaz-security-audit` — at each milestone and before launch.
 3. `eaz-code-review` — on every pull request.
-4. `eaz-performance-optimization` and `eaz-seo-engineering` — before launch for public sites.
+4. `eaz-frontend-design/references/performance-optimization.md` and `eaz-seo-engineering` — before launch for public sites.
 
 ## By project type
 
 | Project type | Build order |
 | :--- | :--- |
-| **Marketing / business site** | `eaz-frontend-design` → `eaz-seo-engineering` → `eaz-performance-optimization` → `eaz-conversion-optimization` → `eaz-seo-strategy` |
+| **Marketing / business site** | `eaz-frontend-design` → `eaz-seo-engineering` → `eaz-frontend-design/references/performance-optimization.md` → `eaz-conversion-optimization` → `eaz-seo-strategy` |
 | **E-commerce store** | `eaz-software-architecture` → `eaz-database-architecture` → `eaz-backend-engineering` → `eaz-api-development` → `eaz-ecommerce-development` → payments skill for the region → `eaz-frontend-design` → `eaz-seo-engineering` → `eaz-security-audit` |
 | **Web app / SaaS** | `eaz-software-architecture` → `eaz-database-architecture` → `eaz-backend-engineering` → `eaz-api-development` → `eaz-frontend-design` → `eaz-software-testing` → `eaz-cloud-devops` |
 | **Mobile app** | `eaz-software-architecture` → `eaz-mobile-app-development` → `eaz-frontend-design` (UI layer) → `eaz-backend-engineering` + `eaz-api-development` → `eaz-software-testing` |
@@ -27,8 +27,8 @@ with the user, and drop any skill that is not installed.
 
 | Region | Add |
 | :--- | :--- |
-| Ghana | `eaz-ghana-payments` |
-| Nigeria | `eaz-nigeria-payments` |
+| Ghana | `eaz-payments` |
+| Nigeria | `eaz-payments` |
 | Other | Record `TBD` for payments and flag it as a blocker for e-commerce and booking work |
 
 ## Rules

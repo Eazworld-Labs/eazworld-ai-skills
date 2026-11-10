@@ -13,7 +13,7 @@ result is written to the project's `tasks.md` (skeleton:
 | 2 | **Foundation** | Tokens, theme, global styles, fonts, base components, project scaffolding | `eaz-frontend-design`, `eaz-cloud-devops` (repo, CI) | No |
 | 3 | **Layout & structure** | Page templates, navigation, responsive grid, placeholder content | `eaz-frontend-design`, `eaz-seo-engineering` (URL structure) | **Yes** |
 | 4 | **Pages & features** | Real content page by page; features with loading, empty, and error states | `eaz-frontend-design`, `eaz-backend-engineering`, `eaz-api-development`, `eaz-database-architecture`, region payments skill, business skills | No |
-| 5 | **Polish & quality** | Motion, accessibility pass, token check, performance, tests | `eaz-frontend-design`, `eaz-performance-optimization`, `eaz-software-testing`, `eaz-code-review` | **Yes** |
+| 5 | **Polish & quality** | Motion, accessibility pass, token check, performance, tests | `eaz-frontend-design`, `eaz-frontend-design/references/performance-optimization.md`, `eaz-software-testing`, `eaz-code-review` | **Yes** |
 | 6 | **Launch & handoff** | SEO, security review, deploy, monitoring, client handoff | `eaz-seo-engineering`, `eaz-security-audit`, `eaz-cloud-devops` | Final sign-off |
 
 Phase contents above are for **frontend-first**, the recommended default (see Build order).

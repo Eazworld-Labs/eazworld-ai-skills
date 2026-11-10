@@ -32,7 +32,7 @@ repository, pinned dependencies, and a tested way back when a release goes wrong
   pipeline.
 - **Anti-Trigger:** Do not activate for writing application features (route to the
   implementation skills) or for application-level performance work (route to
-  eaz-performance-optimization).
+  eaz-frontend-design/references/performance-optimization.md).
 
 ## 3. Required Inputs & Project Audit
 

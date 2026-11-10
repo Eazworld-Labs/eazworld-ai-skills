@@ -33,7 +33,7 @@ access control are not optional extras here.
 - **Trigger 4:** When defining who may see which records — staff, parents, or
   students.
 - **Anti-Trigger:** Do not activate for general payment rail integration details
-  (route to eaz-ghana-payments), generic CRM contact sync (route to eaz-crm-automation), or
+  (route to eaz-payments), generic CRM contact sync (route to eaz-crm-automation), or
   building the parent-facing UI polish (route to eaz-frontend-design).
 
 ## 3. Required Inputs & Project Audit

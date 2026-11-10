@@ -32,7 +32,7 @@ sensitive records any system can hold.
 - **Trigger 3:** When managing service attendance, events, or volunteer rosters.
 - **Trigger 4:** When deciding who may read pastoral notes or giving records.
 - **Anti-Trigger:** Do not activate for payment rail specifics (route to
-  eaz-ghana-payments), email campaigns to the congregation (route to eaz-email-marketing), or
+  eaz-payments), email campaigns to the congregation (route to eaz-email-marketing), or
   social content for the church (route to eaz-social-media-management).
 
 ## 3. Required Inputs & Project Audit

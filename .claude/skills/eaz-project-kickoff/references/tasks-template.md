@@ -129,7 +129,7 @@ actually use before the backend is built.
   - Done when: keyboard path and screen-reader check pass on every page.
 - [ ] **5.2 Token check** — *skill: eaz-frontend-design*
   - Done when: `check-tokens.cjs` is clean, or each hit is justified.
-- [ ] **5.3 Performance** — *skill: eaz-performance-optimization*
+- [ ] **5.3 Performance** — *skill: eaz-frontend-design/references/performance-optimization.md*
   - Done when: Core Web Vitals targets agreed in discovery are met.
 - [ ] **5.4 Tests and review** — *skill: eaz-software-testing, eaz-code-review*
   - Done when: suite passes and open review findings are resolved.
